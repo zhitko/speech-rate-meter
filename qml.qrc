@@ -1,0 +1,35 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>Pages/Welcome/WelcomePageForm.ui.qml</file>
+        <file>Pages/Welcome/WelcomePage.qml</file>
+        <file>Components/Colors.qml</file>
+        <file>Components/qmldir</file>
+        <file>Pages/Settings/SettingsPage.qml</file>
+        <file>Pages/Settings/SettingsPageForm.ui.qml</file>
+        <file>Components/DoubleSpinBox.qml</file>
+        <file>Components/BottomBar.qml</file>
+        <file>Components/BottomBarForm.ui.qml</file>
+        <file>3party/FontAwesome/Font Awesome 5 Brands-Regular-400.otf</file>
+        <file>3party/FontAwesome/Font Awesome 5 Free-Regular-400.otf</file>
+        <file>3party/FontAwesome/Font Awesome 5 Free-Solid-900.otf</file>
+        <file>Components/Buttons/DeleteButton.qml</file>
+        <file>Components/Buttons/DeleteButtonForm.ui.qml</file>
+        <file>Components/FontAwesome/FontAwesome.qml</file>
+        <file>Components/FontAwesome/FontAwesomeIcon.qml</file>
+        <file>Components/FontAwesome/FontAwesomeIconText.qml</file>
+        <file>Components/FontAwesome/FontAwesomeVariables.qml</file>
+        <file>Components/Buttons/PlayButton.qml</file>
+        <file>Components/Buttons/PlayButtonForm.ui.qml</file>
+        <file>Components/Buttons/RecordButton.qml</file>
+        <file>Components/Buttons/RecordButtonForm.ui.qml</file>
+        <file>Pages/Recorder/RecorderPage.qml</file>
+        <file>Pages/Recorder/RecorderPageForm.ui.qml</file>
+        <file>Components/Buttons/OpenFileButton.qml</file>
+        <file>Components/Buttons/OpenFileButtonForm.ui.qml</file>
+        <file>Bus.qml</file>
+        <file>Pages/Metrics/MetricsPage.qml</file>
+        <file>Pages/Metrics/MetricsPageForm.ui.qml</file>
+    </qresource>
+</RCC>
