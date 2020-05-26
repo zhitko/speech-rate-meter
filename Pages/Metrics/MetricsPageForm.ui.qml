@@ -21,7 +21,7 @@ Page {
     property alias vowelsRateValue: vowelsRateValue
     property alias recordButton: recordButton
 
-    title: qsTr("Speech Rate")
+    title: qsTr("Details")
 
     ScrollView {
         id: scrollView
@@ -29,40 +29,8 @@ Page {
         contentHeight: radialbar.height + metrixBox.height
         anchors.fill: parent
 
-        RadialBar {
-            id: radialbar
-            width: 300
-            height: 300
-            anchors.top: parent.top
-            anchors.topMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
-            penStyle: Qt.RoundCap
-            dialType: RadialBar.FullDial
-            progressColor: "#1dc58f"
-            foregroundColor: "#191a2f"
-            dialWidth: 30
-            startAngle: 180
-            spanAngle: 70
-            minValue: 0
-            maxValue: 100
-            value: 55
-            textFont {
-                family: "Halvetica"
-                italic: false
-                pointSize: 32
-            }
-            suffixText: ""
-            textColor: "#c61e5d"
-        }
-
         GroupBox {
             id: metrixBox
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            anchors.top: radialbar.bottom
-            anchors.topMargin: 10
             font.bold: true
             Layout.margins: 10
             Layout.fillHeight: true

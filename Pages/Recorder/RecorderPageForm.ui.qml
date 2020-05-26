@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import RadialBar 1.0
 
 import "../../Components"
 import "../../Components/Buttons"
@@ -14,6 +15,11 @@ Page {
     property alias openButton: openButton
 
     property string path: ""
+    property bool recorded: false
+    property alias meanDurationOfPausesValue: meanDurationOfPausesValue
+    property alias speechRateValue: speechRateValue
+    property alias numberOfWordsValue: numberOfWordsValue
+    property alias speechRateRadialBar: speechRateRadialBar
 
     FontAwesome {
         id: awesome
@@ -23,7 +29,7 @@ Page {
         id: timerLabel
         text: qsTr("00:00")
         anchors.bottom: recordButton.top
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: 30
         font.pointSize: 24
         anchors.horizontalCenter: recordButton.horizontalCenter
     }
@@ -44,7 +50,7 @@ Page {
         id: deleteButton
         width: 70
         height: 70
-        visible: false
+        visible: recorded
         toolButton.font.pointSize: 20
         anchors.top: recordButton.bottom
         anchors.topMargin: 20
@@ -57,7 +63,7 @@ Page {
         id: playButton
         width: 70
         height: 70
-        visible: false
+        visible: recorded
         font.pointSize: 20
         anchors.top: recordButton.bottom
         anchors.topMargin: 20
@@ -70,12 +76,99 @@ Page {
         id: openButton
         width: 70
         height: 70
-        visible: false
+        visible: recorded
         font.pointSize: 20
         anchors.top: recordButton.bottom
         anchors.topMargin: 20
         anchors.horizontalCenter: recordButton.horizontalCenter
         path: root.path
+    }
+
+    Text {
+        id: numberOfWordsTitle
+        text: qsTr("Number of Words")
+        anchors.horizontalCenterOffset: -width / 2
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        font.bold: true
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    Text {
+        id: numberOfWordsValue
+        text: "---"
+        anchors.left: numberOfWordsTitle.right
+        anchors.leftMargin: 5
+        anchors.verticalCenter: numberOfWordsTitle.verticalCenter
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    Text {
+        id: speechRateTitle
+        text: qsTr("Speech Rate")
+        anchors.horizontalCenterOffset: -width / 2
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: numberOfWordsTitle.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    Text {
+        id: speechRateValue
+        text: "---"
+        anchors.left: speechRateTitle.right
+        anchors.leftMargin: 5
+        anchors.verticalCenter: speechRateTitle.verticalCenter
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    Text {
+        id: meanDurationOfPausesTitle
+        text: qsTr("Mean Duration of Pauses")
+        anchors.horizontalCenterOffset: -width / 2
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: speechRateTitle.bottom
+        anchors.topMargin: 5
+        font.bold: true
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    Text {
+        id: meanDurationOfPausesValue
+        text: "---"
+        anchors.left: meanDurationOfPausesTitle.right
+        anchors.leftMargin: 5
+        anchors.verticalCenter: meanDurationOfPausesTitle.verticalCenter
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    RadialBar {
+        id: speechRateRadialBar
+        width: 200
+        height: 200
+        showText: false
+        anchors.verticalCenter: recordButton.verticalCenter
+        anchors.horizontalCenter: recordButton.horizontalCenter
+        penStyle: Qt.RoundCap
+        dialType: RadialBar.FullDial
+        progressColor: "#1dc58f"
+        foregroundColor: "#191a2f"
+        dialWidth: 30
+        startAngle: 180
+        spanAngle: 70
+        minValue: 0
+        maxValue: 300
+        value: 55
+        suffixText: ""
+        visible: recorded
     }
 }
 

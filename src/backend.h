@@ -61,6 +61,9 @@ public:
     Q_INVOKABLE QVariant getConsonantsAndSilenceMeanValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getConsonantsAndSilenceMedianValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsRate(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getNumberOfWords(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getSpeechRate(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getMeanDurationOfPauses(QString path, double from_percent, double to_percent);
 
     // Settings API
     Q_INVOKABLE QVariant getIntensityFrame();
