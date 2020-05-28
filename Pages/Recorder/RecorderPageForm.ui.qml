@@ -18,7 +18,6 @@ Page {
     property bool recorded: false
     property alias meanDurationOfPausesValue: meanDurationOfPausesValue
     property alias speechRateValue: speechRateValue
-    property alias numberOfWordsValue: numberOfWordsValue
     property alias speechRateRadialBar: speechRateRadialBar
 
     FontAwesome {
@@ -26,12 +25,68 @@ Page {
     }
 
     Text {
+        id: speechRateTitle
+        text: qsTr("Average Speech Rate")
+        anchors.horizontalCenterOffset: -width / 2 + 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 15
+        font.bold: true
+        font.pointSize: 16
+        visible: recorded
+    }
+
+    Text {
+        id: speechRateValue
+        text: "---"
+        anchors.left: speechRateTitle.right
+        anchors.leftMargin: 5
+        anchors.verticalCenter: speechRateTitle.verticalCenter
+        font.pointSize: 16
+        visible: recorded
+    }
+
+    Text {
+        id: meanDurationOfPausesTitle
+        text: qsTr("Interphases Pause Duration")
+        anchors.horizontalCenterOffset: -width / 2 + 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: speechRateTitle.bottom
+        anchors.topMargin: 10
+        font.bold: true
+        font.pointSize: 16
+        visible: recorded
+    }
+
+    Text {
+        id: meanDurationOfPausesValue
+        text: "---"
+        anchors.left: meanDurationOfPausesTitle.right
+        anchors.leftMargin: 5
+        anchors.verticalCenter: meanDurationOfPausesTitle.verticalCenter
+        font.pointSize: 16
+        visible: recorded
+    }
+
+    Text {
+        id: timerTitle
+        text: qsTr("Speech Recorded Duration")
+        anchors.horizontalCenterOffset: -width / 2 + 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: meanDurationOfPausesTitle.bottom
+        anchors.topMargin: 10
+        font.bold: true
+        font.pointSize: 16
+        visible: recorded
+    }
+
+    Text {
         id: timerLabel
         text: qsTr("00:00")
-        anchors.bottom: recordButton.top
-        anchors.bottomMargin: 30
-        font.pointSize: 24
-        anchors.horizontalCenter: recordButton.horizontalCenter
+        anchors.left: timerTitle.right
+        anchors.leftMargin: recorded ? 5 : -width / 2 - 20
+        anchors.verticalCenter: timerTitle.verticalCenter
+        font.pointSize: recorded ? 16 : 24
     }
 
     ToolButton {
@@ -84,90 +139,22 @@ Page {
         path: root.path
     }
 
-    Text {
-        id: numberOfWordsTitle
-        text: qsTr("Number of Words")
-        anchors.horizontalCenterOffset: -width / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        font.bold: true
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: numberOfWordsValue
-        text: "---"
-        anchors.left: numberOfWordsTitle.right
-        anchors.leftMargin: 5
-        anchors.verticalCenter: numberOfWordsTitle.verticalCenter
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: speechRateTitle
-        text: qsTr("Speech Rate")
-        anchors.horizontalCenterOffset: -width / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: numberOfWordsTitle.bottom
-        anchors.topMargin: 5
-        font.bold: true
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: speechRateValue
-        text: "---"
-        anchors.left: speechRateTitle.right
-        anchors.leftMargin: 5
-        anchors.verticalCenter: speechRateTitle.verticalCenter
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: meanDurationOfPausesTitle
-        text: qsTr("Mean Duration of Pauses")
-        anchors.horizontalCenterOffset: -width / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: speechRateTitle.bottom
-        anchors.topMargin: 5
-        font.bold: true
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: meanDurationOfPausesValue
-        text: "---"
-        anchors.left: meanDurationOfPausesTitle.right
-        anchors.leftMargin: 5
-        anchors.verticalCenter: meanDurationOfPausesTitle.verticalCenter
-        font.pointSize: 12
-        visible: recorded
-    }
-
     RadialBar {
         id: speechRateRadialBar
-        width: 200
-        height: 200
+        width: 180
+        height: 180
         showText: false
         anchors.verticalCenter: recordButton.verticalCenter
         anchors.horizontalCenter: recordButton.horizontalCenter
-        penStyle: Qt.RoundCap
-        dialType: RadialBar.FullDial
-        progressColor: "#1dc58f"
-        foregroundColor: "#191a2f"
+        dialType: RadialBar.MinToMax
+        progressColor: value < 100 ? Colors.green : value < 200 ? Colors.yellow : Colors.raspberry
+        foregroundColor: "#3F51B5"
         dialWidth: 30
-        startAngle: 180
-        spanAngle: 70
+        startAngle: 90
+        spanAngle: 180
         minValue: 0
         maxValue: 300
         value: 55
-        suffixText: ""
         visible: recorded
     }
 }

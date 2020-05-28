@@ -28,7 +28,7 @@ RecorderPageForm {
 
     function setTimerLabel()
     {
-        timerLabel.text = qsTr("%1:%2 sec")
+        timerLabel.text = qsTr("%1:%2")
             .arg(root.min.toString().padStart(2, '0'))
             .arg(root.sec.toString().padStart(2, '0'))
     }
@@ -108,13 +108,13 @@ RecorderPageForm {
         let back = Qt.createQmlObject('import intondemo.backend 1.0; Backend{}', root)
         let startPoint = 0
         let endPoint = 1
-        let numberOfWords = back.getNumberOfWords(root.path, startPoint, endPoint)
-        numberOfWordsValue.text = qsTr("%1 words").arg(String(numberOfWords.toFixed(0)))
         let speechRate = back.getSpeechRate(root.path, startPoint, endPoint)
         speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(3)))
         let meanDurationOfPauses = back.getMeanDurationOfPauses(root.path, startPoint, endPoint)
         meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(3)))
 
-        speechRateRadialBar.value = speechRate
+        timerLabel.text = qsTr("%1 sec").arg(timerLabel.text)
+
+        speechRateRadialBar.value = speechRate > 300 ? 300 : speechRate
     }
 }
