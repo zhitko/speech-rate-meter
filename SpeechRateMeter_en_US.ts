@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>Backend</name>
+    <message>
+        <location filename="src/backend.cpp" line="84"/>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/backend.cpp" line="86"/>
+        <source>Wave (*.wav)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MetricsPageForm.ui</name>
     <message>
         <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="24"/>
@@ -68,13 +81,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="112"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="115"/>
         <source>%1 wpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="114"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="116"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="117"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="119"/>
         <source>%1 sec</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,16 +101,18 @@
     </message>
     <message>
         <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="51"/>
-        <source>Interphases Pause Duration</source>
+        <source>Interphases Pause</source>
+        <oldsource>Interphases Pause Duration</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="73"/>
-        <source>Speech Recorded Duration</source>
+        <source>Speech Recorded</source>
+        <oldsource>Speech Recorded Duration</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="84"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="85"/>
         <source>00:00</source>
         <translation type="unfinished"></translation>
     </message>
@@ -153,15 +168,20 @@
 <context>
     <name>WelcomePageForm.ui</name>
     <message>
-        <location filename="Pages/Welcome/WelcomePageForm.ui.qml" line="12"/>
+        <location filename="Pages/Welcome/WelcomePageForm.ui.qml" line="13"/>
         <source>Welcome to 
 Speech Rate Meter</source>
         <oldsource>Welcome to ProsodyMeter</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Welcome/WelcomePageForm.ui.qml" line="26"/>
-        <source>Start</source>
+        <location filename="Pages/Welcome/WelcomePageForm.ui.qml" line="27"/>
+        <source>New Record</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Welcome/WelcomePageForm.ui.qml" line="36"/>
+        <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

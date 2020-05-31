@@ -6,6 +6,8 @@
 #include <QDir>
 #include <QGuiApplication>
 #include <QSound>
+#include <QFileDialog>
+#include <QStandardPaths>
 
 #include <intoncore.h>
 #include <utils.h>
@@ -74,6 +76,15 @@ QString Backend::startStopRecordWaveFile()
     }
 
     return path;
+}
+
+QString Backend::openFileDialog()
+{
+    auto fileName = QFileDialog::getOpenFileName(nullptr,
+                                                 tr("Open File"),
+                                                 QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).first(),
+                                                 tr("Wave (*.wav)"));
+    return fileName;
 }
 
 QVariantList Backend::getWaveData(QString path)

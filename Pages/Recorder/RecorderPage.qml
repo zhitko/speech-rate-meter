@@ -45,12 +45,14 @@ RecorderPageForm {
         setControlsVisible(false)
         resetTimer()
         timer.restart()
+        root.recording = true;
     }
 
     function stopTimer()
     {
         setControlsVisible(true)
         timer.stop()
+        root.recording = false;
     }
 
     function addMin()
@@ -91,17 +93,24 @@ RecorderPageForm {
         }
     }
 
-    deleteButton.onDeleted: {
-        setControlsVisible(false)
-        resetTimer()
+    openButton.onOpen: {
+        let path = backend.openFileDialog()
+        if (path) {
+            root.path = path
+            setControlsVisible(true)
+            showSpeechRate()
+        }
     }
 
-    openButton.onOpen: {
+    detailsButton.onOpen: {
         bus.openMetricsPage(path)
     }
 
     Component.onCompleted: {
-
+        if (path) {
+            setControlsVisible(true)
+            showSpeechRate()
+        }
     }
 
     function showSpeechRate() {
@@ -115,6 +124,6 @@ RecorderPageForm {
 
         timerLabel.text = qsTr("%1 sec").arg(timerLabel.text)
 
-        speechRateRadialBar.value = speechRate > 300 ? 300 : speechRate
+        speechRateRadialBar.value = speechRate > 210 ? 210 : speechRate
     }
 }

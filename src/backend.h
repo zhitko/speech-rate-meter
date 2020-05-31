@@ -31,6 +31,7 @@ public:
     Q_INVOKABLE void deleteWaveFile(QString path);
     Q_INVOKABLE void playWaveFile(QString path);
     Q_INVOKABLE QString startStopRecordWaveFile();
+    Q_INVOKABLE QString openFileDialog();
 
     // WAVE file API
     Q_INVOKABLE QVariantList getWaveData(QString path);

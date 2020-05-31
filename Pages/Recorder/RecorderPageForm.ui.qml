@@ -10,15 +10,16 @@ Page {
     id: root
     property alias timerLabel: timerLabel
     property alias recordButton: recordButton
-    property alias deleteButton: deleteButton
     property alias playButton: playButton
     property alias openButton: openButton
 
     property string path: ""
     property bool recorded: false
+    property bool recording: false
     property alias meanDurationOfPausesValue: meanDurationOfPausesValue
     property alias speechRateValue: speechRateValue
     property alias speechRateRadialBar: speechRateRadialBar
+    property alias detailsButton: detailsButton
 
     FontAwesome {
         id: awesome
@@ -31,7 +32,6 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 15
-        font.bold: true
         font.pointSize: 16
         visible: recorded
     }
@@ -39,6 +39,7 @@ Page {
     Text {
         id: speechRateValue
         text: "---"
+        font.bold: true
         anchors.left: speechRateTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: speechRateTitle.verticalCenter
@@ -48,12 +49,11 @@ Page {
 
     Text {
         id: meanDurationOfPausesTitle
-        text: qsTr("Interphases Pause Duration")
+        text: qsTr("Interphases Pause")
         anchors.horizontalCenterOffset: -width / 2 + 20
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateTitle.bottom
         anchors.topMargin: 10
-        font.bold: true
         font.pointSize: 16
         visible: recorded
     }
@@ -61,6 +61,7 @@ Page {
     Text {
         id: meanDurationOfPausesValue
         text: "---"
+        font.bold: true
         anchors.left: meanDurationOfPausesTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: meanDurationOfPausesTitle.verticalCenter
@@ -70,12 +71,11 @@ Page {
 
     Text {
         id: timerTitle
-        text: qsTr("Speech Recorded Duration")
+        text: qsTr("Speech Recorded")
         anchors.horizontalCenterOffset: -width / 2 + 20
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: meanDurationOfPausesTitle.bottom
         anchors.topMargin: 10
-        font.bold: true
         font.pointSize: 16
         visible: recorded
     }
@@ -83,6 +83,7 @@ Page {
     Text {
         id: timerLabel
         text: qsTr("00:00")
+        font.bold: true
         anchors.left: timerTitle.right
         anchors.leftMargin: recorded ? 5 : -width / 2 - 20
         anchors.verticalCenter: timerTitle.verticalCenter
@@ -101,12 +102,12 @@ Page {
         anchors.verticalCenter: parent.verticalCenter
     }
 
-    DeleteButton {
-        id: deleteButton
+    ShowDetailsButton {
+        id: detailsButton
         width: 70
         height: 70
         visible: recorded
-        toolButton.font.pointSize: 20
+        font.pointSize: 20
         anchors.top: recordButton.bottom
         anchors.topMargin: 20
         anchors.right: recordButton.left
@@ -131,12 +132,12 @@ Page {
         id: openButton
         width: 70
         height: 70
-        visible: recorded
         font.pointSize: 20
         anchors.top: recordButton.bottom
         anchors.topMargin: 20
         anchors.horizontalCenter: recordButton.horizontalCenter
         path: root.path
+        visible: !recording
     }
 
     RadialBar {
@@ -147,13 +148,13 @@ Page {
         anchors.verticalCenter: recordButton.verticalCenter
         anchors.horizontalCenter: recordButton.horizontalCenter
         dialType: RadialBar.MinToMax
-        progressColor: value < 100 ? Colors.green : value < 200 ? Colors.yellow : Colors.raspberry
+        progressColor: value < 116 ? Colors.green : value < 162 ? Colors.yellow : Colors.raspberry
         foregroundColor: "#3F51B5"
         dialWidth: 30
         startAngle: 90
         spanAngle: 180
         minValue: 0
-        maxValue: 300
+        maxValue: 210
         value: 55
         visible: recorded
     }

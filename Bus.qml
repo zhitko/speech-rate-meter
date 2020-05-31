@@ -35,9 +35,9 @@ Item {
 
     property string recorderPage: "Pages/Recorder/RecorderPage.qml";
     signal openedRecorderPage()
-    function openRecorderPage()
+    function openRecorderPage(path)
     {
-        stackView.push(recorderPage, {bus: bus})
+        stackView.push(recorderPage, {bus: bus, path: path})
         openedRecorderPage()
     }
 }

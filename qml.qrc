@@ -31,5 +31,7 @@
         <file>Bus.qml</file>
         <file>Pages/Metrics/MetricsPage.qml</file>
         <file>Pages/Metrics/MetricsPageForm.ui.qml</file>
+        <file>Components/Buttons/ShowDetailsButton.qml</file>
+        <file>Components/Buttons/ShowDetailsButtonForm.ui.qml</file>
     </qresource>
 </RCC>
