@@ -221,3 +221,25 @@ void Backend::setMCoeficient(QVariant value)
     this->mCoeficient = value.toDouble();
     this->saveToFile(config);
 }
+
+QVariant Backend::getMinSpeechRate()
+{
+    return this->minSpeechRate;
+}
+
+void Backend::setMinSpeechRate(QVariant value)
+{
+    this->minSpeechRate = value.toDouble();
+    this->saveToFile(config);
+}
+
+QVariant Backend::getMaxSpeechRate()
+{
+    return this->maxSpeechRate;
+}
+
+void Backend::setMaxSpeechRate(QVariant value)
+{
+    this->maxSpeechRate = value.toDouble();
+    this->saveToFile(config);
+}

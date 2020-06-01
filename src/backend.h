@@ -85,6 +85,10 @@ public:
     Q_INVOKABLE void setKCoeficient(QVariant value);
     Q_INVOKABLE QVariant getMCoeficient();
     Q_INVOKABLE void setMCoeficient(QVariant value);
+    Q_INVOKABLE QVariant getMinSpeechRate();
+    Q_INVOKABLE void setMinSpeechRate(QVariant value);
+    Q_INVOKABLE QVariant getMaxSpeechRate();
+    Q_INVOKABLE void setMaxSpeechRate(QVariant value);
 
 
 public:
@@ -108,6 +112,9 @@ private:
 
     double kCoeficient;
     double mCoeficient;
+
+    double minSpeechRate;
+    double maxSpeechRate;
 
 signals:
 

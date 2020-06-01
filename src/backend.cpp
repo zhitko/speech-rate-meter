@@ -22,7 +22,8 @@ const int WAVE_LENGTH = 1000;
 
 Backend::Backend(QObject *parent)
     : QObject(parent), core(nullptr), config(nullptr),
-    kCoeficient(DefaultKCoeficient), mCoeficient(DefaultMCoeficient)
+    kCoeficient(DefaultKCoeficient), mCoeficient(DefaultMCoeficient),
+    minSpeechRate(70), maxSpeechRate(210)
 {
     this->path = "";
 
@@ -81,9 +82,9 @@ QString Backend::startStopRecordWaveFile()
 QString Backend::openFileDialog()
 {
     auto fileName = QFileDialog::getOpenFileName(nullptr,
-                                                 tr("Open File"),
-                                                 QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation).first(),
-                                                 tr("Wave (*.wav)"));
+        tr("Open File"),
+        ".",
+        tr("Wave (*.wav)"));
     return fileName;
 }
 

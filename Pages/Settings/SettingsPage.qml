@@ -16,6 +16,16 @@ SettingsPageForm {
         intensityMaxLengthValue.value = backend.getIntensityMaxLengthValue();
         kCoeficient.value = backend.getKCoeficient() * 100;
         mCoeficient.value = backend.getMCoeficient() * 100;
+        minSpeechRate.value = backend.getMinSpeechRate() * 100;
+        maxSpeechRate.value = backend.getMaxSpeechRate() * 100;
+    }
+
+    minSpeechRate.onValueChanged: {
+        backend.setMinSpeechRate(minSpeechRate.value / 100);
+    }
+
+    maxSpeechRate.onValueChanged: {
+        backend.setMaxSpeechRate(maxSpeechRate.value / 100);
     }
 
     intensityMaxLengthValue.onValueChanged: {

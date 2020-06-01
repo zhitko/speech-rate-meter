@@ -11,6 +11,8 @@ Page {
     property alias intensityMaxLengthValue: intensityMaxLengthValue
     property alias mCoeficient: mCoeficient
     property alias kCoeficient: kCoeficient
+    property alias minSpeechRate: minSpeechRate
+    property alias maxSpeechRate: maxSpeechRate
     title: qsTr("Settings")
 
     ScrollView {
@@ -34,6 +36,36 @@ Page {
 
                 ColumnLayout {
                     anchors.fill: parent
+
+                    Text {
+                        id: minSpeechRateTitle
+                        text: qsTr("Min")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: minSpeechRate
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 10
+                    }
+
+                    Text {
+                        id: maxSpeechRateTitle
+                        text: qsTr("Max")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: maxSpeechRate
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 10
+                    }
 
                     Text {
                         id: mCoeficientTitle

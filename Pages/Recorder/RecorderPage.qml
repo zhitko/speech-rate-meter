@@ -111,6 +111,16 @@ RecorderPageForm {
             setControlsVisible(true)
             showSpeechRate()
         }
+
+        root.minSpeechRate = backend.getMinSpeechRate()
+        root.maxSpeechRate = backend.getMaxSpeechRate()
+        let secSize = (root.maxSpeechRate - root.minSpeechRate) / 3
+        root.sec1SpeechRate = root.minSpeechRate + secSize
+        root.sec2SpeechRate = root.sec1SpeechRate + secSize
+        console.log("minSpeechRate: " + minSpeechRate)
+        console.log("sec1SpeechRate: " + sec1SpeechRate)
+        console.log("sec2SpeechRate: " + sec2SpeechRate)
+        console.log("maxSpeechRate: " + maxSpeechRate)
     }
 
     function showSpeechRate() {
@@ -122,8 +132,20 @@ RecorderPageForm {
         let meanDurationOfPauses = back.getMeanDurationOfPauses(root.path, startPoint, endPoint)
         meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(3)))
 
-        timerLabel.text = qsTr("%1 sec").arg(timerLabel.text)
+        let waveLength = back.getWaveLength(root.path, startPoint, endPoint)
+        timerLabel.text = qsTr("%1 sec").arg(waveLength)
 
-        speechRateRadialBar.value = speechRate > 210 ? 210 : speechRate
+        root.isLow = false
+        root.isAverage = false
+        root.isFast = false
+
+        if (speechRate > root.maxSpeechRate) speechRate = root.maxSpeechRate
+        if (speechRate < root.minSpeechRate) speechRate = root.minSpeechRate
+
+        if (speechRate > root.sec2SpeechRate) isFast = true
+        else if (speechRate > root.sec1SpeechRate) isAverage = true
+        else isLow = true
+
+        speechRateRadialBar.value = speechRate
     }
 }

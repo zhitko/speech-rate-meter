@@ -11,7 +11,6 @@ Item {
     function openMetricsPage(path)
     {
         console.log("Try to open Metrics Page " + path);
-        stackView.pop()
         stackView.push(metricsPage, {name: "Metrics", path: path, bus: bus})
         openedMetricsPage(path)
     }

@@ -21,6 +21,14 @@ Page {
     property alias speechRateRadialBar: speechRateRadialBar
     property alias detailsButton: detailsButton
 
+    property double minSpeechRate: 70
+    property double sec1SpeechRate: 116
+    property double sec2SpeechRate: 162
+    property double maxSpeechRate: 210
+    property bool isLow: false
+    property bool isAverage: false
+    property bool isFast: false
+
     FontAwesome {
         id: awesome
     }
@@ -98,8 +106,61 @@ Page {
         font.family: awesome.solid
         text: checked ? awesome.icons.fa_stop : awesome.icons.fa_microphone
         font.pointSize: 32
+        anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
+        anchors.verticalCenter: speechRateRadialBar.verticalCenter
+    }
+
+    RadialBar {
+        id: speechRateRadialBar
+        width: 220
+        height: 220
+        showText: false
+        anchors.top: timerLabel.bottom
+        anchors.topMargin: 60
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        dialType: RadialBar.MinToMax
+        progressColor: value < sec1SpeechRate ? Colors.green : value
+                                                < sec2SpeechRate ? Colors.yellow : Colors.raspberry
+        foregroundColor: "#2a3f51b5"
+        dialWidth: 50
+        startAngle: 90
+        spanAngle: 180
+        minValue: minSpeechRate
+        maxValue: maxSpeechRate
+        value: 55
+        visible: recorded
+    }
+
+    Text {
+        text: qsTr("Low")
+        anchors.top: speechRateRadialBar.top
+        anchors.topMargin: speechRateRadialBar.height / 4
+        anchors.right: speechRateRadialBar.left
+        anchors.rightMargin: 15
+        font.pointSize: isLow ? 16 : 12
+        visible: recorded
+        font.bold: isLow
+    }
+
+    Text {
+        text: qsTr("Average")
+        anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
+        anchors.bottom: speechRateRadialBar.top
+        anchors.bottomMargin: 15
+        font.pointSize: isAverage ? 16 : 12
+        visible: recorded
+        font.bold: isAverage
+    }
+
+    Text {
+        text: qsTr("Fast")
+        anchors.top: speechRateRadialBar.top
+        anchors.topMargin: speechRateRadialBar.height / 4
+        anchors.left: speechRateRadialBar.right
+        anchors.leftMargin: 15
+        font.pointSize: isFast ? 16 : 12
+        visible: recorded
+        font.bold: isFast
     }
 
     ShowDetailsButton {
@@ -109,7 +170,7 @@ Page {
         visible: recorded
         font.pointSize: 20
         anchors.top: recordButton.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: 0
         anchors.right: recordButton.left
         anchors.leftMargin: 0
         path: root.path
@@ -122,7 +183,7 @@ Page {
         visible: recorded
         font.pointSize: 20
         anchors.top: recordButton.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: 0
         anchors.left: recordButton.right
         anchors.leftMargin: 0
         path: root.path
@@ -134,29 +195,10 @@ Page {
         height: 70
         font.pointSize: 20
         anchors.top: recordButton.bottom
-        anchors.topMargin: 20
+        anchors.topMargin: 0
         anchors.horizontalCenter: recordButton.horizontalCenter
         path: root.path
         visible: !recording
-    }
-
-    RadialBar {
-        id: speechRateRadialBar
-        width: 180
-        height: 180
-        showText: false
-        anchors.verticalCenter: recordButton.verticalCenter
-        anchors.horizontalCenter: recordButton.horizontalCenter
-        dialType: RadialBar.MinToMax
-        progressColor: value < 116 ? Colors.green : value < 162 ? Colors.yellow : Colors.raspberry
-        foregroundColor: "#3F51B5"
-        dialWidth: 30
-        startAngle: 90
-        spanAngle: 180
-        minValue: 0
-        maxValue: 210
-        value: 55
-        visible: recorded
     }
 }
 
