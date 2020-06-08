@@ -4,12 +4,12 @@
 <context>
     <name>Backend</name>
     <message>
-        <location filename="src/backend.cpp" line="84"/>
+        <location filename="src/backend.cpp" line="85"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/backend.cpp" line="86"/>
+        <location filename="src/backend.cpp" line="87"/>
         <source>Wave (*.wav)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,13 +81,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="121"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="132"/>
         <source>%1 wpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="123"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="126"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="135"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="138"/>
         <source>%1 sec</source>
         <translation type="unfinished"></translation>
     </message>
@@ -95,39 +95,38 @@
 <context>
     <name>RecorderPageForm.ui</name>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="30"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="38"/>
         <source>Average Speech Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="52"/>
-        <source>Interphases Pause</source>
-        <oldsource>Interphases Pause Duration</oldsource>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="60"/>
+        <source>Interphases Pauses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="74"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="82"/>
         <source>Speech Recorded</source>
         <oldsource>Speech Recorded Duration</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="85"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="93"/>
         <source>00:00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="126"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="135"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="136"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="146"/>
         <source>Average</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="145"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="156"/>
         <source>Fast</source>
         <translation type="unfinished"></translation>
     </message>
@@ -135,47 +134,57 @@
 <context>
     <name>SettingsPageForm.ui</name>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="14"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="16"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="33"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="35"/>
         <source>Speech Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="40"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="42"/>
+        <source>Min</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="57"/>
+        <source>Max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="72"/>
         <source>M</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="55"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="87"/>
         <source>K</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="75"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="107"/>
         <source>Intensity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="82"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="114"/>
         <source>Frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="95"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="127"/>
         <source>Shift</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="108"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="140"/>
         <source>Smooth Frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="121"/>
+        <location filename="Pages/Settings/SettingsPageForm.ui.qml" line="153"/>
         <source>Segment length limit (millisec)</source>
         <translation type="unfinished"></translation>
     </message>

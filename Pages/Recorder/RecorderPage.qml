@@ -127,13 +127,15 @@ RecorderPageForm {
         let back = Qt.createQmlObject('import intondemo.backend 1.0; Backend{}', root)
         let startPoint = 0
         let endPoint = 1
+
         let speechRate = back.getSpeechRate(root.path, startPoint, endPoint)
-        speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(3)))
+        speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(1)))
+
         let meanDurationOfPauses = back.getMeanDurationOfPauses(root.path, startPoint, endPoint)
-        meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(3)))
+        meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(2)))
 
         let waveLength = back.getWaveLength(root.path, startPoint, endPoint)
-        timerLabel.text = qsTr("%1 sec").arg(waveLength)
+        timerLabel.text = qsTr("%1 sec").arg(String(waveLength.toFixed(2)))
 
         root.isLow = false
         root.isAverage = false

@@ -1,5 +1,6 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.14
+import QtQuick.Shapes 1.14
 import RadialBar 1.0
 
 import "../../Components"
@@ -57,7 +58,7 @@ Page {
 
     Text {
         id: meanDurationOfPausesTitle
-        text: qsTr("Interphases Pause")
+        text: qsTr("Interphases Pauses")
         anchors.horizontalCenterOffset: -width / 2 + 20
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateTitle.bottom
@@ -110,19 +111,73 @@ Page {
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
     }
 
+    Shape {
+        id: legend
+        width: 250
+        height: 250
+        layer.smooth: true
+        antialiasing: true
+        anchors.verticalCenter: recordButton.verticalCenter
+        anchors.horizontalCenter: recordButton.horizontalCenter
+        visible: recorded
+        ShapePath {
+            startX: 0
+            startY: legend.height / 2
+            fillGradient: LinearGradient {
+                x1: 0
+                y1: 125
+                x2: 250
+                y2: 125
+                GradientStop {
+                    position: 0
+                    color: Colors.green
+                }
+                GradientStop {
+                    position: 0.5
+                    color: Colors.yellow
+                }
+                GradientStop {
+                    position: 1
+                    color: Colors.raspberry
+                }
+            }
+            PathArc {
+                x: legend.width
+                y: legend.height / 2
+                radiusX: legend.width / 2
+                radiusY: legend.height / 2
+                useLargeArc: false
+            }
+            PathLine {
+                x: legend.width - 70
+                y: legend.height / 2
+            }
+            PathArc {
+                x: 70
+                y: legend.height / 2
+                radiusX: (legend.width - 140) / 2
+                radiusY: (legend.height - 140) / 2
+                direction: PathArc.Counterclockwise
+            }
+            PathLine {
+                x: 0
+                y: legend.height / 2
+            }
+        }
+    }
+
     RadialBar {
         id: speechRateRadialBar
-        width: 220
-        height: 220
+        width: 270
+        height: 270
         showText: false
         anchors.top: timerLabel.bottom
         anchors.topMargin: 60
         anchors.horizontalCenter: parent.horizontalCenter
         dialType: RadialBar.MinToMax
-        progressColor: value < sec1SpeechRate ? Colors.green : value
-                                                < sec2SpeechRate ? Colors.yellow : Colors.raspberry
-        foregroundColor: "#2a3f51b5"
-        dialWidth: 50
+        progressColor: "#3f51b5"
+        foregroundColor: "#00ffffff"
+        dialWidth: 25
         startAngle: 90
         spanAngle: 180
         minValue: minSpeechRate
@@ -170,7 +225,7 @@ Page {
         visible: recorded
         font.pointSize: 20
         anchors.top: recordButton.bottom
-        anchors.topMargin: 0
+        anchors.topMargin: -10
         anchors.right: recordButton.left
         anchors.leftMargin: 0
         path: root.path
@@ -183,7 +238,7 @@ Page {
         visible: recorded
         font.pointSize: 20
         anchors.top: recordButton.bottom
-        anchors.topMargin: 0
+        anchors.topMargin: -10
         anchors.left: recordButton.right
         anchors.leftMargin: 0
         path: root.path
@@ -195,7 +250,7 @@ Page {
         height: 70
         font.pointSize: 20
         anchors.top: recordButton.bottom
-        anchors.topMargin: 0
+        anchors.topMargin: -10
         anchors.horizontalCenter: recordButton.horizontalCenter
         path: root.path
         visible: !recording
