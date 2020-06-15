@@ -9,10 +9,13 @@ Page {
     property alias intensitySmoothFrameValue: intensitySmoothFrameValue
     property alias intensityShiftValue: intensityShiftValue
     property alias intensityMaxLengthValue: intensityMaxLengthValue
-    property alias mCoeficient: mCoeficient
-    property alias kCoeficient: kCoeficient
-    property alias minSpeechRate: minSpeechRate
-    property alias maxSpeechRate: maxSpeechRate
+    property alias kSpeechRateValue: kSpeechRateValue
+    property alias minSpeechRateValue: minSpeechRateValue
+    property alias maxSpeechRateValue: maxSpeechRateValue
+    property alias kArticulationRateValue: kArticulationRateValue
+    property alias minArticulationRateValue: minArticulationRateValue
+    property alias maxArticulationRateValue: maxArticulationRateValue
+    property alias kMeanPausesValue: kMeanPausesValue
     title: qsTr("Settings")
 
     ScrollView {
@@ -38,13 +41,28 @@ Page {
                     anchors.fill: parent
 
                     Text {
-                        id: minSpeechRateTitle
-                        text: qsTr("Min")
+                        id: kSpeechRateTitle
+                        text: qsTr("K1")
                         font.pointSize: 12
                     }
 
                     DoubleSpinBox {
-                        id: minSpeechRate
+                        id: kSpeechRateValue
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 100
+                    }
+
+                    Text {
+                        id: minSpeechRateTitle
+                        text: qsTr("Min RS")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: minSpeechRateValue
                         decimals: 2
                         to: 99999
                         wheelEnabled: true
@@ -54,12 +72,54 @@ Page {
 
                     Text {
                         id: maxSpeechRateTitle
-                        text: qsTr("Max")
+                        text: qsTr("Max RS")
                         font.pointSize: 12
                     }
 
                     DoubleSpinBox {
-                        id: maxSpeechRate
+                        id: maxSpeechRateValue
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 10
+                    }
+                }
+            }
+
+            GroupBox {
+                id: articulationRateGroup
+                Layout.margins: 10
+                Layout.fillWidth: true
+                font.pointSize: 14
+                title: qsTr("Articulation Rate")
+
+                ColumnLayout {
+                    anchors.fill: parent
+
+                    Text {
+                        id: kArticulationRateTitle
+                        text: qsTr("K2")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: kArticulationRateValue
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 100
+                    }
+
+                    Text {
+                        id: minArticulationRateTitle
+                        text: qsTr("Min RA")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: minArticulationRateValue
                         decimals: 2
                         to: 99999
                         wheelEnabled: true
@@ -68,30 +128,42 @@ Page {
                     }
 
                     Text {
-                        id: mCoeficientTitle
-                        text: qsTr("M")
+                        id: maxArticulationRateTitle
+                        text: qsTr("Max RA")
                         font.pointSize: 12
                     }
 
                     DoubleSpinBox {
-                        id: mCoeficient
+                        id: maxArticulationRateValue
                         decimals: 2
-                        to: 1000
+                        to: 99999
                         wheelEnabled: true
                         editable: true
                         stepSize: 10
                     }
+                }
+            }
+
+            GroupBox {
+                id: meanPausesGroup
+                Layout.margins: 10
+                Layout.fillWidth: true
+                font.pointSize: 14
+                title: qsTr("Mean Pauses")
+
+                ColumnLayout {
+                    anchors.fill: parent
 
                     Text {
-                        id: kCoeficientTitle
-                        text: qsTr("K")
+                        id: kMeanPausesTitle
+                        text: qsTr("K3")
                         font.pointSize: 12
                     }
 
                     DoubleSpinBox {
-                        id: kCoeficient
+                        id: kMeanPausesValue
                         decimals: 2
-                        to: 1000
+                        to: 99999
                         wheelEnabled: true
                         editable: true
                         stepSize: 100

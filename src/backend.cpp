@@ -22,8 +22,13 @@ const int WAVE_LENGTH = 1000;
 
 Backend::Backend(QObject *parent)
     : QObject(parent), core(nullptr), config(nullptr),
-    kCoeficient(DefaultKCoeficient), mCoeficient(DefaultMCoeficient),
-    minSpeechRate(70), maxSpeechRate(210)
+    kSpeechRate(DefaultKSpeechRate),
+    minSpeechRate(DefaultMinSpeechRate),
+    maxSpeechRate(DefaultMaxSpeechRate),
+    kArticulationRate(DefaultKArticulationRate),
+    minArticulationRate(DefaultMinArticulationRate),
+    maxArticulationRate(DefaultMaxArticulationRate),
+    kMeanPauses(DefaultKMeanPauses)
 {
     this->path = "";
 
@@ -567,28 +572,28 @@ QVariant Backend::getVowelsRate(QString path, double from_percent, double to_per
     return QVariant::fromValue(segmentsCount / waveLength);
 }
 
-QVariant Backend::getNumberOfWords(QString path, double from_percent, double to_percent)
-{
-    auto vowelsCount = this->getVowelsCount(path, from_percent, to_percent);
-    double numberOfWords = vowelsCount.toInt() / this->mCoeficient;
-
-    return QVariant::fromValue(numberOfWords);
-}
-
 QVariant Backend::getSpeechRate(QString path, double from_percent, double to_percent)
 {
-    auto numberOfWords = this->getNumberOfWords(path, from_percent, to_percent);
-    auto waveLength = this->getWaveLength(path, from_percent, to_percent);
-    double speechRate = 60.0 * numberOfWords.toDouble() / waveLength.toInt();
+    auto nv = this->getVowelsCount(path, from_percent, to_percent);
+    auto ts = this->getWaveLength(path, from_percent, to_percent);
+    double speechRate = this->kSpeechRate * (nv.toInt() / ts.toDouble());
     return QVariant::fromValue(speechRate);
 }
 
 QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, double to_percent)
 {
-    auto consonantsAndSilenceMean = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent);
-    auto consonantsAndSilenceMedian = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent);
-    double meanDurationOfPauses = abs(consonantsAndSilenceMean.toDouble() - consonantsAndSilenceMedian.toDouble()) * this->kCoeficient;
+    auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent);
+    auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent);
+    double meanDurationOfPauses = this->kMeanPauses * abs(tcm.toDouble() - tcd.toDouble());
     return QVariant::fromValue(meanDurationOfPauses);
+}
+
+QVariant Backend::getArticulationRate(QString path, double from_percent, double to_percent)
+{
+    auto nv = this->getVowelsCount(path, from_percent, to_percent);
+    auto tv = this->getVowelsLength(path, from_percent, to_percent);
+    double articulationRate = this->kArticulationRate * (nv.toDouble() / tv.toDouble());
+    return QVariant::fromValue(articulationRate);
 }
 
 QString Backend::getPath()

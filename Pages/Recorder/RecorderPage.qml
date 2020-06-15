@@ -114,13 +114,8 @@ RecorderPageForm {
 
         root.minSpeechRate = backend.getMinSpeechRate()
         root.maxSpeechRate = backend.getMaxSpeechRate()
-        let secSize = (root.maxSpeechRate - root.minSpeechRate) / 3
-        root.sec1SpeechRate = root.minSpeechRate + secSize
-        root.sec2SpeechRate = root.sec1SpeechRate + secSize
-        console.log("minSpeechRate: " + minSpeechRate)
-        console.log("sec1SpeechRate: " + sec1SpeechRate)
-        console.log("sec2SpeechRate: " + sec2SpeechRate)
-        console.log("maxSpeechRate: " + maxSpeechRate)
+        root.minArticulationRate = backend.getMinArticulationRate()
+        root.maxArticulationRate = backend.getMaxArticulationRate()
     }
 
     function showSpeechRate() {
@@ -129,25 +124,25 @@ RecorderPageForm {
         let endPoint = 1
 
         let speechRate = back.getSpeechRate(root.path, startPoint, endPoint)
-        speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(1)))
+        speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(0)))
 
         let meanDurationOfPauses = back.getMeanDurationOfPauses(root.path, startPoint, endPoint)
         meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(2)))
 
         let waveLength = back.getWaveLength(root.path, startPoint, endPoint)
-        timerLabel.text = qsTr("%1 sec").arg(String(waveLength.toFixed(2)))
-
-        root.isLow = false
-        root.isAverage = false
-        root.isFast = false
+        timerLabel.text = qsTr("%1 sec").arg(String(waveLength.toFixed(0)))
 
         if (speechRate > root.maxSpeechRate) speechRate = root.maxSpeechRate
         if (speechRate < root.minSpeechRate) speechRate = root.minSpeechRate
 
-        if (speechRate > root.sec2SpeechRate) isFast = true
-        else if (speechRate > root.sec1SpeechRate) isAverage = true
-        else isLow = true
-
         speechRateRadialBar.value = speechRate
+
+        let articulationRate =  back.getArticulationRate(root.path, startPoint, endPoint)
+        articulationRateValue.text = qsTr("%1 wpm").arg(String(articulationRate.toFixed(0)))
+
+        if (articulationRate > root.maxArticulationRate) articulationRate = root.maxArticulationRate
+        if (articulationRate < root.minArticulationRate) articulationRate = root.minArticulationRate
+
+        articulationRateRadialBar.value = articulationRate
     }
 }

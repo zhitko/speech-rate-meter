@@ -7,8 +7,13 @@
 #include <QVariant>
 #include <QVariantList>
 
-const double DefaultKCoeficient = 10.0;
-const double DefaultMCoeficient = 1.7;
+const double DefaultKSpeechRate = 36;
+const double DefaultMinSpeechRate = 70;
+const double DefaultMaxSpeechRate = 210;
+const double DefaultKArticulationRate = 12;
+const double DefaultMinArticulationRate = 70;
+const double DefaultMaxArticulationRate = 210;
+const double DefaultKMeanPauses = 10;
 
 namespace IntonCore {
 class Core;
@@ -62,9 +67,9 @@ public:
     Q_INVOKABLE QVariant getConsonantsAndSilenceMeanValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getConsonantsAndSilenceMedianValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsRate(QString path, double from_percent, double to_percent);
-    Q_INVOKABLE QVariant getNumberOfWords(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getSpeechRate(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getMeanDurationOfPauses(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getArticulationRate(QString path, double from_percent, double to_percent);
 
     // Settings API
     Q_INVOKABLE QVariant getIntensityFrame();
@@ -81,14 +86,21 @@ public:
     Q_INVOKABLE void setSegmentsByIntensityThresholdAbsolute(QVariant value);
     Q_INVOKABLE QVariant getSegmentsByIntensityThresholdRelative();
     Q_INVOKABLE void setSegmentsByIntensityThresholdRelative(QVariant value);
-    Q_INVOKABLE QVariant getKCoeficient();
-    Q_INVOKABLE void setKCoeficient(QVariant value);
-    Q_INVOKABLE QVariant getMCoeficient();
-    Q_INVOKABLE void setMCoeficient(QVariant value);
-    Q_INVOKABLE QVariant getMinSpeechRate();
+
+    Q_INVOKABLE void setKSpeechRate(QVariant value);
+    Q_INVOKABLE QVariant getKSpeechRate();
     Q_INVOKABLE void setMinSpeechRate(QVariant value);
-    Q_INVOKABLE QVariant getMaxSpeechRate();
+    Q_INVOKABLE QVariant getMinSpeechRate();
     Q_INVOKABLE void setMaxSpeechRate(QVariant value);
+    Q_INVOKABLE QVariant getMaxSpeechRate();
+    Q_INVOKABLE void setKArticulationRate(QVariant value);
+    Q_INVOKABLE QVariant getKArticulationRate();
+    Q_INVOKABLE void setMinArticulationRate(QVariant value);
+    Q_INVOKABLE QVariant getMinArticulationRate();
+    Q_INVOKABLE void setMaxArticulationRate(QVariant value);
+    Q_INVOKABLE QVariant getMaxArticulationRate();
+    Q_INVOKABLE void setKMeanPauses(QVariant value);
+    Q_INVOKABLE QVariant getKMeanPauses();
 
 
 public:
@@ -110,11 +122,13 @@ private:
     void saveToFile(IntonCore::Config *config);
     IntonCore::Config * getConfig();
 
-    double kCoeficient;
-    double mCoeficient;
-
+    double kSpeechRate;
     double minSpeechRate;
     double maxSpeechRate;
+    double kArticulationRate;
+    double minArticulationRate;
+    double maxArticulationRate;
+    double kMeanPauses;
 
 signals:
 

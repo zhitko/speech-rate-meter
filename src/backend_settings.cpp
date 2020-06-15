@@ -20,6 +20,14 @@ const QString SettingsKeySegmentsByIntensityThresholdRelative = "segmentsByInten
 const QString SettingsKeySpeechRateKCoeficient = "speechRate/K";
 const QString SettingsKeySpeechRateMCoeficient = "speechRate/M";
 
+const QString SettingsKeyKSpeechRate = "speechRate/K1";
+const QString SettingsKeyMinSpeechRate = "speechRate/Min";
+const QString SettingsKeyMaxSpeechRate = "speechRate/Max";
+const QString SettingsKeyKArticulationRate = "articulationRate/K2";
+const QString SettingsKeyMinArticulationRate = "articulationRate/Min";
+const QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
+const QString SettingsKeyKMeanPauses = "meanPauses/Max";
+
 IntonCore::Config * Backend::getConfig()
 {
     qDebug() << "getConfig";
@@ -56,11 +64,26 @@ void Backend::loadFromFile(IntonCore::Config *config)
         config->setSegmentsByIntensityThresholdRelative(
             settings.value(SettingsKeySegmentsByIntensityThresholdRelative).toDouble()
         );
-        this->setKCoeficient(
-            settings.value(SettingsKeySpeechRateKCoeficient, DefaultKCoeficient).toDouble()
+        this->setKSpeechRate(
+            settings.value(SettingsKeyKSpeechRate, DefaultKSpeechRate).toDouble()
         );
-        this->setMCoeficient(
-            settings.value(SettingsKeySpeechRateMCoeficient, DefaultMCoeficient).toDouble()
+        this->setMinSpeechRate(
+            settings.value(SettingsKeyMinSpeechRate, DefaultMinSpeechRate).toDouble()
+        );
+        this->setMaxSpeechRate(
+            settings.value(SettingsKeyMaxSpeechRate, DefaultMaxSpeechRate).toDouble()
+        );
+        this->setKArticulationRate(
+            settings.value(SettingsKeyKArticulationRate, DefaultKArticulationRate).toDouble()
+        );
+        this->setMinArticulationRate(
+            settings.value(SettingsKeyMinArticulationRate, DefaultMinArticulationRate).toDouble()
+        );
+        this->setMaxArticulationRate(
+            settings.value(SettingsKeyMaxArticulationRate, DefaultMaxArticulationRate).toDouble()
+        );
+        this->setKMeanPauses(
+            settings.value(SettingsKeyKMeanPauses, DefaultKMeanPauses).toDouble()
         );
     }
 }
@@ -99,12 +122,32 @@ void Backend::saveToFile(IntonCore::Config *config)
         config->segmentsByIntensityThresholdRelative()
     );
     settings.setValue(
-        SettingsKeySpeechRateKCoeficient,
-        this->getKCoeficient()
+        SettingsKeyKSpeechRate,
+        this->getKSpeechRate()
     );
     settings.setValue(
-        SettingsKeySpeechRateMCoeficient,
-        this->getMCoeficient()
+        SettingsKeyMinSpeechRate,
+        this->getMinSpeechRate()
+    );
+    settings.setValue(
+        SettingsKeyMaxSpeechRate,
+        this->getMaxSpeechRate()
+    );
+    settings.setValue(
+        SettingsKeyKArticulationRate,
+        this->getKArticulationRate()
+    );
+    settings.setValue(
+        SettingsKeyMinArticulationRate,
+        this->getMinArticulationRate()
+    );
+    settings.setValue(
+        SettingsKeyMaxArticulationRate,
+        this->getMaxArticulationRate()
+    );
+    settings.setValue(
+        SettingsKeyKMeanPauses,
+        this->getKMeanPauses()
     );
     settings.sync();
 }
@@ -200,31 +243,15 @@ void Backend::setSegmentsByIntensityThresholdRelative(QVariant value)
     this->saveToFile(config);
 }
 
-QVariant Backend::getKCoeficient()
+void Backend::setKSpeechRate(QVariant value)
 {
-    return this->kCoeficient;
-}
-
-void Backend::setKCoeficient(QVariant value)
-{
-    this->kCoeficient = value.toDouble();
+    this->kSpeechRate = value.toDouble();
     this->saveToFile(config);
 }
 
-QVariant Backend::getMCoeficient()
+QVariant Backend::getKSpeechRate()
 {
-    return this->mCoeficient;
-}
-
-void Backend::setMCoeficient(QVariant value)
-{
-    this->mCoeficient = value.toDouble();
-    this->saveToFile(config);
-}
-
-QVariant Backend::getMinSpeechRate()
-{
-    return this->minSpeechRate;
+    return this->kSpeechRate;
 }
 
 void Backend::setMinSpeechRate(QVariant value)
@@ -233,13 +260,62 @@ void Backend::setMinSpeechRate(QVariant value)
     this->saveToFile(config);
 }
 
-QVariant Backend::getMaxSpeechRate()
+QVariant Backend::getMinSpeechRate()
 {
-    return this->maxSpeechRate;
+    return this->minSpeechRate;
 }
 
 void Backend::setMaxSpeechRate(QVariant value)
 {
     this->maxSpeechRate = value.toDouble();
     this->saveToFile(config);
+}
+
+QVariant Backend::getMaxSpeechRate()
+{
+    return this->maxSpeechRate;
+}
+
+void Backend::setKArticulationRate(QVariant value)
+{
+    this->kArticulationRate = value.toDouble();
+    this->saveToFile(config);
+}
+
+QVariant Backend::getKArticulationRate()
+{
+    return this->kArticulationRate;
+}
+
+void Backend::setMinArticulationRate(QVariant value)
+{
+    this->minArticulationRate = value.toDouble();
+    this->saveToFile(config);
+}
+
+QVariant Backend::getMinArticulationRate()
+{
+    return this->minArticulationRate;
+}
+
+void Backend::setMaxArticulationRate(QVariant value)
+{
+    this->maxArticulationRate = value.toDouble();
+    this->saveToFile(config);
+}
+
+QVariant Backend::getMaxArticulationRate()
+{
+    return this->maxArticulationRate;
+}
+
+void Backend::setKMeanPauses(QVariant value)
+{
+    this->kMeanPauses = value.toDouble();
+    this->saveToFile(config);
+}
+
+QVariant Backend::getKMeanPauses()
+{
+    return this->kMeanPauses;
 }

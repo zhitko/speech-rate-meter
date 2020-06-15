@@ -19,16 +19,14 @@ Page {
     property bool recording: false
     property alias meanDurationOfPausesValue: meanDurationOfPausesValue
     property alias speechRateValue: speechRateValue
+    property alias articulationRateValue: articulationRateValue
     property alias speechRateRadialBar: speechRateRadialBar
     property alias detailsButton: detailsButton
 
     property double minSpeechRate: 70
-    property double sec1SpeechRate: 116
-    property double sec2SpeechRate: 162
     property double maxSpeechRate: 210
-    property bool isLow: false
-    property bool isAverage: false
-    property bool isFast: false
+    property double minArticulationRate: 70
+    property double maxArticulationRate: 210
 
     FontAwesome {
         id: awesome
@@ -36,12 +34,23 @@ Page {
 
     Text {
         id: speechRateTitle
-        text: qsTr("Average Speech Rate")
-        anchors.horizontalCenterOffset: -width / 2 + 20
+        text: qsTr("Speech Rate")
+        anchors.horizontalCenterOffset: -width / 2
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 15
-        font.pointSize: 16
+        anchors.topMargin: 10
+        font.pointSize: 14
+        visible: recorded
+    }
+
+    Rectangle {
+        id: speechRateColor
+        width: speechRateTitle.height
+        height: speechRateTitle.height
+        color: speechRateRadialBar.progressColor
+        anchors.verticalCenter: speechRateTitle.verticalCenter
+        anchors.left: speechRateTitle.right
+        anchors.leftMargin: 5
         visible: recorded
     }
 
@@ -49,21 +58,54 @@ Page {
         id: speechRateValue
         text: "---"
         font.bold: true
-        anchors.left: speechRateTitle.right
+        anchors.left: speechRateColor.right
         anchors.leftMargin: 5
         anchors.verticalCenter: speechRateTitle.verticalCenter
-        font.pointSize: 16
+        font.pointSize: 14
+        visible: recorded
+    }
+
+    Text {
+        id: articulationRateTitle
+        text: qsTr("Articulation Rate")
+        anchors.horizontalCenterOffset: -width / 2
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: speechRateTitle.bottom
+        anchors.topMargin: 8
+        font.pointSize: 14
+        visible: recorded
+    }
+
+    Rectangle {
+        id: articulationRateColor
+        width: articulationRateTitle.height
+        height: articulationRateTitle.height
+        color: articulationRateRadialBar.progressColor
+        anchors.verticalCenter: articulationRateTitle.verticalCenter
+        anchors.left: articulationRateTitle.right
+        anchors.leftMargin: 5
+        visible: recorded
+    }
+
+    Text {
+        id: articulationRateValue
+        text: "---"
+        font.bold: true
+        anchors.left: articulationRateColor.right
+        anchors.leftMargin: 5
+        anchors.verticalCenter: articulationRateTitle.verticalCenter
+        font.pointSize: 14
         visible: recorded
     }
 
     Text {
         id: meanDurationOfPausesTitle
-        text: qsTr("Interphases Pauses")
-        anchors.horizontalCenterOffset: -width / 2 + 20
+        text: qsTr("Mean Pauses")
+        anchors.horizontalCenterOffset: -width / 2
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: speechRateTitle.bottom
-        anchors.topMargin: 10
-        font.pointSize: 16
+        anchors.top: articulationRateTitle.bottom
+        anchors.topMargin: 8
+        font.pointSize: 14
         visible: recorded
     }
 
@@ -74,18 +116,18 @@ Page {
         anchors.left: meanDurationOfPausesTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: meanDurationOfPausesTitle.verticalCenter
-        font.pointSize: 16
+        font.pointSize: 14
         visible: recorded
     }
 
     Text {
         id: timerTitle
-        text: qsTr("Speech Recorded")
-        anchors.horizontalCenterOffset: -width / 2 + 20
+        text: qsTr("Speech Duration")
+        anchors.horizontalCenterOffset: -width / 2
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: meanDurationOfPausesTitle.bottom
-        anchors.topMargin: 10
-        font.pointSize: 16
+        anchors.topMargin: 8
+        font.pointSize: 14
         visible: recorded
     }
 
@@ -94,9 +136,9 @@ Page {
         text: qsTr("00:00")
         font.bold: true
         anchors.left: timerTitle.right
-        anchors.leftMargin: recorded ? 5 : -width / 2 - 20
+        anchors.leftMargin: recorded ? 5 : -width / 2
         anchors.verticalCenter: timerTitle.verticalCenter
-        font.pointSize: recorded ? 16 : 24
+        font.pointSize: recorded ? 14 : 24
     }
 
     ToolButton {
@@ -111,10 +153,15 @@ Page {
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
     }
 
+    property int plotWidth: 300 //250
+    property int plotHeight: 300 //250
+    property int plotDepth: 70
+    property alias articulationRateRadialBar: articulationRateRadialBar
+
     Shape {
         id: legend
-        width: 250
-        height: 250
+        width: plotWidth
+        height: plotHeight
         layer.smooth: true
         antialiasing: true
         anchors.verticalCenter: recordButton.verticalCenter
@@ -125,9 +172,9 @@ Page {
             startY: legend.height / 2
             fillGradient: LinearGradient {
                 x1: 0
-                y1: 125
-                x2: 250
-                y2: 125
+                y1: plotHeight / 2
+                x2: plotWidth
+                y2: plotHeight / 2
                 GradientStop {
                     position: 0
                     color: Colors.green
@@ -149,14 +196,14 @@ Page {
                 useLargeArc: false
             }
             PathLine {
-                x: legend.width - 70
+                x: legend.width - plotDepth
                 y: legend.height / 2
             }
             PathArc {
                 x: 70
                 y: legend.height / 2
-                radiusX: (legend.width - 140) / 2
-                radiusY: (legend.height - 140) / 2
+                radiusX: (legend.width - plotDepth * 2) / 2
+                radiusY: (legend.height - plotDepth * 2) / 2
                 direction: PathArc.Counterclockwise
             }
             PathLine {
@@ -168,11 +215,11 @@ Page {
 
     RadialBar {
         id: speechRateRadialBar
-        width: 270
-        height: 270
+        width: plotWidth + speechRateRadialBar.dialWidth
+        height: plotHeight + speechRateRadialBar.dialWidth
         showText: false
         anchors.top: timerLabel.bottom
-        anchors.topMargin: 60
+        anchors.topMargin: 30
         anchors.horizontalCenter: parent.horizontalCenter
         dialType: RadialBar.MinToMax
         progressColor: "#3f51b5"
@@ -186,25 +233,41 @@ Page {
         visible: recorded
     }
 
+    RadialBar {
+        id: articulationRateRadialBar
+        width: plotWidth - plotDepth - articulationRateRadialBar.dialWidth * 2
+        height: plotHeight - plotDepth - articulationRateRadialBar.dialWidth * 2
+        anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
+        anchors.verticalCenter: speechRateRadialBar.verticalCenter
+        showText: false
+        dialType: RadialBar.MinToMax
+        progressColor: "#cd00ea"
+        foregroundColor: "#00ffffff"
+        dialWidth: 25
+        startAngle: 90
+        spanAngle: 180
+        minValue: minArticulationRate
+        maxValue: maxArticulationRate
+        value: 55
+        visible: recorded
+    }
+
     Text {
         text: qsTr("Low")
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 4
         anchors.right: speechRateRadialBar.left
-        anchors.rightMargin: 15
-        font.pointSize: isLow ? 16 : 12
+        font.pointSize: 12
         visible: recorded
-        font.bold: isLow
     }
 
     Text {
         text: qsTr("Average")
         anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
         anchors.bottom: speechRateRadialBar.top
-        anchors.bottomMargin: 15
-        font.pointSize: isAverage ? 16 : 12
+        anchors.bottomMargin: 3
+        font.pointSize: 12
         visible: recorded
-        font.bold: isAverage
     }
 
     Text {
@@ -212,48 +275,40 @@ Page {
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 4
         anchors.left: speechRateRadialBar.right
-        anchors.leftMargin: 15
-        font.pointSize: isFast ? 16 : 12
+        font.pointSize: 12
         visible: recorded
-        font.bold: isFast
     }
 
-    ShowDetailsButton {
-        id: detailsButton
-        width: 70
-        height: 70
-        visible: recorded
-        font.pointSize: 20
-        anchors.top: recordButton.bottom
-        anchors.topMargin: -10
-        anchors.right: recordButton.left
+    BottomBar {
+        id: bottombar
+        anchors.rightMargin: 0
         anchors.leftMargin: 0
-        path: root.path
-    }
-
-    PlayButton {
-        id: playButton
-        width: 70
-        height: 70
-        visible: recorded
-        font.pointSize: 20
-        anchors.top: recordButton.bottom
-        anchors.topMargin: -10
-        anchors.left: recordButton.right
-        anchors.leftMargin: 0
-        path: root.path
-    }
-
-    OpenFileButton {
-        id: openButton
-        width: 70
-        height: 70
-        font.pointSize: 20
-        anchors.top: recordButton.bottom
-        anchors.topMargin: -10
-        anchors.horizontalCenter: recordButton.horizontalCenter
-        path: root.path
-        visible: !recording
+        content.data: [
+            ShowDetailsButton {
+                id: detailsButton
+                width: 70
+                height: 70
+                visible: recorded
+                font.pointSize: 20
+                path: root.path
+            },
+            PlayButton {
+                id: playButton
+                width: 70
+                height: 70
+                visible: recorded
+                font.pointSize: 20
+                path: root.path
+            },
+            OpenFileButton {
+                id: openButton
+                width: 70
+                height: 70
+                font.pointSize: 20
+                path: root.path
+                visible: !recording
+            }
+        ]
     }
 }
 

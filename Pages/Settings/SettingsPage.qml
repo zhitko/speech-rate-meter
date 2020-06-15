@@ -14,22 +14,14 @@ SettingsPageForm {
         intensityShiftValue.value = backend.getIntensityShift();
         intensitySmoothFrameValue.value = backend.getIntensitySmoothFrame();
         intensityMaxLengthValue.value = backend.getIntensityMaxLengthValue();
-        kCoeficient.value = backend.getKCoeficient() * 100;
-        mCoeficient.value = backend.getMCoeficient() * 100;
-        minSpeechRate.value = backend.getMinSpeechRate() * 100;
-        maxSpeechRate.value = backend.getMaxSpeechRate() * 100;
-    }
 
-    minSpeechRate.onValueChanged: {
-        backend.setMinSpeechRate(minSpeechRate.value / 100);
-    }
-
-    maxSpeechRate.onValueChanged: {
-        backend.setMaxSpeechRate(maxSpeechRate.value / 100);
-    }
-
-    intensityMaxLengthValue.onValueChanged: {
-        backend.setIntensityMaxLengthValue(intensityMaxLengthValue.value);
+        kSpeechRateValue.value = backend.getKSpeechRate() * 100;
+        minSpeechRateValue.value = backend.getMinSpeechRate() * 100;
+        maxSpeechRateValue.value = backend.getMaxSpeechRate() * 100;
+        kArticulationRateValue.value = backend.getKArticulationRate() * 100;
+        minArticulationRateValue.value = backend.getMinArticulationRate() * 100;
+        maxArticulationRateValue.value = backend.getMaxArticulationRate() * 100;
+        kMeanPausesValue.value = backend.getKMeanPauses() * 100;
     }
 
     intensityFrameValue.onValueChanged: {
@@ -44,11 +36,32 @@ SettingsPageForm {
         backend.setIntensitySmoothFrame(intensitySmoothFrameValue.value);
     }
 
-    kCoeficient.onValueChanged: {
-        backend.setKCoeficient(kCoeficient.value / 100);
+    kSpeechRateValue.onValueChanged: {
+        backend.setKSpeechRate(kSpeechRateValue.value / 100);
     }
 
-    mCoeficient.onValueChanged: {
-        backend.setMCoeficient(mCoeficient.value / 100);
+    minSpeechRateValue.onValueChanged: {
+        backend.setMinSpeechRate(minSpeechRateValue.value / 100);
     }
+
+    maxSpeechRateValue.onValueChanged: {
+        backend.setMaxSpeechRate(maxSpeechRateValue.value / 100);
+    }
+
+    kArticulationRateValue.onValueChanged: {
+        backend.setKArticulationRate(kArticulationRateValue.value / 100);
+    }
+
+    minArticulationRateValue.onValueChanged: {
+        backend.setMinArticulationRate(minArticulationRateValue.value / 100);
+    }
+
+    maxArticulationRateValue.onValueChanged: {
+        backend.setMaxArticulationRate(maxArticulationRateValue.value / 100);
+    }
+
+    kMeanPausesValue.onValueChanged: {
+        backend.setKMeanPauses(kMeanPausesValue.value / 100);
+    }
+
 }
