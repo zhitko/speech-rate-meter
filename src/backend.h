@@ -73,33 +73,33 @@ public:
 
     // Settings API
     Q_INVOKABLE QVariant getIntensityFrame();
-    Q_INVOKABLE void setIntensityFrame(QVariant value);
+    Q_INVOKABLE void setIntensityFrame(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getIntensityShift();
-    Q_INVOKABLE void setIntensityShift(QVariant value);
+    Q_INVOKABLE void setIntensityShift(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getIntensitySmoothFrame();
-    Q_INVOKABLE void setIntensitySmoothFrame(QVariant value);
+    Q_INVOKABLE void setIntensitySmoothFrame(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getIntensityMaxLengthValue();
-    Q_INVOKABLE void setIntensityMaxLengthValue(QVariant value);
+    Q_INVOKABLE void setIntensityMaxLengthValue(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getSegmentsByIntensityMinimumLength();
-    Q_INVOKABLE void setSegmentsByIntensityMinimumLength(QVariant value);
+    Q_INVOKABLE void setSegmentsByIntensityMinimumLength(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getSegmentsByIntensityThresholdAbsolute();
-    Q_INVOKABLE void setSegmentsByIntensityThresholdAbsolute(QVariant value);
+    Q_INVOKABLE void setSegmentsByIntensityThresholdAbsolute(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getSegmentsByIntensityThresholdRelative();
-    Q_INVOKABLE void setSegmentsByIntensityThresholdRelative(QVariant value);
+    Q_INVOKABLE void setSegmentsByIntensityThresholdRelative(QVariant value, bool save = true);
 
-    Q_INVOKABLE void setKSpeechRate(QVariant value);
+    Q_INVOKABLE void setKSpeechRate(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getKSpeechRate();
-    Q_INVOKABLE void setMinSpeechRate(QVariant value);
+    Q_INVOKABLE void setMinSpeechRate(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getMinSpeechRate();
-    Q_INVOKABLE void setMaxSpeechRate(QVariant value);
+    Q_INVOKABLE void setMaxSpeechRate(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getMaxSpeechRate();
-    Q_INVOKABLE void setKArticulationRate(QVariant value);
+    Q_INVOKABLE void setKArticulationRate(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getKArticulationRate();
-    Q_INVOKABLE void setMinArticulationRate(QVariant value);
+    Q_INVOKABLE void setMinArticulationRate(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getMinArticulationRate();
-    Q_INVOKABLE void setMaxArticulationRate(QVariant value);
+    Q_INVOKABLE void setMaxArticulationRate(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getMaxArticulationRate();
-    Q_INVOKABLE void setKMeanPauses(QVariant value);
+    Q_INVOKABLE void setKMeanPauses(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getKMeanPauses();
 
 
@@ -120,7 +120,7 @@ private:
     void initializeCore(const QString& path);
     void loadFromFile(IntonCore::Config *config);
     void saveToFile(IntonCore::Config *config);
-    IntonCore::Config * getConfig();
+    IntonCore::Config * getConfig(bool reload = false);
 
     double kSpeechRate;
     double minSpeechRate;

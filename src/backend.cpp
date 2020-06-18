@@ -33,6 +33,7 @@ Backend::Backend(QObject *parent)
     this->path = "";
 
     this->recorder = Recorder::getInstance();
+    this->getConfig(true);
 }
 
 Backend::~Backend()
@@ -574,6 +575,9 @@ QVariant Backend::getVowelsRate(QString path, double from_percent, double to_per
 
 QVariant Backend::getSpeechRate(QString path, double from_percent, double to_percent)
 {
+    this->initializeCore(path);
+
+    qDebug() << "getSpeechRate K1:" << this->kSpeechRate;
     auto nv = this->getVowelsCount(path, from_percent, to_percent);
     auto ts = this->getWaveLength(path, from_percent, to_percent);
     double speechRate = this->kSpeechRate * (nv.toInt() / ts.toDouble());
@@ -582,6 +586,9 @@ QVariant Backend::getSpeechRate(QString path, double from_percent, double to_per
 
 QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, double to_percent)
 {
+    this->initializeCore(path);
+
+    qDebug() << "getMeanDurationOfPauses K3:" << this->kMeanPauses;
     auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent);
     auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent);
     double meanDurationOfPauses = this->kMeanPauses * abs(tcm.toDouble() - tcd.toDouble());
@@ -590,6 +597,9 @@ QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, dou
 
 QVariant Backend::getArticulationRate(QString path, double from_percent, double to_percent)
 {
+    this->initializeCore(path);
+
+    qDebug() << "getArticulationRate K2:" << this->kArticulationRate;
     auto nv = this->getVowelsCount(path, from_percent, to_percent);
     auto tv = this->getVowelsLength(path, from_percent, to_percent);
     double articulationRate = this->kArticulationRate * (nv.toDouble() / tv.toDouble());
@@ -623,6 +633,7 @@ void Backend::initializeCore(const QString& path)
     qDebug() << "path: ";
     qDebug() << this->path;
     qDebug() << path;
+    this->getConfig(true);
     if (this->path == path) return;
     this->setPath(path);
 }

@@ -28,9 +28,15 @@ const QString SettingsKeyMinArticulationRate = "articulationRate/Min";
 const QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
 const QString SettingsKeyKMeanPauses = "meanPauses/Max";
 
-IntonCore::Config * Backend::getConfig()
+IntonCore::Config * Backend::getConfig(bool reload)
 {
-    qDebug() << "getConfig";
+    qDebug() << "getConfig reload: " << reload;
+    if (reload)
+    {
+        delete this->config;
+        this->config = nullptr;
+    }
+
     if (this->config == nullptr)
     {
         this->config = new IntonCore::Config();
@@ -43,7 +49,7 @@ IntonCore::Config * Backend::getConfig()
 void Backend::loadFromFile(IntonCore::Config *config)
 {
     QSettings settings(ApplicationConfig::GetFullSettingsPath(), QSettings::IniFormat);
-    if (settings.contains("date"))
+    if (settings.contains(SettingsKeyDate))
     {
         qDebug() << "Load config file: " << settings.fileName();
         config->setIntensityFrame(
@@ -65,25 +71,32 @@ void Backend::loadFromFile(IntonCore::Config *config)
             settings.value(SettingsKeySegmentsByIntensityThresholdRelative).toDouble()
         );
         this->setKSpeechRate(
-            settings.value(SettingsKeyKSpeechRate, DefaultKSpeechRate).toDouble()
+            settings.value(SettingsKeyKSpeechRate, DefaultKSpeechRate),
+            false
         );
         this->setMinSpeechRate(
-            settings.value(SettingsKeyMinSpeechRate, DefaultMinSpeechRate).toDouble()
+            settings.value(SettingsKeyMinSpeechRate, DefaultMinSpeechRate),
+            false
         );
         this->setMaxSpeechRate(
-            settings.value(SettingsKeyMaxSpeechRate, DefaultMaxSpeechRate).toDouble()
+            settings.value(SettingsKeyMaxSpeechRate, DefaultMaxSpeechRate),
+            false
         );
         this->setKArticulationRate(
-            settings.value(SettingsKeyKArticulationRate, DefaultKArticulationRate).toDouble()
+            settings.value(SettingsKeyKArticulationRate, DefaultKArticulationRate),
+            false
         );
         this->setMinArticulationRate(
-            settings.value(SettingsKeyMinArticulationRate, DefaultMinArticulationRate).toDouble()
+            settings.value(SettingsKeyMinArticulationRate, DefaultMinArticulationRate),
+            false
         );
         this->setMaxArticulationRate(
-            settings.value(SettingsKeyMaxArticulationRate, DefaultMaxArticulationRate).toDouble()
+            settings.value(SettingsKeyMaxArticulationRate, DefaultMaxArticulationRate),
+            false
         );
         this->setKMeanPauses(
-            settings.value(SettingsKeyKMeanPauses, DefaultKMeanPauses).toDouble()
+            settings.value(SettingsKeyKMeanPauses, DefaultKMeanPauses),
+            false
         );
     }
 }
@@ -158,11 +171,11 @@ QVariant Backend::getIntensityFrame()
     return config->intensityFrame();
 }
 
-void Backend::setIntensityFrame(QVariant value)
+void Backend::setIntensityFrame(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setIntensityFrame(value.toUInt());
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getIntensityShift()
@@ -171,11 +184,11 @@ QVariant Backend::getIntensityShift()
     return config->intensityShift();
 }
 
-void Backend::setIntensityShift(QVariant value)
+void Backend::setIntensityShift(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setIntensityShift(value.toUInt());
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getIntensitySmoothFrame()
@@ -184,11 +197,11 @@ QVariant Backend::getIntensitySmoothFrame()
     return config->intensitySmoothFrame();
 }
 
-void Backend::setIntensitySmoothFrame(QVariant value)
+void Backend::setIntensitySmoothFrame(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setIntensitySmoothFrame(value.toUInt());
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getIntensityMaxLengthValue()
@@ -197,11 +210,11 @@ QVariant Backend::getIntensityMaxLengthValue()
     return config->segmentsByIntensityMinimumLength();
 }
 
-void Backend::setIntensityMaxLengthValue(QVariant value)
+void Backend::setIntensityMaxLengthValue(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityMinimumLength(value.toUInt());
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getSegmentsByIntensityMinimumLength()
@@ -210,11 +223,11 @@ QVariant Backend::getSegmentsByIntensityMinimumLength()
     return config->segmentsByIntensityMinimumLength();
 }
 
-void Backend::setSegmentsByIntensityMinimumLength(QVariant value)
+void Backend::setSegmentsByIntensityMinimumLength(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityMinimumLength(value.toUInt());
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getSegmentsByIntensityThresholdAbsolute()
@@ -223,11 +236,11 @@ QVariant Backend::getSegmentsByIntensityThresholdAbsolute()
     return config->segmentsByIntensityThresholdAbsolute();
 }
 
-void Backend::setSegmentsByIntensityThresholdAbsolute(QVariant value)
+void Backend::setSegmentsByIntensityThresholdAbsolute(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityThresholdAbsolute(value.toDouble());
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getSegmentsByIntensityThresholdRelative()
@@ -236,17 +249,17 @@ QVariant Backend::getSegmentsByIntensityThresholdRelative()
     return config->segmentsByIntensityThresholdRelative();
 }
 
-void Backend::setSegmentsByIntensityThresholdRelative(QVariant value)
+void Backend::setSegmentsByIntensityThresholdRelative(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityThresholdRelative(value.toDouble());
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
-void Backend::setKSpeechRate(QVariant value)
+void Backend::setKSpeechRate(QVariant value, bool save)
 {
     this->kSpeechRate = value.toDouble();
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getKSpeechRate()
@@ -254,10 +267,10 @@ QVariant Backend::getKSpeechRate()
     return this->kSpeechRate;
 }
 
-void Backend::setMinSpeechRate(QVariant value)
+void Backend::setMinSpeechRate(QVariant value, bool save)
 {
     this->minSpeechRate = value.toDouble();
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getMinSpeechRate()
@@ -265,10 +278,10 @@ QVariant Backend::getMinSpeechRate()
     return this->minSpeechRate;
 }
 
-void Backend::setMaxSpeechRate(QVariant value)
+void Backend::setMaxSpeechRate(QVariant value, bool save)
 {
     this->maxSpeechRate = value.toDouble();
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getMaxSpeechRate()
@@ -276,10 +289,10 @@ QVariant Backend::getMaxSpeechRate()
     return this->maxSpeechRate;
 }
 
-void Backend::setKArticulationRate(QVariant value)
+void Backend::setKArticulationRate(QVariant value, bool save)
 {
     this->kArticulationRate = value.toDouble();
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getKArticulationRate()
@@ -287,10 +300,10 @@ QVariant Backend::getKArticulationRate()
     return this->kArticulationRate;
 }
 
-void Backend::setMinArticulationRate(QVariant value)
+void Backend::setMinArticulationRate(QVariant value, bool save)
 {
     this->minArticulationRate = value.toDouble();
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getMinArticulationRate()
@@ -298,10 +311,10 @@ QVariant Backend::getMinArticulationRate()
     return this->minArticulationRate;
 }
 
-void Backend::setMaxArticulationRate(QVariant value)
+void Backend::setMaxArticulationRate(QVariant value, bool save)
 {
     this->maxArticulationRate = value.toDouble();
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getMaxArticulationRate()
@@ -309,10 +322,10 @@ QVariant Backend::getMaxArticulationRate()
     return this->maxArticulationRate;
 }
 
-void Backend::setKMeanPauses(QVariant value)
+void Backend::setKMeanPauses(QVariant value, bool save)
 {
     this->kMeanPauses = value.toDouble();
-    this->saveToFile(config);
+    if (save) this->saveToFile(config);
 }
 
 QVariant Backend::getKMeanPauses()
