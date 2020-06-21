@@ -325,16 +325,18 @@ QVariant Backend::getVowelsLength(QString path, double from_percent, double to_p
 
     auto segments_mask = storage->getAutoSegmentsByIntensitySmoothedMask();
 
-    int from = static_cast<int>(std::ceil(from_percent * segments_mask.size()));
-    int to = static_cast<int>(std::ceil(to_percent * segments_mask.size()));
+    uint32_t from = static_cast<uint32_t>(from_percent * segments_mask.size());
+    uint32_t to = static_cast<uint32_t>(to_percent * segments_mask.size());
     qDebug() << "from: " << from;
     qDebug() << "to: " << to;
 
-    int count = 0;
-    for (int i=from; i<to; i++)
+    uint32_t count = 0;
+    for (uint32_t i=from; i<to && i<segments_mask.size(); i++)
     {
-        if (segments_mask[i]) count++;
+        if (segments_mask[i] == 1) count++;
     }
+
+    qDebug() << "count: " << count;
 
     return QVariant::fromValue(storage->convertIntensityPointsToSec(count));
 }
@@ -385,7 +387,7 @@ QVariant Backend::getConsonantsAndSilenceLength(QString path, double from_percen
         if (!segments_mask[i]) count++;
     }
 
-    return QVariant::fromValue(storage->convertIntensityPointsToSec(count));
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(count));
 }
 
 QVariant Backend::getVowelsCount(QString path, double from_percent, double to_percent)
@@ -404,7 +406,6 @@ QVariant Backend::getVowelsCount(QString path, double from_percent, double to_pe
     int count = 0;
     for (auto &it: segments)
     {
-        qDebug() << "Segment first: " << it.first;
         if ( from < (it.first+it.second) && (it.first) < to )
         {
             count++;
@@ -429,15 +430,15 @@ QVariant Backend::getSegmentsVariance(QString path, double from_percent, double 
     qDebug() << "from: " << from;
     qDebug() << "to: " << to;
 
-    int mx2 = 0;
-    int mx = 0;
+    uint32_t mx2 = 0;
+    uint32_t mx = 0;
     for (uint32_t i=from; i<to; i++)
     {
         if (segments_mask[i]) mx += i;
         if (segments_mask[i]) mx2 += i * i;
     }
 
-    return QVariant::fromValue(storage->convertIntensityPointsToSec(mx2 - mx*mx));
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(mx2 - mx*mx));
 
 }
 
@@ -456,7 +457,7 @@ QVariant Backend::getVowelsMeanValue(QString path, double from_percent, double t
     qDebug() << "to: " << to;
 
     double result = 0.0;
-    int count = 0;
+    uint32_t count = 0;
     for (auto &it: segments)
     {
         if ( from < (it.first+it.second) && (it.first) < to )
@@ -468,7 +469,7 @@ QVariant Backend::getVowelsMeanValue(QString path, double from_percent, double t
 
     result /= count;
 
-    return QVariant::fromValue(storage->convertIntensityPointsToSec(result));
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
 }
 
 QVariant Backend::getVowelsMedianValue(QString path, double from_percent, double to_percent)
@@ -485,7 +486,7 @@ QVariant Backend::getVowelsMedianValue(QString path, double from_percent, double
     qDebug() << "from: " << from;
     qDebug() << "to: " << to;
 
-    std::vector<int> selected_segments;
+    std::vector<uint32_t> selected_segments;
 
     for (auto &it: segments)
     {
@@ -497,9 +498,9 @@ QVariant Backend::getVowelsMedianValue(QString path, double from_percent, double
 
     sort(selected_segments.begin(), selected_segments.end());
 
-    int median = IntonCore::getMedianValue(selected_segments);
+    uint32_t median = IntonCore::getMedianValue(selected_segments);
 
-    return QVariant::fromValue(storage->convertIntensityPointsToSec(median));
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(median));
 }
 
 QVariant Backend::getConsonantsAndSilenceMeanValue(QString path, double from_percent, double to_percent)
@@ -517,7 +518,7 @@ QVariant Backend::getConsonantsAndSilenceMeanValue(QString path, double from_per
     qDebug() << "to: " << to;
 
     double result = 0.0;
-    int count = 0;
+    uint32_t count = 0;
     for (auto &it: segments)
     {
         if ( from < (it.first+it.second) && (it.first) < to )
@@ -529,7 +530,7 @@ QVariant Backend::getConsonantsAndSilenceMeanValue(QString path, double from_per
 
     result /= count;
 
-    return QVariant::fromValue(storage->convertIntensityPointsToSec(result));
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
 }
 
 QVariant Backend::getConsonantsAndSilenceMedianValue(QString path, double from_percent, double to_percent)
@@ -558,9 +559,9 @@ QVariant Backend::getConsonantsAndSilenceMedianValue(QString path, double from_p
 
     sort(selected_segments.begin(), selected_segments.end());
 
-    int median = IntonCore::getMedianValue(selected_segments);
+    uint32_t median = IntonCore::getMedianValue(selected_segments);
 
-    return QVariant::fromValue(storage->convertIntensityPointsToSec(median));
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(median));
 }
 
 QVariant Backend::getVowelsRate(QString path, double from_percent, double to_percent)
@@ -601,8 +602,10 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
 
     qDebug() << "getArticulationRate K2:" << this->kArticulationRate;
     auto nv = this->getVowelsCount(path, from_percent, to_percent);
+    qDebug() << "getArticulationRate nv:" << nv;
     auto tv = this->getVowelsLength(path, from_percent, to_percent);
-    double articulationRate = this->kArticulationRate * (nv.toDouble() / tv.toDouble());
+    qDebug() << "getArticulationRate tv:" << tv;
+    double articulationRate = this->kArticulationRate * (nv.toInt() / tv.toDouble());
     return QVariant::fromValue(articulationRate);
 }
 
@@ -633,7 +636,6 @@ void Backend::initializeCore(const QString& path)
     qDebug() << "path: ";
     qDebug() << this->path;
     qDebug() << path;
-    this->getConfig(true);
     if (this->path == path) return;
     this->setPath(path);
 }
