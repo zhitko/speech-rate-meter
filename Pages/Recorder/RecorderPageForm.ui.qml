@@ -32,6 +32,17 @@ Page {
         id: awesome
     }
 
+    Rectangle {
+        id: speechRateColor
+        width: speechRateTitle.height * 2
+        height: speechRateTitle.height
+        color: speechRateRadialBar.progressColor
+        anchors.verticalCenter: speechRateTitle.verticalCenter
+        anchors.right: speechRateTitle.left
+        anchors.rightMargin: 5
+        visible: recorded
+    }
+
     Text {
         id: speechRateTitle
         text: qsTr("Speech Rate")
@@ -43,25 +54,25 @@ Page {
         visible: recorded
     }
 
-    Rectangle {
-        id: speechRateColor
-        width: speechRateTitle.height
-        height: speechRateTitle.height
-        color: speechRateRadialBar.progressColor
-        anchors.verticalCenter: speechRateTitle.verticalCenter
-        anchors.left: speechRateTitle.right
-        anchors.leftMargin: 5
-        visible: recorded
-    }
-
     Text {
         id: speechRateValue
         text: "---"
         font.bold: true
-        anchors.left: speechRateColor.right
+        anchors.left: speechRateTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: speechRateTitle.verticalCenter
         font.pointSize: 14
+        visible: recorded
+    }
+
+    Rectangle {
+        id: articulationRateColor
+        width: articulationRateTitle.height * 2
+        height: articulationRateTitle.height
+        color: articulationRateRadialBar.progressColor
+        anchors.verticalCenter: articulationRateTitle.verticalCenter
+        anchors.right: articulationRateTitle.left
+        anchors.rightMargin: 5
         visible: recorded
     }
 
@@ -76,22 +87,11 @@ Page {
         visible: recorded
     }
 
-    Rectangle {
-        id: articulationRateColor
-        width: articulationRateTitle.height
-        height: articulationRateTitle.height
-        color: articulationRateRadialBar.progressColor
-        anchors.verticalCenter: articulationRateTitle.verticalCenter
-        anchors.left: articulationRateTitle.right
-        anchors.leftMargin: 5
-        visible: recorded
-    }
-
     Text {
         id: articulationRateValue
         text: "---"
         font.bold: true
-        anchors.left: articulationRateColor.right
+        anchors.left: articulationRateTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: articulationRateTitle.verticalCenter
         font.pointSize: 14
@@ -131,6 +131,23 @@ Page {
         visible: recorded
     }
 
+    Label {
+        text: qsTr("Welcome to Speech Rate Meter")
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+        font.pointSize: 17
+        font.bold: true
+        anchors.bottom: timerLabel.top
+        anchors.bottomMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        visible: !recorded
+    }
+
     Text {
         id: timerLabel
         text: qsTr("00:00")
@@ -139,6 +156,21 @@ Page {
         anchors.leftMargin: recorded ? 5 : -width / 2
         anchors.verticalCenter: timerTitle.verticalCenter
         font.pointSize: recorded ? 14 : 24
+    }
+
+    Image {
+        id: image
+        anchors.bottom: recordButton.top
+        anchors.bottomMargin: 10
+        anchors.top: timerLabel.bottom
+        anchors.topMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        anchors.left: parent.left
+        anchors.leftMargin: 0
+        fillMode: Image.PreserveAspectCrop
+        source: "../../wave_long.svg"
+        visible: !recorded
     }
 
     ToolButton {
@@ -222,7 +254,7 @@ Page {
         anchors.topMargin: 30
         anchors.horizontalCenter: parent.horizontalCenter
         dialType: RadialBar.MinToMax
-        progressColor: "#3f51b5"
+        progressColor: Colors.teal_blue
         foregroundColor: "#00ffffff"
         dialWidth: 25
         startAngle: 90
@@ -235,13 +267,13 @@ Page {
 
     RadialBar {
         id: articulationRateRadialBar
-        width: plotWidth - plotDepth - articulationRateRadialBar.dialWidth * 2
-        height: plotHeight - plotDepth - articulationRateRadialBar.dialWidth * 2
+        width: plotWidth - speechRateRadialBar.dialWidth
+        height: plotHeight - speechRateRadialBar.dialWidth
         anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
         showText: false
         dialType: RadialBar.MinToMax
-        progressColor: "#cd00ea"
+        progressColor: Colors.purple
         foregroundColor: "#00ffffff"
         dialWidth: 25
         startAngle: 90

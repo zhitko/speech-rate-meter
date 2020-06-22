@@ -33,5 +33,6 @@
         <file>Pages/Metrics/MetricsPageForm.ui.qml</file>
         <file>Components/Buttons/ShowDetailsButton.qml</file>
         <file>Components/Buttons/ShowDetailsButtonForm.ui.qml</file>
+        <file>wave_long.svg</file>
     </qresource>
 </RCC>

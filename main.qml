@@ -32,7 +32,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        bus.openWelcomePage()
+        bus.openRecorderPage()
     }
 
     header: ToolBar {
@@ -76,7 +76,7 @@ ApplicationWindow {
                 width: parent.width
                 onClicked: {
                     stackView.clear();
-                    bus.openWelcomePage()
+                    bus.openRecorderPage()
                     drawer.close()
                 }
 

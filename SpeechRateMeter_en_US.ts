@@ -96,12 +96,12 @@
 <context>
     <name>RecorderPageForm.ui</name>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="37"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="48"/>
         <source>Speech Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="70"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="81"/>
         <source>Articulation Rate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -116,22 +116,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="136"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="135"/>
+        <source>Welcome to Speech Rate Meter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="153"/>
         <source>00:00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="256"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="288"/>
         <source>Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="265"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="297"/>
         <source>Average</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="274"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="306"/>
         <source>Fast</source>
         <translation type="unfinished"></translation>
     </message>
