@@ -254,7 +254,7 @@ Page {
         anchors.topMargin: 30
         anchors.horizontalCenter: parent.horizontalCenter
         dialType: RadialBar.MinToMax
-        progressColor: Colors.teal_blue
+        progressColor: Colors.blue
         foregroundColor: "#00ffffff"
         dialWidth: 25
         startAngle: 90
@@ -273,7 +273,7 @@ Page {
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
         showText: false
         dialType: RadialBar.MinToMax
-        progressColor: Colors.purple
+        progressColor: Colors.light_green
         foregroundColor: "#00ffffff"
         dialWidth: 25
         startAngle: 90
