@@ -209,15 +209,15 @@ Page {
                 y2: plotHeight / 2
                 GradientStop {
                     position: 0
-                    color: Colors.green
+                    color: "#066832"
                 }
                 GradientStop {
                     position: 0.5
-                    color: Colors.yellow
+                    color: "#c8b219"
                 }
                 GradientStop {
                     position: 1
-                    color: Colors.raspberry
+                    color: "#b8181f"
                 }
             }
             PathArc {

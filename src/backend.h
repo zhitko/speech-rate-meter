@@ -7,7 +7,7 @@
 #include <QVariant>
 #include <QVariantList>
 
-const double DefaultKSpeechRate = 36;
+const double DefaultKSpeechRate = 30;
 const double DefaultMinSpeechRate = 70;
 const double DefaultMaxSpeechRate = 210;
 const double DefaultKArticulationRate = 12;

@@ -579,9 +579,9 @@ QVariant Backend::getSpeechRate(QString path, double from_percent, double to_per
     this->initializeCore(path);
 
     qDebug() << "getSpeechRate K1:" << this->kSpeechRate;
-    auto nv = this->getVowelsCount(path, from_percent, to_percent);
-    auto tc = this->getConsonantsAndSilenceLength(path, from_percent, to_percent);
-    double speechRate = this->kSpeechRate * (nv.toInt() / tc.toDouble());
+    auto ra = this->getArticulationRate(path, from_percent, to_percent);
+    auto tp = this->getMeanDurationOfPauses(path, from_percent, to_percent);
+    double speechRate = ra.toDouble() - (this->kSpeechRate * tp.toDouble());
     return QVariant::fromValue(speechRate);
 }
 
