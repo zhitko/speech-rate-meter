@@ -36,6 +36,10 @@ SettingsPageForm {
         backend.setIntensitySmoothFrame(intensitySmoothFrameValue.value);
     }
 
+    intensityMaxLengthValue.onValueChanged: {
+        backend.setIntensityMaxLengthValue(intensityMaxLengthValue.value);
+    }
+
     kSpeechRateValue.onValueChanged: {
         backend.setKSpeechRate(kSpeechRateValue.value / 100);
     }
