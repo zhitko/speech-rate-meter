@@ -50,7 +50,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 10
-        font.pointSize: 14
+        font.pointSize: 12
         visible: recorded
     }
 
@@ -61,7 +61,7 @@ Page {
         anchors.left: speechRateTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: speechRateTitle.verticalCenter
-        font.pointSize: 14
+        font.pointSize: 12
         visible: recorded
     }
 
@@ -83,7 +83,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateTitle.bottom
         anchors.topMargin: 8
-        font.pointSize: 14
+        font.pointSize: 12
         visible: recorded
     }
 
@@ -94,18 +94,18 @@ Page {
         anchors.left: articulationRateTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: articulationRateTitle.verticalCenter
-        font.pointSize: 14
+        font.pointSize: 12
         visible: recorded
     }
 
     Text {
         id: meanDurationOfPausesTitle
-        text: qsTr("Mean Pauses")
+        text: qsTr("Phrase Pauses")
         anchors.horizontalCenterOffset: -width / 2
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: articulationRateTitle.bottom
         anchors.topMargin: 8
-        font.pointSize: 14
+        font.pointSize: 12
         visible: recorded
     }
 
@@ -116,7 +116,7 @@ Page {
         anchors.left: meanDurationOfPausesTitle.right
         anchors.leftMargin: 5
         anchors.verticalCenter: meanDurationOfPausesTitle.verticalCenter
-        font.pointSize: 14
+        font.pointSize: 12
         visible: recorded
     }
 
@@ -127,7 +127,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: meanDurationOfPausesTitle.bottom
         anchors.topMargin: 8
-        font.pointSize: 14
+        font.pointSize: 12
         visible: recorded
     }
 
@@ -155,7 +155,7 @@ Page {
         anchors.left: timerTitle.right
         anchors.leftMargin: recorded ? 5 : -width / 2
         anchors.verticalCenter: timerTitle.verticalCenter
-        font.pointSize: recorded ? 14 : 24
+        font.pointSize: recorded ? 12 : 24
     }
 
     Image {
@@ -189,6 +189,8 @@ Page {
     property int plotHeight: 300 //250
     property int plotDepth: 70
     property alias articulationRateRadialBar: articulationRateRadialBar
+    property alias minValue: minValue
+    property alias maxValue: maxValue
 
     Shape {
         id: legend
@@ -285,7 +287,28 @@ Page {
     }
 
     Text {
+        id: minValue
+        text: qsTr("--- wpm")
+        anchors.top: speechRateRadialBar.top
+        anchors.topMargin: speechRateRadialBar.height / 2 + 10
+        anchors.left: speechRateRadialBar.left
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    Text {
+        id: maxValue
+        text: qsTr("--- wpm")
+        anchors.top: speechRateRadialBar.top
+        anchors.topMargin: speechRateRadialBar.height / 2 + 10
+        anchors.right: speechRateRadialBar.right
+        font.pointSize: 12
+        visible: recorded
+    }
+
+    Text {
         text: qsTr("Low")
+        font.bold: true
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 4
         anchors.right: speechRateRadialBar.left
@@ -295,6 +318,7 @@ Page {
 
     Text {
         text: qsTr("Average")
+        font.bold: true
         anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
         anchors.bottom: speechRateRadialBar.top
         anchors.bottomMargin: 3
@@ -304,6 +328,7 @@ Page {
 
     Text {
         text: qsTr("Fast")
+        font.bold: true
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 4
         anchors.left: speechRateRadialBar.right

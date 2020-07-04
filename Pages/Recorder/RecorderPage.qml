@@ -114,6 +114,10 @@ RecorderPageForm {
 
         root.minSpeechRate = backend.getMinSpeechRate()
         root.maxSpeechRate = backend.getMaxSpeechRate()
+
+        root.minValue.text = qsTr("%1 wpm").arg(String(root.minSpeechRate.toFixed(0)))
+        root.maxValue.text = qsTr("%1 wpm").arg(String(root.maxSpeechRate.toFixed(0)))
+
         root.minArticulationRate = backend.getMinArticulationRate()
         root.maxArticulationRate = backend.getMaxArticulationRate()
     }

@@ -149,7 +149,7 @@ Page {
                 Layout.margins: 10
                 Layout.fillWidth: true
                 font.pointSize: 14
-                title: qsTr("Mean Pauses")
+                title: qsTr("Phrase Pauses")
 
                 ColumnLayout {
                     anchors.fill: parent
