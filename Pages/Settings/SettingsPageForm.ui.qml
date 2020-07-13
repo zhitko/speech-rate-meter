@@ -13,8 +13,6 @@ Page {
     property alias minSpeechRateValue: minSpeechRateValue
     property alias maxSpeechRateValue: maxSpeechRateValue
     property alias kArticulationRateValue: kArticulationRateValue
-    property alias minArticulationRateValue: minArticulationRateValue
-    property alias maxArticulationRateValue: maxArticulationRateValue
     property alias kMeanPausesValue: kMeanPausesValue
     title: qsTr("Settings")
 
@@ -110,36 +108,6 @@ Page {
                         wheelEnabled: true
                         editable: true
                         stepSize: 100
-                    }
-
-                    Text {
-                        id: minArticulationRateTitle
-                        text: qsTr("Min RA")
-                        font.pointSize: 12
-                    }
-
-                    DoubleSpinBox {
-                        id: minArticulationRateValue
-                        decimals: 2
-                        to: 99999
-                        wheelEnabled: true
-                        editable: true
-                        stepSize: 10
-                    }
-
-                    Text {
-                        id: maxArticulationRateTitle
-                        text: qsTr("Max RA")
-                        font.pointSize: 12
-                    }
-
-                    DoubleSpinBox {
-                        id: maxArticulationRateValue
-                        decimals: 2
-                        to: 99999
-                        wheelEnabled: true
-                        editable: true
-                        stepSize: 10
                     }
                 }
             }

@@ -7,14 +7,25 @@
 #include <QDir>
 
 namespace ApplicationConfig {
-    static const QString DataPath = "data";
+static const QString DataPath = "data";
+static const QString RecordsPath = "records";
+static const QString TestsPath = "tests";
 
-    static QString GetFullDataPath()
-    {
-        QString appPath = QGuiApplication::applicationDirPath();
-        QString dataPath = QDir(appPath).absoluteFilePath(ApplicationConfig::DataPath);
-        return dataPath;
-    }
+static QString GetFullDataPath()
+{
+    QString appPath = QGuiApplication::applicationDirPath();
+    QString dataPath = QDir(appPath).absoluteFilePath(ApplicationConfig::DataPath);
+    QString recordsPath = QDir(dataPath).absoluteFilePath(ApplicationConfig::RecordsPath);
+    return recordsPath;
+}
+
+static QString GetFullTestsPath()
+{
+    QString appPath = QGuiApplication::applicationDirPath();
+    QString dataPath = QDir(appPath).absoluteFilePath(ApplicationConfig::DataPath);
+    QString testsPath = QDir(dataPath).absoluteFilePath(ApplicationConfig::TestsPath);
+    return testsPath;
+}
 
     static const QString WaveFileExtension = "*.wav";
 

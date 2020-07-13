@@ -5,6 +5,7 @@ import "../FontAwesome"
 ToolButton {
     width: 50
     height: 50
+    property bool playing: false
 
     font.pointSize: 14
 
@@ -13,5 +14,5 @@ ToolButton {
     }
 
     font.family: awesome.solid
-    text: awesome.icons.fa_play_circle
+    text: playing ? awesome.icons.fa_stop_circle : awesome.icons.fa_play_circle
 }

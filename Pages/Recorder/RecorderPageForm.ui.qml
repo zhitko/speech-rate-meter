@@ -289,6 +289,7 @@ Page {
     Text {
         id: minValue
         text: qsTr("--- wpm")
+        font.bold: true
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 2 + 10
         anchors.left: speechRateRadialBar.left
@@ -299,6 +300,7 @@ Page {
     Text {
         id: maxValue
         text: qsTr("--- wpm")
+        font.bold: true
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 2 + 10
         anchors.right: speechRateRadialBar.right

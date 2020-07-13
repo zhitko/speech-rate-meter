@@ -4,6 +4,7 @@
 #include <QStringList>
 #include <QDirIterator>
 #include <QDir>
+#include <QDateTime>
 
 #include "backend.h"
 #include "applicationconfig.h"
@@ -13,9 +14,34 @@
 
 void cleanDataDir();
 
+static const QtMessageHandler QT_DEFAULT_MESSAGE_HANDLER = qInstallMessageHandler(0);
+
+void logToFile(const QString message)
+{
+    QFile file("logs.txt");
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
+        QTextStream stream(&file);
+        stream << message << endl;
+    }
+}
+
+void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+    QByteArray localMsg = msg.toLocal8Bit();
+    QString message = QString("%1: %2").arg(
+        QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss:zzz "),
+        QString(localMsg.constData())
+        );
+    logToFile(message);
+
+    (*QT_DEFAULT_MESSAGE_HANDLER)(type, context, message);
+}
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
+    qInstallMessageHandler(messageOutput);
 
     QApplication app(argc, argv);
 

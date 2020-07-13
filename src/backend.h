@@ -22,6 +22,8 @@ class Config;
 
 class Recorder;
 
+class QSound;
+
 class Backend : public QObject
 {
     Q_OBJECT
@@ -34,7 +36,7 @@ public:
     // Files API
     Q_INVOKABLE QVariantList getWaveFilesList();
     Q_INVOKABLE void deleteWaveFile(QString path);
-    Q_INVOKABLE void playWaveFile(QString path);
+    Q_INVOKABLE void playWaveFile(QString path, bool stop);
     Q_INVOKABLE QString startStopRecordWaveFile();
     Q_INVOKABLE QString openFileDialog();
 
@@ -112,6 +114,8 @@ private:
     IntonCore::Config *config;
 
     QString path;
+
+    QSound *sound;
 
     Recorder *recorder;
 

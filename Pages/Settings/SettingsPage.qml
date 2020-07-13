@@ -46,22 +46,16 @@ SettingsPageForm {
 
     minSpeechRateValue.onValueChanged: {
         backend.setMinSpeechRate(minSpeechRateValue.value / 100);
+        backend.setMinArticulationRate(minArticulationRateValue.value / 100);
     }
 
     maxSpeechRateValue.onValueChanged: {
         backend.setMaxSpeechRate(maxSpeechRateValue.value / 100);
+        backend.setMaxArticulationRate(maxArticulationRateValue.value / 100);
     }
 
     kArticulationRateValue.onValueChanged: {
         backend.setKArticulationRate(kArticulationRateValue.value / 100);
-    }
-
-    minArticulationRateValue.onValueChanged: {
-        backend.setMinArticulationRate(minArticulationRateValue.value / 100);
-    }
-
-    maxArticulationRateValue.onValueChanged: {
-        backend.setMaxArticulationRate(maxArticulationRateValue.value / 100);
     }
 
     kMeanPausesValue.onValueChanged: {

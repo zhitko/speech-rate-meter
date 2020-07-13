@@ -21,7 +21,10 @@
 const int WAVE_LENGTH = 1000;
 
 Backend::Backend(QObject *parent)
-    : QObject(parent), core(nullptr), config(nullptr),
+    : QObject(parent),
+    core(nullptr),
+    config(nullptr),
+    sound(nullptr),
     kSpeechRate(DefaultKSpeechRate),
     minSpeechRate(DefaultMinSpeechRate),
     maxSpeechRate(DefaultMaxSpeechRate),
@@ -67,9 +70,18 @@ void Backend::deleteWaveFile(QString path)
     file.remove();
 }
 
-void Backend::playWaveFile(QString path)
+void Backend::playWaveFile(QString path, bool stop)
 {
-    QSound::play(path);
+    if (!stop)
+    {
+        if (!stop && this->sound) this->sound->deleteLater();
+        this->sound = new QSound(path);
+        this->sound->play();
+    }
+    else if (stop && this->sound)
+    {
+        this->sound->stop();
+    }
 }
 
 QString Backend::startStopRecordWaveFile()
@@ -89,7 +101,7 @@ QString Backend::openFileDialog()
 {
     auto fileName = QFileDialog::getOpenFileName(nullptr,
         tr("Open File"),
-        ".",
+        ApplicationConfig::GetFullTestsPath(),
         tr("Wave (*.wav)"));
     return fileName;
 }
