@@ -46,12 +46,12 @@ SettingsPageForm {
 
     minSpeechRateValue.onValueChanged: {
         backend.setMinSpeechRate(minSpeechRateValue.value / 100);
-        backend.setMinArticulationRate(minArticulationRateValue.value / 100);
+        backend.setMinArticulationRate(minSpeechRateValue.value / 100);
     }
 
     maxSpeechRateValue.onValueChanged: {
         backend.setMaxSpeechRate(maxSpeechRateValue.value / 100);
-        backend.setMaxArticulationRate(maxArticulationRateValue.value / 100);
+        backend.setMaxArticulationRate(maxSpeechRateValue.value / 100);
     }
 
     kArticulationRateValue.onValueChanged: {
