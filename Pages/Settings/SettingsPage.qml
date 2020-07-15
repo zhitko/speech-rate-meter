@@ -19,8 +19,6 @@ SettingsPageForm {
         minSpeechRateValue.value = backend.getMinSpeechRate() * 100;
         maxSpeechRateValue.value = backend.getMaxSpeechRate() * 100;
         kArticulationRateValue.value = backend.getKArticulationRate() * 100;
-        minArticulationRateValue.value = backend.getMinArticulationRate() * 100;
-        maxArticulationRateValue.value = backend.getMaxArticulationRate() * 100;
         kMeanPausesValue.value = backend.getKMeanPauses() * 100;
     }
 
