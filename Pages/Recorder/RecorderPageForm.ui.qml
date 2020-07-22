@@ -309,7 +309,7 @@ Page {
     }
 
     Text {
-        text: qsTr("Low")
+        text: qsTr("Slow")
         font.bold: true
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 4

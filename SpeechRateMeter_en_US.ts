@@ -136,7 +136,8 @@
     </message>
     <message>
         <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="312"/>
-        <source>Low</source>
+        <source>Slow</source>
+        <oldsource>Low</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
