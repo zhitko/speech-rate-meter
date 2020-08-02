@@ -42,6 +42,7 @@ Page {
                         id: kSpeechRateTitle
                         text: qsTr("K1")
                         font.pointSize: 12
+                        visible: advanced.checked
                     }
 
                     DoubleSpinBox {
@@ -51,6 +52,7 @@ Page {
                         wheelEnabled: true
                         editable: true
                         stepSize: 100
+                        visible: advanced.checked
                     }
 
                     Text {
@@ -91,6 +93,7 @@ Page {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 title: qsTr("Articulation Rate")
+                visible: advanced.checked
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -118,6 +121,7 @@ Page {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 title: qsTr("Phrase Pauses")
+                visible: advanced.checked
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -145,6 +149,7 @@ Page {
                 Layout.fillWidth: true
                 font.pointSize: 14
                 title: qsTr("Intensity")
+                visible: advanced.checked
 
                 ColumnLayout {
                     anchors.fill: parent
@@ -204,11 +209,20 @@ Page {
             }
         }
     }
+
+    CheckBox {
+        id: advanced
+        text: qsTr("Advanced")
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+    }
 }
 
 /*##^##
 Designer {
-    D{i:0;autoSize:true;height:480;width:640}D{i:1;anchors_height:200;anchors_width:200}
+    D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/
 
