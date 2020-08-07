@@ -104,6 +104,9 @@ public:
     Q_INVOKABLE void setKMeanPauses(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getKMeanPauses();
 
+    Q_INVOKABLE void setAdvanced(QVariant value);
+    Q_INVOKABLE QVariant getAdvanced();
+
 
 public:
     QString getPath();

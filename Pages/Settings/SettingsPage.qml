@@ -20,6 +20,12 @@ SettingsPageForm {
         maxSpeechRateValue.value = backend.getMaxSpeechRate() * 100;
         kArticulationRateValue.value = backend.getKArticulationRate() * 100;
         kMeanPausesValue.value = backend.getKMeanPauses() * 100;
+
+        advanced.checked = backend.getAdvanced()
+    }
+
+    advanced.onCheckedChanged: {
+        backend.setAdvanced(advanced.checked)
     }
 
     intensityFrameValue.onValueChanged: {

@@ -17,6 +17,7 @@ Page {
     property string path: ""
     property bool recorded: false
     property bool recording: false
+    property bool advanced: false
     property alias meanDurationOfPausesValue: meanDurationOfPausesValue
     property alias speechRateValue: speechRateValue
     property alias articulationRateValue: articulationRateValue
@@ -344,7 +345,7 @@ Page {
                 id: detailsButton
                 width: 70
                 height: 70
-                visible: recorded
+                visible: recorded && advanced
                 font.pointSize: 20
                 path: root.path
             },

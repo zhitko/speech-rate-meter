@@ -81,6 +81,14 @@ RecorderPageForm {
         }
     }
 
+    function delay(delayTime, cb) {
+        let timer = Qt.createQmlObject("import QtQuick 2.0; Timer {}", root)
+        timer.interval = delayTime
+        timer.repeat = false
+        timer.triggered.connect(cb)
+        timer.start()
+    }
+
     recordButton.onClicked: {
         if (recordButton.checked)
         {
@@ -88,8 +96,10 @@ RecorderPageForm {
             root.path = backend.startStopRecordWaveFile()
         } else {
             stopTimer()
-            root.path = backend.startStopRecordWaveFile()
-            showSpeechRate()
+            delay(0, function() {
+                root.path = backend.startStopRecordWaveFile()
+                showSpeechRate()
+            });
         }
     }
 
@@ -149,5 +159,7 @@ RecorderPageForm {
         if (articulationRate < root.minArticulationRate) articulationRate = root.minArticulationRate
 
         articulationRateRadialBar.value = articulationRate
+
+        advanced = back.getAdvanced()
     }
 }

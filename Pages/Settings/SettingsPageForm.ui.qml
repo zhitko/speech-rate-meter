@@ -14,6 +14,7 @@ Page {
     property alias maxSpeechRateValue: maxSpeechRateValue
     property alias kArticulationRateValue: kArticulationRateValue
     property alias kMeanPausesValue: kMeanPausesValue
+    property alias advanced: advanced
     title: qsTr("Settings")
 
     ScrollView {

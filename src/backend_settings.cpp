@@ -332,3 +332,15 @@ QVariant Backend::getKMeanPauses()
 {
     return this->kMeanPauses;
 }
+
+static bool advanced = false;
+
+void Backend::setAdvanced(QVariant value)
+{
+    advanced = value.toBool();
+}
+
+QVariant Backend::getAdvanced()
+{
+    return advanced;
+}
