@@ -173,14 +173,11 @@ Page {
         visible: !recorded
     }
 
-    ToolButton {
+    AnimatedRecordButton {
         id: recordButton
         width: 150
         height: 150
         checkable: true
-        font.family: awesome.solid
-        text: checked ? awesome.icons.fa_stop : awesome.icons.fa_microphone
-        font.pointSize: 32
         anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
     }
