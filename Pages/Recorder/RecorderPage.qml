@@ -96,8 +96,8 @@ RecorderPageForm {
             root.path = backend.startStopRecordWaveFile()
         } else {
             stopTimer()
-            delay(0, function() {
-                root.path = backend.startStopRecordWaveFile()
+            root.path = backend.startStopRecordWaveFile()
+            delay(1, function() {
                 showSpeechRate()
             });
         }
