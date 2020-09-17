@@ -51,5 +51,11 @@ MetricsPageForm {
 
         let vowelsMedianMedian = backend.getVowelsMedianValue(root.path, startPoint, endPoint)
         vowelsMedianValue.text = String(vowelsMedianMedian)
+
+        let vowelsMax = backend.getVowelsMax(root.path, startPoint, endPoint)
+        vowelsMaxValue.text = String(vowelsMax.toFixed(2))
+
+        let consonantsAndSilenceMax = backend.getConsonantsAndSilenceMax(root.path, startPoint, endPoint)
+        consonantsAndSilenceMaxValue.text = String(consonantsAndSilenceMax.toFixed(2))
     }
 }

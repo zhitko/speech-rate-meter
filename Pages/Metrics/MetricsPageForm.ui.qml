@@ -20,6 +20,8 @@ Page {
     property alias vowelsMedianValue: vowelsMedianValue
     property alias vowelsRateValue: vowelsRateValue
     property alias recordButton: recordButton
+    property alias consonantsAndSilenceMaxValue: consonantsAndSilenceMaxValue
+    property alias vowelsMaxValue: vowelsMaxValue
 
     title: qsTr("Details")
 
@@ -82,6 +84,19 @@ Page {
                 }
 
                 Text {
+                    id: consonantsAndSilenceMaxTitle
+                    text: qsTr("Consonants & Silence Max")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: consonantsAndSilenceMaxValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
                     id: consonantsAndSilenceMeanTitle
                     text: qsTr("Consonants & Silence Mean Duration")
                     font.bold: true
@@ -129,6 +144,19 @@ Page {
 
                 Text {
                     id: vowelsCountValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsMaxTitle
+                    text: qsTr("Vowels Max")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsMaxValue
                     text: "---"
                     font.pointSize: 12
                 }

@@ -353,6 +353,35 @@ QVariant Backend::getVowelsLength(QString path, double from_percent, double to_p
     return QVariant::fromValue(storage->convertIntensityPointsToSec(count));
 }
 
+QVariant Backend::getVowelsMax(QString path, double from_percent, double to_percent)
+{
+    this->initializeCore(path);
+
+    auto storage = this->core->getTemplate();
+    auto segments = storage->getAutoSegmentsByIntensitySmoothed();
+
+    auto segments_mask = storage->getAutoSegmentsByIntensitySmoothedMask();
+
+    uint32_t from = static_cast<uint32_t>(from_percent * segments_mask.size());
+    uint32_t to = static_cast<uint32_t>(to_percent * segments_mask.size());
+    qDebug() << "from: " << from;
+    qDebug() << "to: " << to;
+
+    uint32_t max = 0;
+    uint32_t current = 0;
+    for (uint32_t i=from; i<to && i<segments_mask.size(); i++)
+    {
+        if (segments_mask[i] == 1) current++;
+        else current = 0;
+
+        if (current > max) max = current;
+    }
+
+    qDebug() << "max: " << max;
+
+    return QVariant::fromValue(storage->convertIntensityPointsToSec(max));
+}
+
 QVariant Backend::getConsonantsAndSilenceCount(QString path, double from_percent, double to_percent)
 {
     this->initializeCore(path);
@@ -388,18 +417,47 @@ QVariant Backend::getConsonantsAndSilenceLength(QString path, double from_percen
 
     auto segments_mask = storage->getAutoSegmentsByIntensitySmoothedMask();
 
-    int from = static_cast<int>(std::ceil(from_percent * segments_mask.size()));
-    int to = static_cast<int>(std::ceil(to_percent * segments_mask.size()));
+    uint32_t from = static_cast<uint32_t>(std::ceil(from_percent * segments_mask.size()));
+    uint32_t to = static_cast<uint32_t>(std::ceil(to_percent * segments_mask.size()));
     qDebug() << "from: " << from;
     qDebug() << "to: " << to;
 
-    int count = 0;
-    for (int i=from; i<to; i++)
+    uint32_t count = 0;
+    for (uint32_t i=from; i<to; i++)
     {
-        if (!segments_mask[i]) count++;
+        if (segments_mask[i] == 0) count++;
     }
 
     return QVariant::fromValue( storage->convertIntensityPointsToSec(count));
+}
+
+QVariant Backend::getConsonantsAndSilenceMax(QString path, double from_percent, double to_percent)
+{
+    this->initializeCore(path);
+
+    auto storage = this->core->getTemplate();
+    auto segments = storage->getAutoSegmentsByIntensitySmoothed();
+
+    auto segments_mask = storage->getAutoSegmentsByIntensitySmoothedMask();
+
+    uint32_t from = static_cast<uint32_t>(std::ceil(from_percent * segments_mask.size()));
+    uint32_t to = static_cast<uint32_t>(std::ceil(to_percent * segments_mask.size()));
+    qDebug() << "from: " << from;
+    qDebug() << "to: " << to;
+
+    uint32_t max = 0;
+    uint32_t current = 0;
+    for (uint32_t i=from; i<to && i<segments_mask.size(); i++)
+    {
+        if (segments_mask[i] == 0) current++;
+        else current = 0;
+
+        if (current > max) max = current;
+    }
+
+    qDebug() << "max: " << max;
+
+    return QVariant::fromValue(storage->convertIntensityPointsToSec(max));
 }
 
 QVariant Backend::getVowelsCount(QString path, double from_percent, double to_percent)

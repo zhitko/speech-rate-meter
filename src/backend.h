@@ -59,10 +59,12 @@ public:
 
     // Metrics API
     Q_INVOKABLE QVariant getWaveLength(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getVowelsCount(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsLength(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getVowelsMax(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getConsonantsAndSilenceCount(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getConsonantsAndSilenceLength(QString path, double from_percent, double to_percent);
-    Q_INVOKABLE QVariant getVowelsCount(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getConsonantsAndSilenceMax(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getSegmentsVariance(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsMeanValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsMedianValue(QString path, double from_percent, double to_percent);
