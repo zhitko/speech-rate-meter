@@ -57,5 +57,19 @@ MetricsPageForm {
 
         let consonantsAndSilenceMax = backend.getConsonantsAndSilenceMax(root.path, startPoint, endPoint)
         consonantsAndSilenceMaxValue.text = String(consonantsAndSilenceMax.toFixed(2))
+
+        let consonantsAndSilenceVariance = backend.getConsonantsAndSilenceVarianceValue(root.path, startPoint, endPoint)
+        consonantsAndSilenceVarianceValue.text = String(consonantsAndSilenceVariance.toFixed(2))
+        let consonantsAndSilenceSkewness = backend.getConsonantsAndSilenceSkewnessValue(root.path, startPoint, endPoint)
+        consonantsAndSilenceSkewnessValue.text = String(consonantsAndSilenceSkewness.toFixed(2))
+        let consonantsAndSilenceKurtosis = backend.getConsonantsAndSilenceKurtosisValue(root.path, startPoint, endPoint)
+        consonantsAndSilenceKurtosisValue.text = String(consonantsAndSilenceKurtosis.toFixed(2))
+
+        let vowelsVariance = backend.getVowelsVarianceValue(root.path, startPoint, endPoint)
+        vowelsVarianceValue.text = String(vowelsVariance.toFixed(2))
+        let vowelsSkewness = backend.getVowelsSkewnessValue(root.path, startPoint, endPoint)
+        vowelsSkewnessValue.text = String(vowelsSkewness.toFixed(2))
+        let vowelsKurtosis = backend.getVowelsKurtosisValue(root.path, startPoint, endPoint)
+        vowelsKurtosisValue.text = String(vowelsKurtosis.toFixed(2))
     }
 }

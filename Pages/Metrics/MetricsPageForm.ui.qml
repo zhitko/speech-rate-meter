@@ -22,6 +22,12 @@ Page {
     property alias recordButton: recordButton
     property alias consonantsAndSilenceMaxValue: consonantsAndSilenceMaxValue
     property alias vowelsMaxValue: vowelsMaxValue
+    property alias consonantsAndSilenceVarianceValue: consonantsAndSilenceVarianceValue
+    property alias consonantsAndSilenceSkewnessValue: consonantsAndSilenceSkewnessValue
+    property alias consonantsAndSilenceKurtosisValue: consonantsAndSilenceKurtosisValue
+    property alias vowelsVarianceValue: vowelsVarianceValue
+    property alias vowelsSkewnessValue: vowelsSkewnessValue
+    property alias vowelsKurtosisValue: vowelsKurtosisValue
 
     title: qsTr("Details")
 
@@ -123,6 +129,45 @@ Page {
                 }
 
                 Text {
+                    id: consonantsAndSilenceVarianceTitle
+                    text: qsTr("Consonants & Silence Variance")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: consonantsAndSilenceVarianceValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: consonantsAndSilenceSkewnessTitle
+                    text: qsTr("Consonants & Silence Skewness")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: consonantsAndSilenceSkewnessValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: consonantsAndSilenceKurtosisTitle
+                    text: qsTr("Consonants & Silence Kurtosis")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: consonantsAndSilenceKurtosisValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
                     id: vowelsLengthTitle
                     text: qsTr("Vowels Length")
                     font.bold: true
@@ -183,6 +228,45 @@ Page {
 
                 Text {
                     id: vowelsMedianValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsVarianceTitle
+                    text: qsTr("Vowels Variance")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsVarianceValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsSkewnessTitle
+                    text: qsTr("Vowels Skewness")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsSkewnessValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsKurtosisTitle
+                    text: qsTr("Vowels Kurtosis")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: vowelsKurtosisValue
                     text: "---"
                     font.pointSize: 12
                 }

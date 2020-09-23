@@ -17,58 +17,68 @@
 <context>
     <name>MetricsPageForm.ui</name>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="24"/>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="39"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="26"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="41"/>
         <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="47"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="49"/>
         <source>Record Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="60"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="62"/>
         <source>Consonants &amp; Silence Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="73"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="75"/>
         <source>Consonants &amp; Silence Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="86"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="88"/>
+        <source>Consonants &amp; Silence Max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="101"/>
         <source>Consonants &amp; Silence Mean Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="99"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="114"/>
         <source>Consonants &amp; Silence Median Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="112"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="127"/>
         <source>Vowels Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="125"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="140"/>
         <source>Vowels Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="138"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="153"/>
+        <source>Vowels Max</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="166"/>
         <source>Vowels Mean Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="151"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="179"/>
         <source>Vowels Median Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="164"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="192"/>
         <source>Vowels Speaking Rate</source>
         <translation type="unfinished"></translation>
     </message>

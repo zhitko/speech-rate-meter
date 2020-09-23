@@ -75,6 +75,13 @@ public:
     Q_INVOKABLE QVariant getMeanDurationOfPauses(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getArticulationRate(QString path, double from_percent, double to_percent);
 
+    Q_INVOKABLE QVariant getVowelsVarianceValue(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getConsonantsAndSilenceVarianceValue(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getVowelsSkewnessValue(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getConsonantsAndSilenceSkewnessValue(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getVowelsKurtosisValue(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getConsonantsAndSilenceKurtosisValue(QString path, double from_percent, double to_percent);
+
     // Settings API
     Q_INVOKABLE QVariant getIntensityFrame();
     Q_INVOKABLE void setIntensityFrame(QVariant value, bool save = true);
