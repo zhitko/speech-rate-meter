@@ -29,12 +29,11 @@ QString Recorder::startRecording()
 {
     this->is_recording = true;
 
-    QString appPath = QGuiApplication::applicationDirPath();
     QString dataPath = ApplicationConfig::GetFullDataPath();
     QDir dataDir(dataPath);
     if (!dataDir.exists()) dataDir.mkpath(".");
     QString path = dataDir.absoluteFilePath(
-        QDateTime::currentDateTime().toString(ApplicationConfig::RecordingFileNameTemplate) + ".wav"
+        QDateTime::currentDateTime().toString(ApplicationConfig::RecordingFileNameTemplate) + ApplicationConfig::RecordingFileFormat
         );
 
     qDebug() << path;
@@ -90,6 +89,17 @@ void Recorder::reinitializeAudioRecorder()
     this->audio_recorder->setEncodingSettings(audioSettings);
 
     QAudioDeviceInfo info = QAudioDeviceInfo::defaultInputDevice();
+
+    auto devices = QAudioDeviceInfo::availableDevices(QAudio::AudioInput);
+
+    for (auto device: devices)
+    {
+        qDebug() << "device :" << device.deviceName();
+        qDebug() << "supportedCodecs :" << device.supportedCodecs();
+    }
+
+    qDebug() << "defaultInputDevice :" << info.deviceName();
+    qDebug() << "supportedCodecs :" << QAudioDeviceInfo::defaultInputDevice().supportedCodecs();
 
     this->audio_recorder->setAudioInput(info.deviceName());
     this->audio_recorder->setContainerFormat(ApplicationConfig::RecordingContainerFormat);

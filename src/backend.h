@@ -7,10 +7,10 @@
 #include <QVariant>
 #include <QVariantList>
 
-const double DefaultKSpeechRate = 30;
+const double DefaultKSpeechRate = 0.6;
 const double DefaultMinSpeechRate = 70;
 const double DefaultMaxSpeechRate = 210;
-const double DefaultKArticulationRate = 12;
+const double DefaultKArticulationRate = 2.4;
 const double DefaultMinArticulationRate = 70;
 const double DefaultMaxArticulationRate = 210;
 const double DefaultKMeanPauses = 10;
@@ -21,6 +21,7 @@ class Config;
 }
 
 class Recorder;
+class PcmRecorder;
 
 class QSound;
 
@@ -129,7 +130,7 @@ private:
 
     QSound *sound;
 
-    Recorder *recorder;
+    PcmRecorder *recorder;
 
 private:
     void initializeCore(bool reinit = false);

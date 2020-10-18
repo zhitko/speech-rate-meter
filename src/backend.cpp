@@ -14,6 +14,7 @@
 
 #include "applicationconfig.h"
 #include "recorder.h"
+#include "pcm_recorder.h"
 #include "qml/qmlfileinfo.h"
 #include "qml/qmlpoint.h"
 
@@ -35,7 +36,8 @@ Backend::Backend(QObject *parent)
 {
     this->path = "";
 
-    this->recorder = Recorder::getInstance();
+    this->recorder = PcmRecorder::getInstance();
+//    this->recorder = Recorder::getInstance();
     this->getConfig(true);
 }
 
@@ -99,10 +101,21 @@ QString Backend::startStopRecordWaveFile()
 
 QString Backend::openFileDialog()
 {
+#ifdef ANDROID
+    auto fileUrl = QFileDialog::getOpenFileUrl(nullptr,
+                                tr("Open File"),
+                                ApplicationConfig::GetFullTestsPath(),
+                                tr("Wave (*.wav)"));
+    qDebug() << "openFileDialog: " << fileUrl;
+    auto fileName = fileUrl.toString();
+#else
     auto fileName = QFileDialog::getOpenFileName(nullptr,
         tr("Open File"),
         ApplicationConfig::GetFullTestsPath(),
         tr("Wave (*.wav)"));
+#endif
+
+    qDebug() << "openFileDialog: " << fileName;
     return fileName;
 }
 
@@ -582,9 +595,10 @@ QVariant Backend::getSpeechRate(QString path, double from_percent, double to_per
     this->initializeCore(path);
 
     qDebug() << "getSpeechRate K1:" << this->kSpeechRate;
-    auto ra = this->getArticulationRate(path, from_percent, to_percent);
-    auto tp = this->getMeanDurationOfPauses(path, from_percent, to_percent);
-    double speechRate = ra.toDouble() - (this->kSpeechRate * tp.toDouble());
+
+    auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
+    auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
+    double speechRate = this->kSpeechRate * nv * 60 / ts;
     return QVariant::fromValue(speechRate);
 }
 
@@ -604,11 +618,12 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
     this->initializeCore(path);
 
     qDebug() << "getArticulationRate K2:" << this->kArticulationRate;
-    auto nv = this->getVowelsCount(path, from_percent, to_percent);
-    qDebug() << "getArticulationRate nv:" << nv;
-    auto tv = this->getVowelsLength(path, from_percent, to_percent);
-    qDebug() << "getArticulationRate tv:" << tv;
-    double articulationRate = this->kArticulationRate * (nv.toInt() / tv.toDouble());
+
+
+    auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
+    auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
+    double articulationRate = this->kSpeechRate * nv * 60 / (this->kArticulationRate * tv);
+
     return QVariant::fromValue(articulationRate);
 }
 
