@@ -16,7 +16,7 @@ Recommended areas of application:
 * Improving the skills of reading texts in native and foreign languages;
 * Self-control tool for eliminating speech defects, diagnostics and treatment of speech pathologies;
 
-SRM is implemented as a standalone application for Windows (7, 8, 10). 
+SRM is implemented as a standalone application for Windows (7, 8, 10), Linux, Android (in progress now). 
 
 ## Installation
 
