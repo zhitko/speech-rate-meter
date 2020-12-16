@@ -37,17 +37,11 @@ Item {
         }
     }
 
-    ToolButton {
+    FontAwesomeToolButton {
         id: toolButton
 
-        font.pointSize: 14
-
-        FontAwesome {
-            id: awesome
-        }
-
         font.family: awesome.regular
-        text: awesome.icons.fa_trash_alt
+        text: awesome.icons.faTrashAlt
         anchors.fill: parent
         property alias okButton: okButton
         property alias cancelButton: cancelButton

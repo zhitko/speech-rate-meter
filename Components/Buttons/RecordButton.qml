@@ -12,7 +12,7 @@ RecordButtonForm {
 
 //    signal record(string path)
 
-    onClicked: {
+    button.onClicked: {
         root.bus.openRecorderPage()
 //        recording = !recording
 //        console.log("Click record button: " + recording)

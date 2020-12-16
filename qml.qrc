@@ -41,5 +41,9 @@
         <file>speech-active-1-icon.png</file>
         <file>speech-active-0-icon.png</file>
         <file>speech-icon.png</file>
+        <file>3party/FontAwesome/Font Awesome 5 Brands-Regular-400.ttf</file>
+        <file>3party/FontAwesome/Font Awesome 5 Free-Regular-400.ttf</file>
+        <file>3party/FontAwesome/Font Awesome 5 Free-Solid-900.ttf</file>
+        <file>Components/FontAwesome/FontAwesomeToolButton.qml</file>
     </qresource>
 </RCC>

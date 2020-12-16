@@ -295,9 +295,13 @@ Page {
             PlayButton {
                 id: playButton
                 path: root.path
+                width: 70
+                height: 70
             },
             RecordButton {
                 id: recordButton
+                width: 70
+                height: 70
             }
         ]
     }

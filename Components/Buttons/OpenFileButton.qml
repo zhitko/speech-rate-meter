@@ -8,7 +8,7 @@ OpenFileButtonForm {
     property string path: ""
     signal open(string path)
 
-    onClicked: {
+    button.onClicked: {
         console.log("Click open button: " + path)
 
         root.open(path)

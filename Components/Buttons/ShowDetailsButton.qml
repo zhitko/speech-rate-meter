@@ -8,7 +8,7 @@ ShowDetailsButtonForm {
     property string path: ""
     signal open(string path)
 
-    onClicked: {
+    button.onClicked: {
         console.log("Click details button: " + path)
 
         root.open(path)

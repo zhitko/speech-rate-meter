@@ -21,6 +21,7 @@ Page {
         id: scrollView
         contentWidth: parent.width
         clip: true
+        anchors.topMargin: 5
         anchors.fill: parent
         ScrollBar.vertical.interactive: true
 

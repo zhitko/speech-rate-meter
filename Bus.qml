@@ -39,4 +39,10 @@ Item {
         stackView.push(recorderPage, {bus: bus, path: path})
         openedRecorderPage()
     }
+    function reopenRecorderPage(path)
+    {
+        stackView.pop();
+        stackView.push(recorderPage, {bus: bus, path: path})
+        openedRecorderPage()
+    }
 }

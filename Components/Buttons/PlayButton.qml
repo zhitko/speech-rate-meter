@@ -9,7 +9,7 @@ PlayButtonForm {
         id: backend
     }
 
-    onClicked: {
+    button.onClicked: {
         if (path != "")
         {
             backend.playWaveFile(path, playing)

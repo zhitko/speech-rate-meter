@@ -9,7 +9,7 @@ ToolBar {
     property alias root: root
     rightPadding: 10
     leftPadding: 10
-    bottomPadding: 3
+    bottomPadding: 15
     property alias content: content
 
     RowLayout {

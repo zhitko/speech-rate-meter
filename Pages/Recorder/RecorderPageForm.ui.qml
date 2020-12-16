@@ -346,7 +346,6 @@ Page {
                 width: 70
                 height: 70
                 visible: recorded && advanced
-                font.pointSize: 20
                 path: root.path
             },
             PlayButton {
@@ -354,14 +353,12 @@ Page {
                 width: 70
                 height: 70
                 visible: recorded
-                font.pointSize: 20
                 path: root.path
             },
             OpenFileButton {
                 id: openButton
                 width: 70
                 height: 70
-                font.pointSize: 20
                 path: root.path
                 visible: !recording
             }

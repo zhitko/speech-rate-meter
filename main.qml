@@ -38,22 +38,23 @@ ApplicationWindow {
     header: ToolBar {
         contentHeight: toolButton.implicitHeight
 
-        ToolButton {
+        FontAwesomeToolButton {
             id: menuButton
-            font.family: awesome.solid
-            text: awesome.icons.fa_bars
-            font.pixelSize: Qt.application.font.pixelSize * 1.6
-            onClicked: drawer.open()
+            type: awesome.solid
+            icon: awesome.icons.faBars
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            button.onClicked: drawer.open()
         }
 
-        ToolButton {
+        FontAwesomeToolButton {
             id: toolButton
+            type: awesome.solid
+            icon: awesome.icons.faArrowLeft
             anchors.right: parent.right
+            anchors.rightMargin: 10
             visible: stackView.depth > 1
-            font.family: awesome.solid
-            text: awesome.icons.fa_arrow_left
-            font.pixelSize: Qt.application.font.pixelSize * 1.6
-            onClicked: stackView.pop()
+            button.onClicked: stackView.pop()
         }
 
         Label {
@@ -81,9 +82,10 @@ ApplicationWindow {
                 }
 
                 FontAwesomeIconText {
-                    icon: awesome.icons.fa_house_user
+                    icon: awesome.icons.faHouseUser
                     text: qsTr("Home")
                     anchors.fill: parent
+                    color: "black"
                 }
             }
 
@@ -95,9 +97,10 @@ ApplicationWindow {
                 }
 
                 FontAwesomeIconText {
-                    icon: awesome.icons.fa_sliders
+                    icon: awesome.icons.faSlidersH
                     text: qsTr("Settings")
                     anchors.fill: parent
+                    color: "black"
                 }
             }
         }

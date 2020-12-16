@@ -6,7 +6,7 @@ Text {
     }
 
     property string type: awesome.solid
-    property string icon: awesome.icons.fa_question_circle
+    property string icon: awesome.icons.faQuestionCircle
     width: 24
     height: 24
 
@@ -15,6 +15,7 @@ Text {
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
     font.weight: Font.Bold
-    font.pointSize: 16
+    font.pointSize: 22
     anchors.verticalCenter: parent.verticalCenter
+    color: "white"
 }

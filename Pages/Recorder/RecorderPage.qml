@@ -93,13 +93,11 @@ RecorderPageForm {
         if (recordButton.checked)
         {
             startTimer()
-            root.path = backend.startStopRecordWaveFile()
+            backend.startStopRecordWaveFile()
         } else {
             stopTimer()
             root.path = backend.startStopRecordWaveFile()
-            delay(1, function() {
-                showSpeechRate()
-            });
+            bus.reopenRecorderPage(root.path)
         }
     }
 
@@ -124,27 +122,27 @@ RecorderPageForm {
     }
 
     function showSpeechRate() {
-        let back = Qt.createQmlObject('import intondemo.backend 1.0; Backend{}', root)
+        let back = backend
 
-        root.minSpeechRate = back.getMinSpeechRate()
-        root.maxSpeechRate = back.getMaxSpeechRate()
+        root.minSpeechRate = backend.getMinSpeechRate()
+        root.maxSpeechRate = backend.getMaxSpeechRate()
 
         root.minValue.text = qsTr("%1 wpm").arg(String(root.minSpeechRate.toFixed(0)))
         root.maxValue.text = qsTr("%1 wpm").arg(String(root.maxSpeechRate.toFixed(0)))
 
-        root.minArticulationRate = back.getMinArticulationRate()
-        root.maxArticulationRate = back.getMaxArticulationRate()
+        root.minArticulationRate = backend.getMinArticulationRate()
+        root.maxArticulationRate = backend.getMaxArticulationRate()
 
         let startPoint = 0
         let endPoint = 1
 
-        let speechRate = back.getSpeechRate(root.path, startPoint, endPoint)
+        let speechRate = backend.getSpeechRate(root.path, startPoint, endPoint)
         speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(0)))
 
-        let meanDurationOfPauses = back.getMeanDurationOfPauses(root.path, startPoint, endPoint)
+        let meanDurationOfPauses = backend.getMeanDurationOfPauses(root.path, startPoint, endPoint)
         meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(2)))
 
-        let waveLength = back.getWaveLength(root.path, startPoint, endPoint)
+        let waveLength = backend.getWaveLength(root.path, startPoint, endPoint)
         timerLabel.text = qsTr("%1 sec").arg(String(waveLength.toFixed(0)))
 
         if (speechRate > root.maxSpeechRate) speechRate = root.maxSpeechRate
@@ -152,7 +150,7 @@ RecorderPageForm {
 
         speechRateRadialBar.value = speechRate
 
-        let articulationRate =  back.getArticulationRate(root.path, startPoint, endPoint)
+        let articulationRate =  backend.getArticulationRate(root.path, startPoint, endPoint)
         articulationRateValue.text = qsTr("%1 wpm").arg(String(articulationRate.toFixed(0)))
 
         if (articulationRate > root.maxArticulationRate) articulationRate = root.maxArticulationRate
@@ -160,6 +158,6 @@ RecorderPageForm {
 
         articulationRateRadialBar.value = articulationRate
 
-        advanced = back.getAdvanced()
+        advanced = backend.getAdvanced()
     }
 }

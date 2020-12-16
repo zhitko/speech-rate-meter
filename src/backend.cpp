@@ -37,7 +37,6 @@ Backend::Backend(QObject *parent)
     this->path = "";
 
     this->recorder = PcmRecorder::getInstance();
-//    this->recorder = Recorder::getInstance();
     this->getConfig(true);
 }
 
@@ -67,7 +66,7 @@ QVariantList Backend::getWaveFilesList()
 
 void Backend::deleteWaveFile(QString path)
 {
-    qDebug() << "Delete file " << path;
+    qDebug() << "deleteWaveFile " << path;
     QFile file (path.toLocal8Bit());
     file.remove();
 }
@@ -127,7 +126,7 @@ QVariantList Backend::getWaveData(QString path)
 
     auto data = storage->getWaveNormalized();
     auto resized_data = IntonCore::resizeVectorByMinMax(data, WAVE_LENGTH);
-    qDebug() << "Wave file size " << data.size();
+    qDebug() << "getWaveData: file size: " << data.size();
 
     QVariantList waveData;
 
@@ -146,7 +145,8 @@ QVariantList Backend::getIntensity(QString path)
 
     auto data = storage->getIntensityNormalized();
     auto resized_data = IntonCore::resizeVector(data, WAVE_LENGTH);
-    qDebug() << "Intensity size " << data.size();
+
+    qDebug() << "getIntensity size " << data.size();
 
     QVariantList intensityData;
 
@@ -165,6 +165,7 @@ QVariantList Backend::getIntensitySmoothed(QString path)
 
     auto data = storage->getIntensityNormalizedSmoothed();
     auto resized_data = IntonCore::resizeVector(data, WAVE_LENGTH);
+
     qDebug() << "Intensity smoothed size " << data.size();
 
     QVariantList intensityData;
@@ -190,7 +191,7 @@ QVariantList Backend::getWaveSegmantData(QString path, double from_percent, doub
     std::vector<double>  cutted_data(first, last);
     auto resized_data = IntonCore::resizeVectorByMinMax(cutted_data, WAVE_LENGTH);
 
-    qDebug() << "Wave file size " << data.size();
+    qDebug() << "getWaveSegmantData: file size; " << data.size();
 
     QVariantList waveData;
 
@@ -209,7 +210,8 @@ QVariantList Backend::getSegmentsP(QString path)
     auto wave = storage->getWave();
 
     auto data = storage->getManualSegmentsP();
-    qDebug() << "Segments P count " << data.size();
+
+    qDebug() << "getSegmentsP count: " << data.size();
 
     QVariantList segments;
 
@@ -231,7 +233,7 @@ QVariantList Backend::getSegmentsN(QString path)
     auto wave = storage->getWave();
 
     auto data = storage->getManualSegmentsN();
-    qDebug() << "Segments N count " << data.size();
+    qDebug() << "getSegmentsN Segments N count: " << data.size();
 
     QVariantList segments;
 
@@ -253,7 +255,7 @@ QVariantList Backend::getSegmentsT(QString path)
     auto wave = storage->getWave();
 
     auto data = storage->getManualSegmentsT();
-    qDebug() << "Segments T count " << data.size();
+    qDebug() << "getSegmentsT Segments T count: " << data.size();
 
     QVariantList segments;
 
@@ -275,7 +277,8 @@ QVariantList Backend::getSegmentsByIntensity(QString path)
     auto intensity = storage->getIntensity();
 
     auto data = storage->getAutoSegmentsByIntensitySmoothed();
-    qDebug() << "Segments by intensity count " << data.size();
+
+    qDebug() << "getSegmentsByIntensity count: " << data.size();
 
     QVariantList segments;
 
@@ -291,7 +294,7 @@ QVariantList Backend::getSegmentsByIntensity(QString path)
 
 QVariantList Backend::getSegmentsByIntensityMask(QString path, double from_percent, double to_percent)
 {
-    qDebug() << "getSegmentsByIntensityMask " << from_percent << " " << to_percent;
+    qDebug() << "getSegmentsByIntensityMask: " << from_percent << " " << to_percent;
     this->initializeCore(path);
 
     auto storage = this->core->getTemplate();
@@ -299,16 +302,16 @@ QVariantList Backend::getSegmentsByIntensityMask(QString path, double from_perce
 
     auto data = storage->getAutoSegmentsByIntensitySmoothedMask();
 
-    qDebug() << "Segments mask by intensity count " << data.size();
+    qDebug() << "getSegmentsByIntensityMask count: " << data.size();
     int from = static_cast<int>(std::round(data.size() * std::min(from_percent, to_percent)));
-    qDebug() << "from " << from;
+    qDebug() << "getSegmentsByIntensityMask from: " << from;
     int to = static_cast<int>(std::round(data.size() * std::max(from_percent, to_percent)));
-    qDebug() << "to " << to;
+    qDebug() << "getSegmentsByIntensityMask to: " << to;
 
     int count = 20;
 
     int segment_size = 1.0 * (to - from) / count;
-    qDebug() << "segment_size " << segment_size;
+    qDebug() << "getSegmentsByIntensityMask segment_size: " << segment_size;
 
     QVariantList result;
 
@@ -338,6 +341,8 @@ QVariant Backend::getWaveLength(QString path, double from_percent, double to_per
 
     auto select = abs(to_percent - from_percent);
 
+    qDebug() << "getWaveLength: " << select;
+
     return QVariant::fromValue(1.0 * wave.size() / ApplicationConfig::RecordingFrequency * select);
 }
 
@@ -346,24 +351,11 @@ QVariant Backend::getVowelsLength(QString path, double from_percent, double to_p
     this->initializeCore(path);
 
     auto storage = this->core->getTemplate();
-    auto segments = storage->getAutoSegmentsByIntensitySmoothed();
+    auto length = storage->getVowelsLength();
 
-    auto segments_mask = storage->getAutoSegmentsByIntensitySmoothedMask();
+    qDebug() << "getVowelsLength: " << length;
 
-    uint32_t from = static_cast<uint32_t>(from_percent * segments_mask.size());
-    uint32_t to = static_cast<uint32_t>(to_percent * segments_mask.size());
-    qDebug() << "from: " << from;
-    qDebug() << "to: " << to;
-
-    uint32_t count = 0;
-    for (uint32_t i=from; i<to && i<segments_mask.size(); i++)
-    {
-        if (segments_mask[i] == 1) count++;
-    }
-
-    qDebug() << "count: " << count;
-
-    return QVariant::fromValue(storage->convertIntensityPointsToSec(count));
+    return QVariant::fromValue(storage->convertIntensityPointsToSec(length));
 }
 
 QVariant Backend::getVowelsMax(QString path, double from_percent, double to_percent)
@@ -377,8 +369,8 @@ QVariant Backend::getVowelsMax(QString path, double from_percent, double to_perc
 
     uint32_t from = static_cast<uint32_t>(from_percent * segments_mask.size());
     uint32_t to = static_cast<uint32_t>(to_percent * segments_mask.size());
-    qDebug() << "from: " << from;
-    qDebug() << "to: " << to;
+    qDebug() << "getVowelsMax from: " << from;
+    qDebug() << "getVowelsMax to: " << to;
 
     uint32_t max = 0;
     uint32_t current = 0;
@@ -390,7 +382,7 @@ QVariant Backend::getVowelsMax(QString path, double from_percent, double to_perc
         if (current > max) max = current;
     }
 
-    qDebug() << "max: " << max;
+    qDebug() << "getVowelsMax: " << max;
 
     return QVariant::fromValue(storage->convertIntensityPointsToSec(max));
 }
@@ -402,6 +394,8 @@ QVariant Backend::getConsonantsAndSilenceCount(QString path, double from_percent
     auto storage = this->core->getTemplate();
     auto count = storage->getConsonantsAndSilenceCount();
 
+    qDebug() << "getConsonantsAndSilenceCount: " << count;
+
     return QVariant::fromValue(count);
 }
 
@@ -410,22 +404,11 @@ QVariant Backend::getConsonantsAndSilenceLength(QString path, double from_percen
     this->initializeCore(path);
 
     auto storage = this->core->getTemplate();
-    auto segments = storage->getAutoSegmentsByIntensitySmoothed();
+    auto length = storage->getConsonantsAndSilenceLength();
 
-    auto segments_mask = storage->getAutoSegmentsByIntensitySmoothedMask();
+    qDebug() << "getConsonantsAndSilenceLength: " << length;
 
-    uint32_t from = static_cast<uint32_t>(std::ceil(from_percent * segments_mask.size()));
-    uint32_t to = static_cast<uint32_t>(std::ceil(to_percent * segments_mask.size()));
-    qDebug() << "from: " << from;
-    qDebug() << "to: " << to;
-
-    uint32_t count = 0;
-    for (uint32_t i=from; i<to; i++)
-    {
-        if (segments_mask[i] == 0) count++;
-    }
-
-    return QVariant::fromValue( storage->convertIntensityPointsToSec(count));
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(length));
 }
 
 QVariant Backend::getConsonantsAndSilenceMax(QString path, double from_percent, double to_percent)
@@ -439,8 +422,8 @@ QVariant Backend::getConsonantsAndSilenceMax(QString path, double from_percent, 
 
     uint32_t from = static_cast<uint32_t>(std::ceil(from_percent * segments_mask.size()));
     uint32_t to = static_cast<uint32_t>(std::ceil(to_percent * segments_mask.size()));
-    qDebug() << "from: " << from;
-    qDebug() << "to: " << to;
+    qDebug() << "getConsonantsAndSilenceMax from: " << from;
+    qDebug() << "getConsonantsAndSilenceMax to: " << to;
 
     uint32_t max = 0;
     uint32_t current = 0;
@@ -455,7 +438,7 @@ QVariant Backend::getConsonantsAndSilenceMax(QString path, double from_percent, 
 
     }
 
-    qDebug() << "max: " << max;
+    qDebug() << "getConsonantsAndSilenceMax: " << max;
 
     return QVariant::fromValue(storage->convertIntensityPointsToSec(max));
 }
@@ -466,6 +449,8 @@ QVariant Backend::getVowelsCount(QString path, double from_percent, double to_pe
 
     auto storage = this->core->getTemplate();
     auto count = storage->getVowelsCount();
+
+    qDebug() << "getVowelsCount: " << count;
 
     return QVariant::fromValue(count);
 
@@ -482,8 +467,8 @@ QVariant Backend::getSegmentsVariance(QString path, double from_percent, double 
 
     uint32_t from = static_cast<uint32_t>(std::ceil(from_percent * segments_mask.size()));
     uint32_t to = static_cast<uint32_t>(std::ceil(to_percent * segments_mask.size()));
-    qDebug() << "from: " << from;
-    qDebug() << "to: " << to;
+    qDebug() << "getSegmentsVariance from: " << from;
+    qDebug() << "getSegmentsVariance to: " << to;
 
     uint32_t mx2 = 0;
     uint32_t mx = 0;
@@ -492,6 +477,9 @@ QVariant Backend::getSegmentsVariance(QString path, double from_percent, double 
         if (segments_mask[i]) mx += i;
         if (segments_mask[i]) mx2 += i * i;
     }
+
+    qDebug() << "getSegmentsVariance: mx2" << mx2;
+    qDebug() << "getSegmentsVariance: mx" << mx;
 
     return QVariant::fromValue( storage->convertIntensityPointsToSec(mx2 - mx*mx));
 
@@ -504,6 +492,8 @@ QVariant Backend::getVowelsMeanValue(QString path, double from_percent, double t
     auto storage = this->core->getTemplate();
 
     auto result = storage->getVowelsLengthMean();
+
+    qDebug() << "getVowelsMeanValue: mx" << result;
 
     return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
 }
@@ -519,8 +509,8 @@ QVariant Backend::getVowelsMedianValue(QString path, double from_percent, double
 
     uint32_t from = static_cast<uint32_t>(std::ceil(from_percent * segments_mask.size()));
     uint32_t to = static_cast<uint32_t>(std::ceil(to_percent * segments_mask.size()));
-    qDebug() << "from: " << from;
-    qDebug() << "to: " << to;
+    qDebug() << "getVowelsMedianValue from: " << from;
+    qDebug() << "getVowelsMedianValue to: " << to;
 
     std::vector<uint32_t> selected_segments;
 
@@ -536,6 +526,8 @@ QVariant Backend::getVowelsMedianValue(QString path, double from_percent, double
 
     uint32_t median = IntonCore::getMedianValue(selected_segments);
 
+    qDebug() << "getVowelsMedianValue median: " << median;
+
     return QVariant::fromValue( storage->convertIntensityPointsToSec(median));
 }
 
@@ -545,6 +537,8 @@ QVariant Backend::getConsonantsAndSilenceMeanValue(QString path, double from_per
 
     auto storage = this->core->getTemplate();
     auto result = storage->getConsonantsAndSilenceLengthMean();
+
+    qDebug() << "getConsonantsAndSilenceMeanValue: " << result;
 
     return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
 }
@@ -560,8 +554,8 @@ QVariant Backend::getConsonantsAndSilenceMedianValue(QString path, double from_p
 
     uint32_t from = static_cast<uint32_t>(std::ceil(from_percent * segments_mask.size()));
     uint32_t to = static_cast<uint32_t>(std::ceil(to_percent * segments_mask.size()));
-    qDebug() << "from: " << from;
-    qDebug() << "to: " << to;
+    qDebug() << "getConsonantsAndSilenceMedianValue from: " << from;
+    qDebug() << "getConsonantsAndSilenceMedianValue to: " << to;
 
     std::vector<int> selected_segments;
 
@@ -577,6 +571,8 @@ QVariant Backend::getConsonantsAndSilenceMedianValue(QString path, double from_p
 
     uint32_t median = IntonCore::getMedianValue(selected_segments);
 
+    qDebug() << "getConsonantsAndSilenceMedianValue median: " << median;
+
     return QVariant::fromValue( storage->convertIntensityPointsToSec(median));
 }
 
@@ -586,6 +582,9 @@ QVariant Backend::getVowelsRate(QString path, double from_percent, double to_per
 
     auto waveLength = this->getWaveLength(path, from_percent, to_percent).toDouble();
     auto segmentsCount = this->getVowelsCount(path, from_percent, to_percent).toDouble();
+
+    qDebug() << "getVowelsRate median: " << segmentsCount;
+    qDebug() << "getVowelsRate median: " << waveLength;
 
     return QVariant::fromValue(segmentsCount / waveLength);
 }
@@ -599,6 +598,9 @@ QVariant Backend::getSpeechRate(QString path, double from_percent, double to_per
     auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
     auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
     double speechRate = this->kSpeechRate * nv * 60 / ts;
+
+    qDebug() << "getSpeechRate:" << speechRate;
+
     return QVariant::fromValue(speechRate);
 }
 
@@ -610,6 +612,9 @@ QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, dou
     auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent);
     auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent);
     double meanDurationOfPauses = this->kMeanPauses * abs(tcm.toDouble() - tcd.toDouble());
+
+    qDebug() << "getMeanDurationOfPauses:" << meanDurationOfPauses;
+
     return QVariant::fromValue(meanDurationOfPauses);
 }
 
@@ -624,6 +629,8 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
     auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
     double articulationRate = this->kSpeechRate * nv * 60 / (this->kArticulationRate * tv);
 
+    qDebug() << "getArticulationRate:" << articulationRate;
+
     return QVariant::fromValue(articulationRate);
 }
 
@@ -633,6 +640,8 @@ QVariant Backend::getVowelsVarianceValue(QString path, double from_percent, doub
 
     auto storage = this->core->getTemplate();
     auto count = storage->getVowelsLengthVariance();
+
+    qDebug() << "getVowelsVarianceValue:" << count;
 
     return QVariant::fromValue(count);
 }
@@ -644,6 +653,8 @@ QVariant Backend::getConsonantsAndSilenceVarianceValue(QString path, double from
     auto storage = this->core->getTemplate();
     auto count = storage->getConsonantsAndSilenceLengthVariance();
 
+    qDebug() << "getConsonantsAndSilenceVarianceValue:" << count;
+
     return QVariant::fromValue(count);
 }
 
@@ -653,6 +664,8 @@ QVariant Backend::getVowelsSkewnessValue(QString path, double from_percent, doub
 
     auto storage = this->core->getTemplate();
     auto count = storage->getVowelsLengthSkewness();
+
+    qDebug() << "getVowelsSkewnessValue:" << count;
 
     return QVariant::fromValue(count);
 }
@@ -664,6 +677,8 @@ QVariant Backend::getConsonantsAndSilenceSkewnessValue(QString path, double from
     auto storage = this->core->getTemplate();
     auto count = storage->getConsonantsAndSilenceLengthSkewness();
 
+    qDebug() << "getConsonantsAndSilenceSkewnessValue:" << count;
+
     return QVariant::fromValue(count);
 }
 
@@ -673,6 +688,8 @@ QVariant Backend::getVowelsKurtosisValue(QString path, double from_percent, doub
 
     auto storage = this->core->getTemplate();
     auto count = storage->getVowelsLengthKurtosis();
+
+    qDebug() << "getVowelsKurtosisValue:" << count;
 
     return QVariant::fromValue(count);
 }
@@ -684,6 +701,8 @@ QVariant Backend::getConsonantsAndSilenceKurtosisValue(QString path, double from
     auto storage = this->core->getTemplate();
     auto count = storage->getConsonantsAndSilenceLengthKurtosis();
 
+    qDebug() << "getConsonantsAndSilenceKurtosisValue:" << count;
+
     return QVariant::fromValue(count);
 }
 
@@ -694,7 +713,7 @@ QString Backend::getPath()
 
 void Backend::setPath(const QString &path)
 {
-    qDebug() << "path = " << path;
+    qDebug() << "set path: " << path;
     this->path = path;
 
     this->initializeCore(true);
@@ -704,16 +723,19 @@ void Backend::initializeCore(bool reinit)
 {
     if (this->core != nullptr && !reinit) return;
 
+    qDebug() << "Delete core";
     delete this->core;
+    qDebug() << "Load config";
     IntonCore::Config * config = this->getConfig();
+    qDebug() << "Initialize core: " << this->path;
     this->core = new IntonCore::Core(this->path.toLocal8Bit().toStdString(), config);
+    qDebug() << "Initialize core complete";
 }
 
 void Backend::initializeCore(const QString& path)
 {
-    qDebug() << "path: ";
-    qDebug() << this->path;
-    qDebug() << path;
+    qDebug() << "new path" << path;
     if (this->path == path) return;
+    qDebug() << "old path" << this->path;
     this->setPath(path);
 }

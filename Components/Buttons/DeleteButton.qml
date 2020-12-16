@@ -17,7 +17,7 @@ DeleteButtonForm {
         toolButton.visible = !visibility
     }
 
-    toolButton.onClicked: {
+    toolButton.button.onClicked: {
         if (path != "")
             showDialog(true)
     }

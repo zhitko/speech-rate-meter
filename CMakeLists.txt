@@ -22,10 +22,11 @@ if(ANDROID)
     set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
 
     if (ANDROID_ABI STREQUAL "armeabi-v7a")
-        set(ANDROID_EXTRA_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/lib_android/libIntonCore.so)
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
+        set(ANDROID_EXTRA_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/lib_android_64/libIntonCore.so)
+    endif()
+
+    if (ANDROID_ABI STREQUAL "arm64-v8a")
+        set(ANDROID_EXTRA_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/lib_android_64/libIntonCore.so)
     endif()
 else()
     LINK_DIRECTORIES(../IntonCoreBin/install/lib)

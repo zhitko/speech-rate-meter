@@ -3,9 +3,14 @@ import QtQuick 2.14
 Item {
     id: root
 
+    FontAwesome {
+        id: awesome
+    }
+
     property string text: ""
     property string type: awesome.solid
-    property string icon: awesome.icons.fa_question_circle
+    property string icon: awesome.icons.faQuestionCircle
+    property string color: "white"
 
     FontAwesomeIcon {
         id: awesomeIcon
@@ -13,6 +18,7 @@ Item {
         icon: root.icon
         anchors.left: parent.left
         anchors.leftMargin: 10
+        color: root.color
     }
 
     Text {
@@ -22,5 +28,6 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: awesomeIcon.right
         anchors.leftMargin: 10
+        color: root.color
     }
 }
