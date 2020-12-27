@@ -33,115 +33,16 @@ Page {
         id: awesome
     }
 
-    Rectangle {
-        id: speechRateColor
-        width: speechRateTitle.height * 2
-        height: speechRateTitle.height
-        color: speechRateRadialBar.progressColor
-        anchors.verticalCenter: speechRateTitle.verticalCenter
-        anchors.right: speechRateTitle.left
-        anchors.rightMargin: 5
-        visible: recorded
-    }
-
-    Text {
-        id: speechRateTitle
-        text: qsTr("Speech Rate")
-        anchors.horizontalCenterOffset: -width / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.topMargin: 10
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: speechRateValue
-        text: "---"
-        font.bold: true
-        anchors.left: speechRateTitle.right
-        anchors.leftMargin: 5
-        anchors.verticalCenter: speechRateTitle.verticalCenter
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Rectangle {
-        id: articulationRateColor
-        width: articulationRateTitle.height * 2
-        height: articulationRateTitle.height
-        color: articulationRateRadialBar.progressColor
-        anchors.verticalCenter: articulationRateTitle.verticalCenter
-        anchors.right: articulationRateTitle.left
-        anchors.rightMargin: 5
-        visible: recorded
-    }
-
-    Text {
-        id: articulationRateTitle
-        text: qsTr("Articulation Rate")
-        anchors.horizontalCenterOffset: -width / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: speechRateTitle.bottom
-        anchors.topMargin: 8
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: articulationRateValue
-        text: "---"
-        font.bold: true
-        anchors.left: articulationRateTitle.right
-        anchors.leftMargin: 5
-        anchors.verticalCenter: articulationRateTitle.verticalCenter
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: meanDurationOfPausesTitle
-        text: qsTr("Phrase Pauses")
-        anchors.horizontalCenterOffset: -width / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: articulationRateTitle.bottom
-        anchors.topMargin: 8
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: meanDurationOfPausesValue
-        text: "---"
-        font.bold: true
-        anchors.left: meanDurationOfPausesTitle.right
-        anchors.leftMargin: 5
-        anchors.verticalCenter: meanDurationOfPausesTitle.verticalCenter
-        font.pointSize: 12
-        visible: recorded
-    }
-
-    Text {
-        id: timerTitle
-        text: qsTr("Speech Duration")
-        anchors.horizontalCenterOffset: -width / 2
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: meanDurationOfPausesTitle.bottom
-        anchors.topMargin: 8
-        font.pointSize: 12
-        visible: recorded
-    }
-
     Label {
         text: qsTr("Welcome to Speech Rate Meter")
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         font.pointSize: 17
         font.bold: true
-        anchors.bottom: timerLabel.top
+        anchors.bottom: parent.top
         anchors.bottomMargin: 10
         anchors.top: parent.top
-        anchors.topMargin: 10
+        anchors.topMargin: 40
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
@@ -150,13 +51,108 @@ Page {
     }
 
     Text {
+        id: speechRateTitle
+        text: qsTr("Speech Rate")
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.top: parent.top
+        anchors.topMargin: 10
+        font.pointSize: 25
+        visible: recorded
+    }
+
+    Text {
+        id: speechRateValue
+        text: "---"
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.top: speechRateTitle.bottom
+        anchors.topMargin: 10
+        font.pointSize: 30
+        font.bold: true
+        color: speechRateRadialBar.progressColor
+        visible: recorded
+    }
+
+    Text {
+        id: articulationRateTitle
+        text: qsTr("Articulation Rate")
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.top: speechRateValue.bottom
+        anchors.topMargin: 10
+        font.pointSize: 25
+        visible: recorded
+    }
+
+    Text {
+        id: articulationRateValue
+        text: "---"
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.top: articulationRateTitle.bottom
+        anchors.topMargin: 10
+        color: articulationRateRadialBar.progressColor
+        font.pointSize: 30
+        font.bold: true
+        visible: recorded
+    }
+
+    Text {
+        id: meanDurationOfPausesTitle
+        text: qsTr("Phrase Pauses")
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottom: meanDurationOfPausesValue.top
+        anchors.bottomMargin: 10
+        font.pointSize: 25
+        visible: recorded
+    }
+
+    Text {
+        id: meanDurationOfPausesValue
+        text: "---"
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottom: timerTitle.top
+        anchors.bottomMargin: 10
+        font.bold: true
+        font.pointSize: 30
+        visible: recorded
+    }
+
+    Text {
+        id: timerTitle
+        text: qsTr("Speech Duration")
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottom: timerTitleValue.top
+        anchors.bottomMargin: 10
+        font.pointSize: 25
+        visible: recorded
+    }
+
+    Text {
+        id: timerTitleValue
+        text: timerLabel.text
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 10
+        font.bold: true
+        font.pointSize: 30
+        visible: recorded
+    }
+
+    Text {
         id: timerLabel
         text: qsTr("00:00")
+        anchors.bottom: recordButton.top
+        anchors.bottomMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         font.bold: true
-        anchors.left: timerTitle.right
-        anchors.leftMargin: recorded ? 5 : -width / 2
-        anchors.verticalCenter: timerTitle.verticalCenter
-        font.pointSize: recorded ? 12 : 24
+        font.pointSize: 24
+        visible: !recorded
     }
 
     Image {
@@ -250,9 +246,9 @@ Page {
         width: plotWidth + speechRateRadialBar.dialWidth
         height: plotHeight + speechRateRadialBar.dialWidth
         showText: false
-        anchors.top: timerLabel.bottom
-        anchors.topMargin: 30
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: speechRateRadialBar.height / 4
         dialType: RadialBar.MinToMax
         progressColor: Colors.blue
         foregroundColor: "#00ffffff"

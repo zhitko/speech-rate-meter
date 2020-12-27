@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QAudioInput>
 #include <QBuffer>
+#include <intoncore.h>
 
 class PcmRecorder : public QObject
 {
@@ -16,7 +17,7 @@ public:
     static PcmRecorder *getInstance();
 
     QString startRecording();
-    QString stopRecording();
+    WaveFile * stopRecording();
 
     bool isRecording();
 

@@ -32,7 +32,7 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        bus.openRecorderPage()
+        bus.openWelcomePage()
     }
 
     header: ToolBar {
@@ -57,10 +57,10 @@ ApplicationWindow {
             button.onClicked: stackView.pop()
         }
 
-        Label {
-            text: stackView.currentItem.title
-            anchors.centerIn: parent
-        }
+//        Label {
+//            text: stackView.currentItem.title
+//            anchors.centerIn: parent
+//        }
     }
 
     Drawer {
@@ -76,8 +76,7 @@ ApplicationWindow {
                 id: itemDelegate
                 width: parent.width
                 onClicked: {
-                    stackView.clear();
-                    bus.openRecorderPage()
+                    bus.openWelcomePage()
                     drawer.close()
                 }
 

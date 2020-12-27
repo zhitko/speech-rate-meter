@@ -10,10 +10,10 @@
 const double DefaultKSpeechRate = 0.6;
 const double DefaultMinSpeechRate = 70;
 const double DefaultMaxSpeechRate = 210;
-const double DefaultKArticulationRate = 2.4;
+const double DefaultKArticulationRate = 30;
 const double DefaultMinArticulationRate = 70;
 const double DefaultMaxArticulationRate = 210;
-const double DefaultKMeanPauses = 10;
+const double DefaultKMeanPauses = 17;
 
 namespace IntonCore {
 class Core;
@@ -137,7 +137,7 @@ private:
     void initializeCore(const QString& path);
     void loadFromFile(IntonCore::Config *config);
     void saveToFile(IntonCore::Config *config);
-    IntonCore::Config * getConfig(bool reload = false);
+    IntonCore::Config * getConfig();
 
     double kSpeechRate;
     double minSpeechRate;

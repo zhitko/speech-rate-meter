@@ -6,7 +6,7 @@ Page {
     width: 600
     height: 400
     property alias bOpen: bOpen
-    title: "Home"
+    property string title: qsTr("Home")
     property alias bStart: bStart
 
     Label {

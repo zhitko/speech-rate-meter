@@ -37,12 +37,13 @@ Backend::Backend(QObject *parent)
     this->path = "";
 
     this->recorder = PcmRecorder::getInstance();
-    this->getConfig(true);
+    this->getConfig();
 }
 
 Backend::~Backend()
 {
-    delete core;
+    if(this->core != nullptr) delete this->core;
+    if(this->config != nullptr) delete this->config;
 }
 
 QVariantList Backend::getWaveFilesList()
@@ -90,11 +91,17 @@ QString Backend::startStopRecordWaveFile()
     QString path = "";
     if (!this->recorder->isRecording())
     {
+        qDebug() << "Backend::startStopRecordWaveFile: start recording";
         path = this->recorder->startRecording();
     } else {
-        path = this->recorder->stopRecording();
+        qDebug() << "Backend::startStopRecordWaveFile: stop recording";
+        WaveFile * file = this->recorder->stopRecording();
+        qDebug() << "Backend::startStopRecordWaveFile: reset wave file " << file;
+        this->initializeCore();
+        this->core->reloadTemplate(file);
     }
 
+    qDebug() << "Backend::startStopRecordWaveFile: complete - " << path;
     return path;
 }
 
@@ -340,8 +347,6 @@ QVariant Backend::getWaveLength(QString path, double from_percent, double to_per
     auto wave = storage->getWave();
 
     auto select = abs(to_percent - from_percent);
-
-    qDebug() << "getWaveLength: " << select;
 
     return QVariant::fromValue(1.0 * wave.size() / ApplicationConfig::RecordingFrequency * select);
 }
@@ -625,9 +630,9 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
     qDebug() << "getArticulationRate K2:" << this->kArticulationRate;
 
 
-    auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
-    auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
-    double articulationRate = this->kSpeechRate * nv * 60 / (this->kArticulationRate * tv);
+    auto rs = this->getSpeechRate(path, from_percent, to_percent).toDouble();
+    auto tp = this->getMeanDurationOfPauses(path, from_percent, to_percent).toDouble();
+    double articulationRate = rs + this->kArticulationRate * tp;
 
     qDebug() << "getArticulationRate:" << articulationRate;
 
@@ -715,27 +720,38 @@ void Backend::setPath(const QString &path)
 {
     qDebug() << "set path: " << path;
     this->path = path;
-
-    this->initializeCore(true);
 }
 
 void Backend::initializeCore(bool reinit)
 {
     if (this->core != nullptr && !reinit) return;
 
-    qDebug() << "Delete core";
-    delete this->core;
-    qDebug() << "Load config";
-    IntonCore::Config * config = this->getConfig();
+    if (this->core != nullptr)
+    {
+        qDebug() << "Delete core";
+        delete this->core;
+        this->core = nullptr;
+    }
+    qDebug() << "Delete config";
+    delete this->config;
+    this->config = nullptr;
+
+    QString recordsPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+    QString logPath = QDir(recordsPath).absoluteFilePath("core.log");
+
     qDebug() << "Initialize core: " << this->path;
-    this->core = new IntonCore::Core(this->path.toLocal8Bit().toStdString(), config);
+    this->core = new IntonCore::Core(
+        this->path.toLocal8Bit().toStdString(),
+        this->getConfig()
+    );
     qDebug() << "Initialize core complete";
 }
 
 void Backend::initializeCore(const QString& path)
 {
-    qDebug() << "new path" << path;
+    qDebug() << "path" << path;
     if (this->path == path) return;
     qDebug() << "old path" << this->path;
+
     this->setPath(path);
 }

@@ -28,17 +28,13 @@ const QString SettingsKeyMinArticulationRate = "articulationRate/Min";
 const QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
 const QString SettingsKeyKMeanPauses = "meanPauses/Max";
 
-IntonCore::Config * Backend::getConfig(bool reload)
+IntonCore::Config * Backend::getConfig()
 {
-    qDebug() << "getConfig reload: " << reload;
-    if (reload)
-    {
-        delete this->config;
-        this->config = nullptr;
-    }
+    qDebug() << "getConfig";
 
     if (this->config == nullptr)
     {
+        qDebug() << "Load new config";
         this->config = new IntonCore::Config();
         this->loadFromFile(config);
     }

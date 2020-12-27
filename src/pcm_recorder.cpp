@@ -8,7 +8,6 @@
 #endif
 
 #include "applicationconfig.h"
-#include <intoncore.h>
 
 PcmRecorder::PcmRecorder(QObject *parent) : QObject(parent),
     is_recording(false),
@@ -50,7 +49,7 @@ QString PcmRecorder::startRecording()
     return path;
 }
 
-QString PcmRecorder::stopRecording()
+WaveFile * PcmRecorder::stopRecording()
 {
     this->is_recording = false;
 
@@ -59,22 +58,19 @@ QString PcmRecorder::stopRecording()
 
     this->audio->stop();
 
-    IntonCore::Helpers::makeSimpleWaveFileFromRawData(
+    WaveFile * file = IntonCore::Helpers::makeSimpleWaveFileFromRawData(
         path.toStdString(),
         this->buffer->data().constData(),
         this->buffer->size(),
         ApplicationConfig::RecordingChannelsCount,
         ApplicationConfig::RecordingFrequency,
-        ApplicationConfig::RecordingBitsPerSample
+        ApplicationConfig::RecordingBitsPerSample,
+        false
     );
 
     this->reinitializeAudioRecorder();
 
-    QFileInfo info1(path);
-    qDebug() << "File absoluteFilePath" << info1.absoluteFilePath();
-    qDebug() << "File size" << info1.size();
-
-    return path;
+    return file;
 }
 
 bool PcmRecorder::isRecording()
