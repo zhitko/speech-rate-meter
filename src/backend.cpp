@@ -120,11 +120,7 @@ QString Backend::openFileDialog()
         ApplicationConfig::GetFullTestsPath(),
         tr("Wave (*.wav)"));
 #endif
-    qDebug() << "openFileDialog: " << fileName;
-
-    WaveFile * file = IntonCore::Helpers::openWaveFile(fileName.toLocal8Bit().toStdString());
-    this->initializeCore();
-    this->core->reloadTemplate(file);
+    qDebug() << "openFileDialog: " << fileName;    
 
     return fileName;
 }
@@ -753,9 +749,19 @@ void Backend::initializeCore(bool reinit)
 
 void Backend::initializeCore(const QString& path)
 {
-    qDebug() << "path" << path;
+    qDebug() << "initializeCore: path" << path;
     if (this->path == path) return;
-    qDebug() << "old path" << this->path;
+    qDebug() << "initializeCore: old path" << this->path;
+
+    if (!path.isEmpty())
+    {
+        qDebug() << "initializeCore: initialize core" << path;
+        this->initializeCore();
+        qDebug() << "initializeCore: load wav file" << path;
+        WaveFile * file = IntonCore::Helpers::openWaveFile(path.toLocal8Bit().toStdString());
+        qDebug() << "initializeCore: reload template" << path;
+        this->core->reloadTemplate(file);
+    }
 
     this->setPath(path);
 }

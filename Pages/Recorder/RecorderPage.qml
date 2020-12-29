@@ -175,6 +175,8 @@ RecorderPageForm {
         if (!waveLength) return false
         timerLabel.text = qsTr("%1 sec").arg(String(waveLength.toFixed(0)))
 
+        playButton.interval = waveLength
+
         let speechRate = backend.getSpeechRate(root.path, startPoint, endPoint)
         console.log("calculateSpeechRate: speechRate " + speechRate)
         speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(0)))

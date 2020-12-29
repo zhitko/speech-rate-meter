@@ -11,8 +11,8 @@ Page {
     id: root
     property alias timerLabel: timerLabel
     property alias recordButton: recordButton
-    property alias playButton: playButton
     property alias openButton: openButton
+    property alias playButton: playButton
 
     property string path: ""
     property bool recorded: false
@@ -39,22 +39,16 @@ Page {
         horizontalAlignment: Text.AlignHCenter
         font.pointSize: 17
         font.bold: true
-        anchors.bottom: parent.top
-        anchors.bottomMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
-        anchors.topMargin: 40
-        anchors.right: parent.right
-        anchors.rightMargin: 0
-        anchors.left: parent.left
-        anchors.leftMargin: 0
+        anchors.topMargin: 10
         visible: !recorded
     }
 
     Text {
         id: speechRateTitle
         text: qsTr("Speech Rate")
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 10
         font.pointSize: 25
@@ -64,21 +58,40 @@ Page {
     Text {
         id: speechRateValue
         text: "---"
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateTitle.bottom
         anchors.topMargin: 10
         font.pointSize: 30
         font.bold: true
+        visible: recorded
+    }
+
+    Rectangle {
         color: speechRateRadialBar.progressColor
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.right: speechRateValue.left
+        anchors.rightMargin: 10
+        anchors.top: speechRateValue.top
+        anchors.bottom: speechRateValue.bottom
+        visible: recorded
+    }
+
+    Rectangle {
+        color: speechRateRadialBar.progressColor
+        anchors.left: speechRateValue.right
+        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.top: speechRateValue.top
+        anchors.bottom: speechRateValue.bottom
         visible: recorded
     }
 
     Text {
         id: articulationRateTitle
         text: qsTr("Articulation Rate")
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateValue.bottom
         anchors.topMargin: 10
         font.pointSize: 25
@@ -88,21 +101,40 @@ Page {
     Text {
         id: articulationRateValue
         text: "---"
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: articulationRateTitle.bottom
         anchors.topMargin: 10
-        color: articulationRateRadialBar.progressColor
         font.pointSize: 30
         font.bold: true
+        visible: recorded
+    }
+
+    Rectangle {
+        color: articulationRateRadialBar.progressColor
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.right: articulationRateValue.left
+        anchors.rightMargin: 10
+        anchors.top: articulationRateValue.top
+        anchors.bottom: articulationRateValue.bottom
+        visible: recorded
+    }
+
+    Rectangle {
+        color: articulationRateRadialBar.progressColor
+        anchors.left: articulationRateValue.right
+        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.top: articulationRateValue.top
+        anchors.bottom: articulationRateValue.bottom
         visible: recorded
     }
 
     Text {
         id: meanDurationOfPausesTitle
         text: qsTr("Phrase Pauses")
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: meanDurationOfPausesValue.top
         anchors.bottomMargin: 10
         font.pointSize: 25
@@ -112,8 +144,7 @@ Page {
     Text {
         id: meanDurationOfPausesValue
         text: "---"
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: timerTitle.top
         anchors.bottomMargin: 10
         font.bold: true
@@ -124,8 +155,7 @@ Page {
     Text {
         id: timerTitle
         text: qsTr("Speech Duration")
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: timerTitleValue.top
         anchors.bottomMargin: 10
         font.pointSize: 25
@@ -135,8 +165,7 @@ Page {
     Text {
         id: timerTitleValue
         text: timerLabel.text
-        anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
         font.bold: true
@@ -308,8 +337,12 @@ Page {
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 4
         anchors.right: speechRateRadialBar.left
+        anchors.rightMargin: -25
         font.pointSize: 12
         visible: recorded
+        transform: Rotation {
+            angle: -60
+        }
     }
 
     Text {
@@ -328,8 +361,12 @@ Page {
         anchors.top: speechRateRadialBar.top
         anchors.topMargin: speechRateRadialBar.height / 4
         anchors.left: speechRateRadialBar.right
+        anchors.leftMargin: -3
         font.pointSize: 12
         visible: recorded
+        transform: Rotation {
+            angle: 60
+        }
     }
 
     BottomBar {
