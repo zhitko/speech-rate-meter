@@ -120,8 +120,12 @@ QString Backend::openFileDialog()
         ApplicationConfig::GetFullTestsPath(),
         tr("Wave (*.wav)"));
 #endif
-
     qDebug() << "openFileDialog: " << fileName;
+
+    WaveFile * file = IntonCore::Helpers::openWaveFile(fileName.toLocal8Bit().toStdString());
+    this->initializeCore();
+    this->core->reloadTemplate(file);
+
     return fileName;
 }
 

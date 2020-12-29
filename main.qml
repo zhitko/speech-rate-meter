@@ -13,8 +13,8 @@ ApplicationWindow {
     visible: true
     minimumWidth: 640
     width: 640
-    minimumHeight: 480
-    height: 480
+    minimumHeight: 740
+    height: 740
     title: qsTr("SpeechRateMeter")
 
     FontAwesome {
