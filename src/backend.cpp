@@ -93,6 +93,7 @@ QString Backend::startStopRecordWaveFile()
     {
         qDebug() << "Backend::startStopRecordWaveFile: start recording";
         path = this->recorder->startRecording();
+        this->path = path;
     } else {
         qDebug() << "Backend::startStopRecordWaveFile: stop recording";
         WaveFile * file = this->recorder->stopRecording();
@@ -614,9 +615,9 @@ QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, dou
     this->initializeCore(path);
 
     qDebug() << "getMeanDurationOfPauses K3:" << this->kMeanPauses;
-    auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent);
-    auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent);
-    double meanDurationOfPauses = this->kMeanPauses * abs(tcm.toDouble() - tcd.toDouble());
+    auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent).toDouble();
+    auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent).toDouble();
+    double meanDurationOfPauses = this->kMeanPauses * abs(tcm - tcd);
 
     qDebug() << "getMeanDurationOfPauses:" << meanDurationOfPauses;
 
@@ -631,8 +632,11 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
 
 
     auto rs = this->getSpeechRate(path, from_percent, to_percent).toDouble();
-    auto tp = this->getMeanDurationOfPauses(path, from_percent, to_percent).toDouble();
-    double articulationRate = rs + this->kArticulationRate * tp;
+    auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
+    auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
+    auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent).toDouble();
+    auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
+    double articulationRate = rs * ts / (tv + this->kArticulationRate * tcm * nv);
 
     qDebug() << "getArticulationRate:" << articulationRate;
 

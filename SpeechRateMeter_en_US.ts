@@ -4,14 +4,14 @@
 <context>
     <name>Backend</name>
     <message>
-        <location filename="src/backend.cpp" line="112"/>
-        <location filename="src/backend.cpp" line="119"/>
+        <location filename="src/backend.cpp" line="113"/>
+        <location filename="src/backend.cpp" line="120"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/backend.cpp" line="114"/>
-        <location filename="src/backend.cpp" line="121"/>
+        <location filename="src/backend.cpp" line="115"/>
+        <location filename="src/backend.cpp" line="122"/>
         <source>Wave (*.wav)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -125,14 +125,14 @@
     <message>
         <location filename="Pages/Recorder/RecorderPage.qml" line="160"/>
         <location filename="Pages/Recorder/RecorderPage.qml" line="161"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="180"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="194"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="182"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="196"/>
         <source>%1 wpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="Pages/Recorder/RecorderPage.qml" line="176"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="184"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="186"/>
         <source>%1 sec</source>
         <translation type="unfinished"></translation>
     </message>
@@ -140,22 +140,22 @@
 <context>
     <name>RecorderPageForm.ui</name>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="55"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="50"/>
         <source>Speech Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="79"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="93"/>
         <source>Articulation Rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="103"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="136"/>
         <source>Phrase Pauses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="126"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="157"/>
         <source>Speech Duration</source>
         <translation type="unfinished"></translation>
     </message>
@@ -165,28 +165,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="149"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="178"/>
         <source>00:00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="285"/>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="296"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="314"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="325"/>
         <source>--- wpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="306"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="335"/>
         <source>Slow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="316"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="349"/>
         <source>Average</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="326"/>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="359"/>
         <source>Fast</source>
         <translation type="unfinished"></translation>
     </message>
