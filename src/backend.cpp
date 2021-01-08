@@ -635,8 +635,8 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
     auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
     auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
     auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent).toDouble();
-    auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
-    double articulationRate = rs * ts / (tv + this->kArticulationRate * tcm * nv);
+    auto nc = this->getConsonantsAndSilenceCount(path, from_percent, to_percent).toDouble();
+    double articulationRate = rs * ts / (tv + this->kArticulationRate * tcm * nc);
 
     qDebug() << "getArticulationRate:" << articulationRate;
 
