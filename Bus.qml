@@ -51,4 +51,13 @@ Item {
         stackView.push(recorderPage, {bus: bus, path: path, autostart: true})
         openedRecorderPage()
     }
+
+    property string resultsPage: "Pages/Results/ResultsPage.qml";
+    signal openedResultsPage()
+    function openResultsPage()
+    {
+        console.log("Bus: openResultsPage");
+        stackView.push(resultsPage, {bus: bus})
+        openedResultsPage()
+    }
 }

@@ -45,5 +45,9 @@
         <file>3party/FontAwesome/Font Awesome 5 Free-Regular-400.ttf</file>
         <file>3party/FontAwesome/Font Awesome 5 Free-Solid-900.ttf</file>
         <file>Components/FontAwesome/FontAwesomeToolButton.qml</file>
+        <file>Components/Buttons/SaveResultButton.qml</file>
+        <file>Components/Buttons/SaveResultButtonForm.ui.qml</file>
+        <file>Pages/Results/ResultsPage.qml</file>
+        <file>Pages/Results/ResultsPageForm.ui.qml</file>
     </qresource>
 </RCC>

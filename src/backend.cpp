@@ -13,6 +13,7 @@
 #include <utils.h>
 
 #include "applicationconfig.h"
+#include "settings.h"
 #include "recorder.h"
 #include "pcm_recorder.h"
 #include "qml/qmlfileinfo.h"
@@ -24,26 +25,16 @@ const int WAVE_LENGTH = 1000;
 Backend::Backend(QObject *parent)
     : QObject(parent),
     core(nullptr),
-    config(nullptr),
-    sound(nullptr),
-    kSpeechRate(DefaultKSpeechRate),
-    minSpeechRate(DefaultMinSpeechRate),
-    maxSpeechRate(DefaultMaxSpeechRate),
-    kArticulationRate(DefaultKArticulationRate),
-    minArticulationRate(DefaultMinArticulationRate),
-    maxArticulationRate(DefaultMaxArticulationRate),
-    kMeanPauses(DefaultKMeanPauses)
+    sound(nullptr)
 {
     this->path = "";
 
     this->recorder = PcmRecorder::getInstance();
-    this->getConfig();
 }
 
 Backend::~Backend()
 {
     if(this->core != nullptr) delete this->core;
-    if(this->config != nullptr) delete this->config;
 }
 
 QVariantList Backend::getWaveFilesList()
@@ -124,6 +115,45 @@ QString Backend::openFileDialog()
     qDebug() << "openFileDialog: " << fileName;    
 
     return fileName;
+}
+
+QString Backend::loadResult()
+{
+    QFile file(ApplicationConfig::GetFullResultsPath());
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return "";
+
+    QTextStream in(&file);
+    QString results = "";
+
+    while(!in.atEnd()) {
+        results += in.readLine().replace("|","\n");
+        results += "\n\n";
+    }
+
+    file.close();
+
+    return results;
+}
+
+void Backend::saveResult(QString startTime, QString endTime, QString speechRate, QString articulationRate, QString phrasePause, QString speechDuration)
+{
+    qDebug() << "startTime: " << startTime;
+    qDebug() << "endTime: " << endTime;
+    qDebug() << "speechRate: " << speechRate;
+    qDebug() << "articulationRate: " << articulationRate;
+    qDebug() << "phrasePause: " << phrasePause;
+    qDebug() << "speechDuration: " << speechDuration;
+    QFile results(ApplicationConfig::GetFullResultsPath());
+    if (!results.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
+        return;
+    QTextStream out(&results);
+    out << "Date&Time(Star&End) - " << startTime << " - " << endTime << "|" <<
+           "Speech Rate - " << speechRate << "|"
+           "Articulation Rate - " << articulationRate << "|"
+           "Phrase Pause - " << phrasePause << "|"
+           "Speech Duration - " << speechDuration << "\n";
+    results.close();
 }
 
 QVariantList Backend::getWaveData(QString path)
@@ -598,12 +628,13 @@ QVariant Backend::getVowelsRate(QString path, double from_percent, double to_per
 QVariant Backend::getSpeechRate(QString path, double from_percent, double to_percent)
 {
     this->initializeCore(path);
+    Settings * settings = Settings::getInstance();
 
-    qDebug() << "getSpeechRate K1:" << this->kSpeechRate;
+    qDebug() << "getSpeechRate K1:" << settings->getKSpeechRate();
 
     auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
     auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
-    double speechRate = this->kSpeechRate * nv * 60 / ts;
+    double speechRate = settings->getKSpeechRate().toDouble() * nv * 60 / ts;
 
     qDebug() << "getSpeechRate:" << speechRate;
 
@@ -612,12 +643,13 @@ QVariant Backend::getSpeechRate(QString path, double from_percent, double to_per
 
 QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, double to_percent)
 {
-    this->initializeCore(path);
+    this->initializeCore(path);    
+    Settings * settings = Settings::getInstance();
 
-    qDebug() << "getMeanDurationOfPauses K3:" << this->kMeanPauses;
+    qDebug() << "getMeanDurationOfPauses K3:" << settings->getKMeanPauses();
     auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent).toDouble();
     auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent).toDouble();
-    double meanDurationOfPauses = this->kMeanPauses * abs(tcm - tcd);
+    double meanDurationOfPauses = settings->getKMeanPauses().toDouble() * abs(tcm - tcd);
 
     qDebug() << "getMeanDurationOfPauses:" << meanDurationOfPauses;
 
@@ -627,16 +659,17 @@ QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, dou
 QVariant Backend::getArticulationRate(QString path, double from_percent, double to_percent)
 {
     this->initializeCore(path);
+    Settings * settings = Settings::getInstance();
 
-    qDebug() << "getArticulationRate K2:" << this->kArticulationRate;
+    qDebug() << "getArticulationRate K2:" << settings->getKArticulationRate();
 
 
     auto rs = this->getSpeechRate(path, from_percent, to_percent).toDouble();
     auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
     auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
-    auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent).toDouble();
-    auto nc = this->getConsonantsAndSilenceCount(path, from_percent, to_percent).toDouble();
-    double articulationRate = rs * ts / (tv + this->kArticulationRate * tcm * nc);
+    auto tcpm = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent).toDouble();
+    auto nc = this->getConsonantsAndSilenceCount(path, from_percent, to_percent).toInt();
+    double articulationRate = rs * ts / (tv + settings->getKArticulationRate().toDouble() * tcpm * nc);
 
     qDebug() << "getArticulationRate:" << articulationRate;
 
@@ -736,17 +769,16 @@ void Backend::initializeCore(bool reinit)
         delete this->core;
         this->core = nullptr;
     }
-    qDebug() << "Delete config";
-    delete this->config;
-    this->config = nullptr;
 
     QString recordsPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     QString logPath = QDir(recordsPath).absoluteFilePath("core.log");
 
+    Settings * settings = Settings::getInstance();
+
     qDebug() << "Initialize core: " << this->path;
     this->core = new IntonCore::Core(
         this->path.toLocal8Bit().toStdString(),
-        this->getConfig()
+        settings->getConfig()
     );
     qDebug() << "Initialize core complete";
 }

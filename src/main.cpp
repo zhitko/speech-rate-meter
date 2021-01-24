@@ -7,6 +7,7 @@
 #include <QDateTime>
 
 #include "backend.h"
+#include "settings.h"
 #include "applicationconfig.h"
 #include "qml/qmlfileinfo.h"
 #include "qml/qmlpoint.h"
@@ -47,6 +48,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<RadialBar>("RadialBar", 1, 0, "RadialBar");
     qmlRegisterType<Backend>("intondemo.backend", 1, 0, "Backend");
+    qmlRegisterType<Settings>("intondemo.settings", 1, 0, "Settings");
     qRegisterMetaType<QmlFileInfo>("FileInfo");
     qRegisterMetaType<QmlPoint>("Point");
 

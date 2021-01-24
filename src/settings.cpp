@@ -1,4 +1,4 @@
-#include "backend.h"
+#include "settings.h"
 
 #include <QDebug>
 #include <QSettings>
@@ -8,7 +8,6 @@
 #include <config.h>
 
 #include "applicationconfig.h"
-
 
 const QString SettingsKeyDate = "date";
 const QString SettingsKeyIntensityFrame = "intensity/frame";
@@ -28,7 +27,39 @@ const QString SettingsKeyMinArticulationRate = "articulationRate/Min";
 const QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
 const QString SettingsKeyKMeanPauses = "meanPauses/Max";
 
-IntonCore::Config * Backend::getConfig()
+Settings::Settings() : QObject(),
+  config(nullptr),
+  kSpeechRate(DefaultKSpeechRate),
+  minSpeechRate(DefaultMinSpeechRate),
+  maxSpeechRate(DefaultMaxSpeechRate),
+  kArticulationRate(DefaultKArticulationRate),
+  minArticulationRate(DefaultMinArticulationRate),
+  maxArticulationRate(DefaultMaxArticulationRate),
+  kMeanPauses(DefaultKMeanPauses)
+{
+    this->getConfig();
+}
+
+Settings::Settings(const Settings &settings) : QObject(),
+    config(settings.config),
+    kSpeechRate(settings.kSpeechRate),
+    minSpeechRate(settings.minSpeechRate),
+    maxSpeechRate(settings.maxSpeechRate),
+    kArticulationRate(settings.kArticulationRate),
+    minArticulationRate(settings.minArticulationRate),
+    maxArticulationRate(settings.maxArticulationRate),
+    kMeanPauses(settings.kMeanPauses)
+{
+
+}
+
+Settings * Settings::getInstance()
+{
+    static Settings * instance = new Settings();
+    return instance;
+}
+
+IntonCore::Config * Settings::getConfig()
 {
     qDebug() << "getConfig";
 
@@ -42,7 +73,7 @@ IntonCore::Config * Backend::getConfig()
     return this->config;
 }
 
-void Backend::loadFromFile(IntonCore::Config *config)
+void Settings::loadFromFile(IntonCore::Config *config)
 {
     QSettings settings(ApplicationConfig::GetFullSettingsPath(), QSettings::IniFormat);
     if (settings.contains(SettingsKeyDate))
@@ -97,7 +128,7 @@ void Backend::loadFromFile(IntonCore::Config *config)
     }
 }
 
-void Backend::saveToFile(IntonCore::Config *config)
+void Settings::saveToFile(IntonCore::Config *config)
 {
     QSettings settings(ApplicationConfig::GetFullSettingsPath(), QSettings::IniFormat);
 
@@ -161,182 +192,182 @@ void Backend::saveToFile(IntonCore::Config *config)
     settings.sync();
 }
 
-QVariant Backend::getIntensityFrame()
+QVariant Settings::getIntensityFrame()
 {
     IntonCore::Config * config = this->getConfig();
     return config->intensityFrame();
 }
 
-void Backend::setIntensityFrame(QVariant value, bool save)
+void Settings::setIntensityFrame(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setIntensityFrame(value.toUInt());
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getIntensityShift()
+QVariant Settings::getIntensityShift()
 {
     IntonCore::Config * config = this->getConfig();
     return config->intensityShift();
 }
 
-void Backend::setIntensityShift(QVariant value, bool save)
+void Settings::setIntensityShift(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setIntensityShift(value.toUInt());
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getIntensitySmoothFrame()
+QVariant Settings::getIntensitySmoothFrame()
 {
     IntonCore::Config * config = this->getConfig();
     return config->intensitySmoothFrame();
 }
 
-void Backend::setIntensitySmoothFrame(QVariant value, bool save)
+void Settings::setIntensitySmoothFrame(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setIntensitySmoothFrame(value.toUInt());
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getIntensityMaxLengthValue()
+QVariant Settings::getIntensityMaxLengthValue()
 {
     IntonCore::Config * config = this->getConfig();
     return config->segmentsByIntensityMinimumLength();
 }
 
-void Backend::setIntensityMaxLengthValue(QVariant value, bool save)
+void Settings::setIntensityMaxLengthValue(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityMinimumLength(value.toUInt());
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getSegmentsByIntensityMinimumLength()
+QVariant Settings::getSegmentsByIntensityMinimumLength()
 {
     IntonCore::Config * config = this->getConfig();
     return config->segmentsByIntensityMinimumLength();
 }
 
-void Backend::setSegmentsByIntensityMinimumLength(QVariant value, bool save)
+void Settings::setSegmentsByIntensityMinimumLength(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityMinimumLength(value.toUInt());
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getSegmentsByIntensityThresholdAbsolute()
+QVariant Settings::getSegmentsByIntensityThresholdAbsolute()
 {
     IntonCore::Config * config = this->getConfig();
     return config->segmentsByIntensityThresholdAbsolute();
 }
 
-void Backend::setSegmentsByIntensityThresholdAbsolute(QVariant value, bool save)
+void Settings::setSegmentsByIntensityThresholdAbsolute(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityThresholdAbsolute(value.toDouble());
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getSegmentsByIntensityThresholdRelative()
+QVariant Settings::getSegmentsByIntensityThresholdRelative()
 {
     IntonCore::Config * config = this->getConfig();
     return config->segmentsByIntensityThresholdRelative();
 }
 
-void Backend::setSegmentsByIntensityThresholdRelative(QVariant value, bool save)
+void Settings::setSegmentsByIntensityThresholdRelative(QVariant value, bool save)
 {
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityThresholdRelative(value.toDouble());
     if (save) this->saveToFile(config);
 }
 
-void Backend::setKSpeechRate(QVariant value, bool save)
+void Settings::setKSpeechRate(QVariant value, bool save)
 {
     this->kSpeechRate = value.toDouble();
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getKSpeechRate()
+QVariant Settings::getKSpeechRate()
 {
     return this->kSpeechRate;
 }
 
-void Backend::setMinSpeechRate(QVariant value, bool save)
+void Settings::setMinSpeechRate(QVariant value, bool save)
 {
     this->minSpeechRate = value.toDouble();
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getMinSpeechRate()
+QVariant Settings::getMinSpeechRate()
 {
     return this->minSpeechRate;
 }
 
-void Backend::setMaxSpeechRate(QVariant value, bool save)
+void Settings::setMaxSpeechRate(QVariant value, bool save)
 {
     this->maxSpeechRate = value.toDouble();
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getMaxSpeechRate()
+QVariant Settings::getMaxSpeechRate()
 {
     return this->maxSpeechRate;
 }
 
-void Backend::setKArticulationRate(QVariant value, bool save)
+void Settings::setKArticulationRate(QVariant value, bool save)
 {
     this->kArticulationRate = value.toDouble();
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getKArticulationRate()
+QVariant Settings::getKArticulationRate()
 {
     return this->kArticulationRate;
 }
 
-void Backend::setMinArticulationRate(QVariant value, bool save)
+void Settings::setMinArticulationRate(QVariant value, bool save)
 {
     this->minArticulationRate = value.toDouble();
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getMinArticulationRate()
+QVariant Settings::getMinArticulationRate()
 {
     return this->minArticulationRate;
 }
 
-void Backend::setMaxArticulationRate(QVariant value, bool save)
+void Settings::setMaxArticulationRate(QVariant value, bool save)
 {
     this->maxArticulationRate = value.toDouble();
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getMaxArticulationRate()
+QVariant Settings::getMaxArticulationRate()
 {
     return this->maxArticulationRate;
 }
 
-void Backend::setKMeanPauses(QVariant value, bool save)
+void Settings::setKMeanPauses(QVariant value, bool save)
 {
     this->kMeanPauses = value.toDouble();
     if (save) this->saveToFile(config);
 }
 
-QVariant Backend::getKMeanPauses()
+QVariant Settings::getKMeanPauses()
 {
     return this->kMeanPauses;
 }
 
 static bool advanced = false;
 
-void Backend::setAdvanced(QVariant value)
+void Settings::setAdvanced(QVariant value)
 {
     advanced = value.toBool();
 }
 
-QVariant Backend::getAdvanced()
+QVariant Settings::getAdvanced()
 {
     return advanced;
 }

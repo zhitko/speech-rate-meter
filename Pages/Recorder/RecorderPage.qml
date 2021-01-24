@@ -1,6 +1,7 @@
 import QtQuick 2.14
 
 import intondemo.backend 1.0
+import intondemo.settings 1.0
 
 import "../../Components/FontAwesome"
 
@@ -16,6 +17,10 @@ RecorderPageForm {
 
     Backend {
         id: backend
+    }
+
+    Settings {
+        id: settings
     }
 
     FontAwesome {
@@ -105,17 +110,25 @@ RecorderPageForm {
     }
 
     recordButton.onClicked: {
-        console.log("RecorderPage: recordButton.onClicked");
+        console.log("RecorderPage: recordButton.onClicked")
+        var today = new Date()
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+        var dateTime = date+' '+time
+
         if (root.recording)
         {
-            console.log("RecorderPage: stop recording");
+            console.log("RecorderPage: stop recording")
+            saveButton.endTime = time
             recordButton.checked = true
+            saveButton.visible = true
 
             stopTimer()
             backend.startStopRecordWaveFile()
             showSpeechRate()
         } else {
-            console.log("RecorderPage: start new recording");
+            console.log("RecorderPage: start new recording")
+            saveButton.startTime = dateTime
             recordButton.checked = false
 
             startTimer()
@@ -154,14 +167,18 @@ RecorderPageForm {
     }
 
     function showSpeechRate() {
-        root.minSpeechRate = backend.getMinSpeechRate()
-        root.maxSpeechRate = backend.getMaxSpeechRate()
+        let stngs = settings.getInstance();
+
+        root.minSpeechRate = stngs.getMinSpeechRate()
+        root.maxSpeechRate = stngs.getMaxSpeechRate()
 
         root.minValue.text = qsTr("%1 wpm").arg(String(root.minSpeechRate.toFixed(0)))
         root.maxValue.text = qsTr("%1 wpm").arg(String(root.maxSpeechRate.toFixed(0)))
 
-        root.minArticulationRate = backend.getMinArticulationRate()
-        root.maxArticulationRate = backend.getMaxArticulationRate()
+        root.minArticulationRate = stngs.getMinArticulationRate()
+        root.maxArticulationRate = stngs.getMaxArticulationRate()
+
+        advanced = stngs.getAdvanced()
 
         calculateSpeechRate()
     }
@@ -199,8 +216,6 @@ RecorderPageForm {
         if (articulationRate < root.minArticulationRate) articulationRate = root.minArticulationRate
 
         articulationRateRadialBar.value = articulationRate
-
-        advanced = backend.getAdvanced()
 
         return true
     }

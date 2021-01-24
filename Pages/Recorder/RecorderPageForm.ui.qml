@@ -23,11 +23,22 @@ Page {
     property alias articulationRateValue: articulationRateValue
     property alias speechRateRadialBar: speechRateRadialBar
     property alias detailsButton: detailsButton
+    property alias saveButton: saveButton
 
     property double minSpeechRate: 70
     property double maxSpeechRate: 210
     property double minArticulationRate: 70
     property double maxArticulationRate: 210
+
+    property int plotHeight: parent.height * 0.4 // 300
+    property int plotWidth: plotHeight // 300
+    property int dialWidth: plotWidth * 0.05 // 25
+    property int plotDepth: plotWidth * 0.33 // 70
+    property int recordButtonWidth: plotWidth * 0.5 // 150
+    property int recordButtonHeight: recordButtonWidth // 150
+    property alias articulationRateRadialBar: articulationRateRadialBar
+    property alias minValue: minValue
+    property alias maxValue: maxValue
 
     FontAwesome {
         id: awesome
@@ -201,19 +212,12 @@ Page {
 
     AnimatedRecordButton {
         id: recordButton
-        width: 150
-        height: 150
+        width: recordButtonWidth
+        height: recordButtonHeight
         checkable: true
         anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
     }
-
-    property int plotWidth: 300 //250
-    property int plotHeight: 300 //250
-    property int plotDepth: 70
-    property alias articulationRateRadialBar: articulationRateRadialBar
-    property alias minValue: minValue
-    property alias maxValue: maxValue
 
     Shape {
         id: legend
@@ -257,10 +261,10 @@ Page {
                 y: legend.height / 2
             }
             PathArc {
-                x: 70
+                x: plotDepth
                 y: legend.height / 2
-                radiusX: (legend.width - plotDepth * 2) / 2
-                radiusY: (legend.height - plotDepth * 2) / 2
+                radiusX: plotDepth / 2
+                radiusY: plotDepth / 2
                 direction: PathArc.Counterclockwise
             }
             PathLine {
@@ -281,7 +285,7 @@ Page {
         dialType: RadialBar.MinToMax
         progressColor: Colors.blue
         foregroundColor: "#00ffffff"
-        dialWidth: 25
+        dialWidth: dialWidth
         startAngle: 90
         spanAngle: 180
         minValue: minSpeechRate
@@ -300,7 +304,7 @@ Page {
         dialType: RadialBar.MinToMax
         progressColor: Colors.light_green
         foregroundColor: "#00ffffff"
-        dialWidth: 25
+        dialWidth: dialWidth
         startAngle: 90
         spanAngle: 180
         minValue: minArticulationRate
@@ -394,7 +398,20 @@ Page {
                 height: 70
                 path: root.path
                 visible: !recording
+            },
+            SaveResultButton {
+                id: saveButton
+                width: 70
+                height: 70
+                visible: recorded
+                startTime: ""
+                endTime: ""
+                speechRate: speechRateValue.text
+                articulationRate: articulationRateValue.text
+                phrasePause: meanDurationOfPausesValue.text
+                speechDuration: timerLabel.text
             }
+
         ]
     }
 }

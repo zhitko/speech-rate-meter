@@ -91,6 +91,21 @@ ApplicationWindow {
             ItemDelegate {
                 width: parent.width
                 onClicked: {
+                    bus.openResultsPage()
+                    drawer.close()
+                }
+
+                FontAwesomeIconText {
+                    icon: awesome.icons.faHistory
+                    text: qsTr("Results History")
+                    anchors.fill: parent
+                    color: "black"
+                }
+            }
+
+            ItemDelegate {
+                width: parent.width
+                onClicked: {
                     bus.openSettingsPage()
                     drawer.close()
                 }

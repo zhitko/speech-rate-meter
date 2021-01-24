@@ -55,6 +55,20 @@ namespace ApplicationConfig {
         return dataPath;
     }
 
+    static const QString ResultsPath = "results.txt";
+
+    static QString GetFullResultsPath()
+    {
+#ifdef ANDROID
+        QString appPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+        QString dataPath = QDir(appPath).absoluteFilePath(ApplicationConfig::ResultsPath);
+#else
+        QString appPath = QGuiApplication::applicationDirPath();
+        QString dataPath = QDir(appPath).absoluteFilePath(ApplicationConfig::ResultsPath);
+#endif
+        return dataPath;
+    }
+
     static const int RecordingFrequency =  8000;
     static const int RecordingBitsPerSample =  16;
     static const int RecordingChannelsCount =  1;
