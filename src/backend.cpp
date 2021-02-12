@@ -534,6 +534,19 @@ QVariant Backend::getVowelsMeanValue(QString path, double from_percent, double t
     return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
 }
 
+QVariant Backend::getVowelsSquareMeanValue(QString path, double from_percent, double to_percent)
+{
+    this->initializeCore(path);
+
+    auto storage = this->core->getTemplate();
+
+    auto result = storage->getVowelsLengthSquareMean();
+
+    qDebug() << "getVowelsSquareMeanValue: mx" << result;
+
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
+}
+
 QVariant Backend::getVowelsMedianValue(QString path, double from_percent, double to_percent)
 {
     this->initializeCore(path);
@@ -575,6 +588,18 @@ QVariant Backend::getConsonantsAndSilenceMeanValue(QString path, double from_per
     auto result = storage->getConsonantsAndSilenceLengthMean();
 
     qDebug() << "getConsonantsAndSilenceMeanValue: " << result;
+
+    return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
+}
+
+QVariant Backend::getConsonantsAndSilenceMeanSquareValue(QString path, double from_percent, double to_percent)
+{
+    this->initializeCore(path);
+
+    auto storage = this->core->getTemplate();
+    auto result = storage->getConsonantsAndSilenceLengthSquareMean();
+
+    qDebug() << "getConsonantsAndSilenceMeanSquareValue: " << result;
 
     return QVariant::fromValue( storage->convertIntensityPointsToSec(result));
 }

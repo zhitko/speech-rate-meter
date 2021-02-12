@@ -70,8 +70,10 @@ public:
     Q_INVOKABLE QVariant getConsonantsAndSilenceMax(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getSegmentsVariance(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsMeanValue(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getVowelsSquareMeanValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsMedianValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getConsonantsAndSilenceMeanValue(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getConsonantsAndSilenceMeanSquareValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getConsonantsAndSilenceMedianValue(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getVowelsRate(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getSpeechRate(QString path, double from_percent, double to_percent);

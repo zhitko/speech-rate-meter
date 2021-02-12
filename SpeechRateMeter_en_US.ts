@@ -123,16 +123,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="174"/>
         <location filename="Pages/Recorder/RecorderPage.qml" line="175"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="198"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="212"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="176"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="199"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="213"/>
         <source>%1 wpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="192"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="202"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="193"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="203"/>
         <source>%1 sec</source>
         <translation type="unfinished"></translation>
     </message>
@@ -194,7 +194,7 @@
 <context>
     <name>ResultsPageForm.ui</name>
     <message>
-        <location filename="Pages/Results/ResultsPageForm.ui.qml" line="14"/>
+        <location filename="Pages/Results/ResultsPageForm.ui.qml" line="13"/>
         <source>Results</source>
         <translation type="unfinished"></translation>
     </message>

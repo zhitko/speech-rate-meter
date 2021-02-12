@@ -40,10 +40,10 @@ MetricsPageForm {
         let consonantsAndSilenceCount = backend.getConsonantsAndSilenceCount(root.path, startPoint, endPoint)
         consonantsAndSilenceCountValue.text = String(consonantsAndSilenceCount)
 
-        let vowelsMean = backend.getVowelsMeanValue(root.path, startPoint, endPoint)
+        let vowelsMean = backend.getVowelsSquareMeanValue(root.path, startPoint, endPoint)
         vowelsMeanValue.text = String(vowelsMean.toFixed(2))
 
-        let consonantsAndSilenceMean = backend.getConsonantsAndSilenceMeanValue(root.path, startPoint, endPoint)
+        let consonantsAndSilenceMean = backend.getConsonantsAndSilenceMeanSquareValue(root.path, startPoint, endPoint)
         consonantsAndSilenceMeanValue.text = String(consonantsAndSilenceMean.toFixed(2))
 
         let consonantsAndSilenceMedian = backend.getConsonantsAndSilenceMedianValue(root.path, startPoint, endPoint)
