@@ -18,16 +18,13 @@ INCLUDE_DIRECTORIES(../IntonCoreBin/install/include)
 # They need to be set before the find_package(Qt5 ...) call.
 
 if(ANDROID)
-    LINK_DIRECTORIES(../IntonCoreBin/install/lib_android)
     set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
 
-    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-        set(ANDROID_EXTRA_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/lib_android/libIntonCore.so)
-    endif()
+    set(ANDROID_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/lib_android/")
 
-    if (ANDROID_ABI STREQUAL "arm64-v8a")
-        set(ANDROID_EXTRA_LIBS ${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/lib_android_64/libIntonCore.so)
-    endif()
+    set(ANDROID_EXTRA_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/${ANDROID_ABI}/libIntonCore.so")
+
+    LINK_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/${ANDROID_ABI}/")
 else()
     LINK_DIRECTORIES(../IntonCoreBin/install/lib)
 endif()

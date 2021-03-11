@@ -26,6 +26,8 @@ public:
 
     Q_PROPERTY(QString path READ getPath WRITE setPath)
 
+    Q_INVOKABLE Settings* getSettings();
+
     // Files API
     Q_INVOKABLE QVariantList getWaveFilesList();
     Q_INVOKABLE void deleteWaveFile(QString path);

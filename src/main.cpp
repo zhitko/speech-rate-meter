@@ -42,6 +42,10 @@ int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+    #ifndef ANDROID
+    qputenv("QT_SCALE_FACTOR", "0.75");
+    #endif
+
     qInstallMessageHandler(messageOutput);
 
     QApplication app(argc, argv);
@@ -53,6 +57,9 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QmlPoint>("Point");
 
     QQmlApplicationEngine engine;
+
+    Settings::getInstance(&app);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

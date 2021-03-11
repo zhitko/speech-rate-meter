@@ -30,12 +30,12 @@ Page {
     property double minArticulationRate: 70
     property double maxArticulationRate: 210
 
-    property int plotHeight: parent.height * 0.4 // 300
-    property int plotWidth: plotHeight // 300
-    property int dialWidth: plotWidth * 0.05 // 25
-    property int plotDepth: plotWidth * 0.33 // 70
-    property int recordButtonWidth: plotWidth * 0.5 // 150
-    property int recordButtonHeight: recordButtonWidth // 150
+    property int plotHeight: parent.height * 0.4
+    property int plotWidth: plotHeight
+    property int dialWidth: plotWidth * 0.1
+    property int plotDepth: plotWidth * 0.25
+    property int recordButtonWidth: plotWidth * 0.5
+    property int recordButtonHeight: recordButtonWidth
     property alias articulationRateRadialBar: articulationRateRadialBar
     property alias minValue: minValue
     property alias maxValue: maxValue
@@ -285,7 +285,7 @@ Page {
         dialType: RadialBar.MinToMax
         progressColor: Colors.blue
         foregroundColor: "#00ffffff"
-        dialWidth: dialWidth
+        dialWidth: root.dialWidth
         startAngle: 90
         spanAngle: 180
         minValue: minSpeechRate
@@ -304,7 +304,7 @@ Page {
         dialType: RadialBar.MinToMax
         progressColor: Colors.light_green
         foregroundColor: "#00ffffff"
-        dialWidth: dialWidth
+        dialWidth: root.dialWidth
         startAngle: 90
         spanAngle: 180
         minValue: minArticulationRate
@@ -363,7 +363,7 @@ Page {
         text: qsTr("Fast")
         font.bold: true
         anchors.top: speechRateRadialBar.top
-        anchors.topMargin: speechRateRadialBar.height / 4
+        anchors.topMargin: speechRateRadialBar.height / 6
         anchors.left: speechRateRadialBar.right
         anchors.leftMargin: -3
         font.pointSize: 12
@@ -397,13 +397,13 @@ Page {
                 width: 70
                 height: 70
                 path: root.path
-                visible: !recording
+                visible: !recording //&& false
             },
             SaveResultButton {
                 id: saveButton
                 width: 70
                 height: 70
-                visible: recorded
+                visible: recorded && !recording
                 startTime: ""
                 endTime: ""
                 speechRate: speechRateValue.text

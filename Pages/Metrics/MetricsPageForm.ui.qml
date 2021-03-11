@@ -19,22 +19,15 @@ Page {
     property alias vowelsMeanValue: vowelsMeanValue
     property alias vowelsMedianValue: vowelsMedianValue
     property alias vowelsRateValue: vowelsRateValue
-    property alias recordButton: recordButton
     property alias consonantsAndSilenceMaxValue: consonantsAndSilenceMaxValue
     property alias vowelsMaxValue: vowelsMaxValue
-    property alias consonantsAndSilenceVarianceValue: consonantsAndSilenceVarianceValue
-    property alias consonantsAndSilenceSkewnessValue: consonantsAndSilenceSkewnessValue
-    property alias consonantsAndSilenceKurtosisValue: consonantsAndSilenceKurtosisValue
-    property alias vowelsVarianceValue: vowelsVarianceValue
-    property alias vowelsSkewnessValue: vowelsSkewnessValue
-    property alias vowelsKurtosisValue: vowelsKurtosisValue
 
     title: qsTr("Details")
 
     ScrollView {
         id: scrollView
         padding: 10
-        contentHeight: radialbar.height + metrixBox.height
+        contentHeight: metrixBox.height
         anchors.fill: parent
 
         GroupBox {
@@ -129,45 +122,6 @@ Page {
                 }
 
                 Text {
-                    id: consonantsAndSilenceVarianceTitle
-                    text: qsTr("Consonants & Silence Variance")
-                    font.bold: true
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: consonantsAndSilenceVarianceValue
-                    text: "---"
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: consonantsAndSilenceSkewnessTitle
-                    text: qsTr("Consonants & Silence Skewness")
-                    font.bold: true
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: consonantsAndSilenceSkewnessValue
-                    text: "---"
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: consonantsAndSilenceKurtosisTitle
-                    text: qsTr("Consonants & Silence Kurtosis")
-                    font.bold: true
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: consonantsAndSilenceKurtosisValue
-                    text: "---"
-                    font.pointSize: 12
-                }
-
-                Text {
                     id: vowelsLengthTitle
                     text: qsTr("Vowels Length")
                     font.bold: true
@@ -233,45 +187,6 @@ Page {
                 }
 
                 Text {
-                    id: vowelsVarianceTitle
-                    text: qsTr("Vowels Variance")
-                    font.bold: true
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: vowelsVarianceValue
-                    text: "---"
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: vowelsSkewnessTitle
-                    text: qsTr("Vowels Skewness")
-                    font.bold: true
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: vowelsSkewnessValue
-                    text: "---"
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: vowelsKurtosisTitle
-                    text: qsTr("Vowels Kurtosis")
-                    font.bold: true
-                    font.pointSize: 12
-                }
-
-                Text {
-                    id: vowelsKurtosisValue
-                    text: "---"
-                    font.pointSize: 12
-                }
-
-                Text {
                     id: vowelsRateTitle
                     text: qsTr("Vowels Speaking Rate")
                     font.bold: true
@@ -287,24 +202,24 @@ Page {
         }
     }
 
-    BottomBar {
-        id: bottombar
-        anchors.rightMargin: 0
-        anchors.leftMargin: 0
-        content.data: [
-            PlayButton {
-                id: playButton
-                path: root.path
-                width: 70
-                height: 70
-            },
-            RecordButton {
-                id: recordButton
-                width: 70
-                height: 70
-            }
-        ]
-    }
+//    BottomBar {
+//        id: bottombar
+//        anchors.rightMargin: 0
+//        anchors.leftMargin: 0
+//        content.data: [
+//            PlayButton {
+//                id: playButton
+//                path: root.path
+//                width: 70
+//                height: 70
+//            },
+//            RecordButton {
+//                id: recordButton
+//                width: 70
+//                height: 70
+//            }
+//        ]
+//    }
 }
 
 /*##^##

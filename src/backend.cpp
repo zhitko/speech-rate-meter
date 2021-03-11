@@ -34,7 +34,14 @@ Backend::Backend(QObject *parent)
 
 Backend::~Backend()
 {
+    qDebug() << "~Backend";
+
     if(this->core != nullptr) delete this->core;
+}
+
+Settings *Backend::getSettings()
+{
+    return Settings::getInstance();
 }
 
 QVariantList Backend::getWaveFilesList()
@@ -674,7 +681,8 @@ QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, dou
     qDebug() << "getMeanDurationOfPauses K3:" << settings->getKMeanPauses();
     auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent).toDouble();
     auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent).toDouble();
-    double meanDurationOfPauses = settings->getKMeanPauses().toDouble() * abs(tcm - tcd);
+    if (tcm < tcd) return QVariant::fromValue(0.0);
+    double meanDurationOfPauses = settings->getKMeanPauses().toDouble() * (tcm - tcd);
 
     qDebug() << "getMeanDurationOfPauses:" << meanDurationOfPauses;
 
@@ -688,7 +696,6 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
 
     qDebug() << "getArticulationRate K2:" << settings->getKArticulationRate();
 
-
     auto rs = this->getSpeechRate(path, from_percent, to_percent).toDouble();
     auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
     auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
@@ -697,6 +704,9 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
     double articulationRate = rs * ts / (tv + settings->getKArticulationRate().toDouble() * tcpm * nc);
 
     qDebug() << "getArticulationRate:" << articulationRate;
+
+    auto speechRate = this->getSpeechRate(path, from_percent, to_percent);
+    if (speechRate.toDouble() > articulationRate) return speechRate;
 
     return QVariant::fromValue(articulationRate);
 }
@@ -786,26 +796,28 @@ void Backend::setPath(const QString &path)
 
 void Backend::initializeCore(bool reinit)
 {
+    qDebug() << "Backend::initializeCore";
     if (this->core != nullptr && !reinit) return;
 
     if (this->core != nullptr)
     {
-        qDebug() << "Delete core";
+        qDebug() << "Backend::initializeCore: Delete core";
         delete this->core;
         this->core = nullptr;
     }
 
     QString recordsPath = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     QString logPath = QDir(recordsPath).absoluteFilePath("core.log");
+    qDebug() << "Backend::initializeCore: logPath: " << logPath;
 
     Settings * settings = Settings::getInstance();
 
-    qDebug() << "Initialize core: " << this->path;
+    qDebug() << "Backend::initializeCore: Initialize core: " << this->path;
     this->core = new IntonCore::Core(
         this->path.toLocal8Bit().toStdString(),
         settings->getConfig()
     );
-    qDebug() << "Initialize core complete";
+    qDebug() << "Backend::initializeCore: Initialize core complete";
 }
 
 void Backend::initializeCore(const QString& path)

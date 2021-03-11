@@ -27,7 +27,7 @@ const QString SettingsKeyMinArticulationRate = "articulationRate/Min";
 const QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
 const QString SettingsKeyKMeanPauses = "meanPauses/Max";
 
-Settings::Settings() : QObject(),
+Settings::Settings(QObject *parent) : QObject(parent),
   config(nullptr),
   kSpeechRate(DefaultKSpeechRate),
   minSpeechRate(DefaultMinSpeechRate),
@@ -53,9 +53,14 @@ Settings::Settings(const Settings &settings) : QObject(),
 
 }
 
-Settings * Settings::getInstance()
+Settings::~Settings()
 {
-    static Settings * instance = new Settings();
+    qDebug() << "~Settings";
+}
+
+Settings * Settings::getInstance(QObject *parent)
+{
+    static Settings * instance = new Settings(parent);
     return instance;
 }
 

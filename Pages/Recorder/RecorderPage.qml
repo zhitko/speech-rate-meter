@@ -168,6 +168,7 @@ RecorderPageForm {
 
     function showSpeechRate() {
         let stngs = settings.getInstance();
+        console.log("showSpeechRate: " + stngs)
 
         root.minSpeechRate = stngs.getMinSpeechRate()
         root.maxSpeechRate = stngs.getMaxSpeechRate()
@@ -184,6 +185,7 @@ RecorderPageForm {
     }
 
     function calculateSpeechRate() {
+        console.log("calculateSpeechRate")
         let startPoint = 0
         let endPoint = 1
 
@@ -198,15 +200,14 @@ RecorderPageForm {
         console.log("calculateSpeechRate: speechRate " + speechRate)
         speechRateValue.text = qsTr("%1 wpm").arg(String(speechRate.toFixed(0)))
 
-        let meanDurationOfPauses = backend.getMeanDurationOfPauses(root.path, startPoint, endPoint)
-        console.log("calculateSpeechRate: meanDurationOfPauses " + meanDurationOfPauses)
-        meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(2)))
-
-
         if (speechRate > root.maxSpeechRate) speechRate = root.maxSpeechRate
         if (speechRate < root.minSpeechRate) speechRate = root.minSpeechRate
 
         speechRateRadialBar.value = speechRate
+
+        let meanDurationOfPauses = backend.getMeanDurationOfPauses(root.path, startPoint, endPoint)
+        console.log("calculateSpeechRate: meanDurationOfPauses " + meanDurationOfPauses)
+        meanDurationOfPausesValue.text = qsTr("%1 sec").arg(String(meanDurationOfPauses.toFixed(2)))
 
         let articulationRate =  backend.getArticulationRate(root.path, startPoint, endPoint)
         console.log("calculateSpeechRate: articulationRate " + articulationRate)

@@ -38,10 +38,10 @@ Item {
 
     property string recorderPage: "Pages/Recorder/RecorderPage.qml";
     signal openedRecorderPage()
-    function openRecorderPage(path)
+    function openRecorderPage()
     {
-        console.log("Bus: openRecorderPage " + path);
-        stackView.push(recorderPage, {bus: bus, path: path})
+        console.log("Bus: openRecorderPage");
+        stackView.push(recorderPage, {bus: bus})
         openedRecorderPage()
     }
     function reopenRecorderPage(path)

@@ -4,6 +4,10 @@ import intondemo.backend 1.0
 import intondemo.settings 1.0
 
 SettingsPageForm {
+    id: root
+
+    property bool loading: true
+
     anchors.fill: parent
 
     Backend {
@@ -15,6 +19,7 @@ SettingsPageForm {
     }
 
     Component.onCompleted: {
+        root.loading = true
         let stngs = settings.getInstance();
 
         intensityFrameValue.value = stngs.getIntensityFrame();
@@ -29,56 +34,67 @@ SettingsPageForm {
         kMeanPausesValue.value = stngs.getKMeanPauses() * 100;
 
         advanced.checked = stngs.getAdvanced()
+        root.loading = false
     }
 
     advanced.onCheckedChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setAdvanced(advanced.checked)
     }
 
     intensityFrameValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setIntensityFrame(intensityFrameValue.value);
     }
 
     intensityShiftValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setIntensityShift(intensityShiftValue.value);
     }
 
     intensitySmoothFrameValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setIntensitySmoothFrame(intensitySmoothFrameValue.value);
     }
 
     intensityMaxLengthValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setIntensityMaxLengthValue(intensityMaxLengthValue.value);
     }
 
     kSpeechRateValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setKSpeechRate(kSpeechRateValue.value / 100);
     }
 
     minSpeechRateValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setMinSpeechRate(minSpeechRateValue.value / 100);
         stngs.setMinArticulationRate(minSpeechRateValue.value / 100);
     }
 
     maxSpeechRateValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setMaxSpeechRate(maxSpeechRateValue.value / 100);
         stngs.setMaxArticulationRate(maxSpeechRateValue.value / 100);
     }
 
     kArticulationRateValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setKArticulationRate(kArticulationRateValue.value / 100);
     }
 
     kMeanPausesValue.onValueChanged: {
+        if (root.loading) return
         let stngs = settings.getInstance();
         stngs.setKMeanPauses(kMeanPausesValue.value / 100);
     }

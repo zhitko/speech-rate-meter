@@ -19,9 +19,10 @@ class Settings : public QObject
 {
     Q_OBJECT
 public:
-    explicit Settings();
+    explicit Settings(QObject *parent = nullptr);
     explicit Settings(const Settings& settings);
-    Q_INVOKABLE static Settings* getInstance();
+    ~Settings();
+    Q_INVOKABLE static Settings* getInstance(QObject *parent = nullptr);
 
     IntonCore::Config * getConfig();
 
