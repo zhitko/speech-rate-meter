@@ -14,6 +14,9 @@ Page {
     property alias maxSpeechRateValue: maxSpeechRateValue
     property alias kArticulationRateValue: kArticulationRateValue
     property alias kMeanPausesValue: kMeanPausesValue
+    property alias kFillerSoundsValue: kFillerSoundsValue
+    property alias minFillerSoundsValue: minFillerSoundsValue
+    property alias maxFillerSoundsValue: maxFillerSoundsValue
     property alias advanced: advanced
     title: qsTr("Settings")
 
@@ -206,6 +209,63 @@ Page {
                         to: 2000
                         wheelEnabled: true
                         editable: true
+                    }
+                }
+            }
+
+            GroupBox {
+                id: fillerSoundsGroup
+                Layout.margins: 10
+                Layout.fillWidth: true
+                font.pointSize: 14
+                title: qsTr("Filler Sounds")
+
+                ColumnLayout {
+                    anchors.fill: parent
+
+                    Text {
+                        id: kFillerSounds
+                        text: qsTr("K4")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: kFillerSoundsValue
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 100
+                    }
+
+                    Text {
+                        id: minFillerSoundsTitle
+                        text: qsTr("Min FS")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: minFillerSoundsValue
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 10
+                    }
+
+                    Text {
+                        id: maxFillerSoundsTitle
+                        text: qsTr("Max FS")
+                        font.pointSize: 12
+                    }
+
+                    DoubleSpinBox {
+                        id: maxFillerSoundsValue
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 10
                     }
                 }
             }

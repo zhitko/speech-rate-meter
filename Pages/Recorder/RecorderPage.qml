@@ -218,6 +218,11 @@ RecorderPageForm {
 
         articulationRateRadialBar.value = articulationRate
 
+        minFillerSounds
+        minFillerSounds
+        let meanFillerSounds = backend.getMeanFillerSounds(root.path, startPoint, endPoint)
+        meanFillerSoundsRadialBar.value = meanFillerSounds
+
         return true
     }
 }

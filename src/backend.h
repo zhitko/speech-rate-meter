@@ -80,6 +80,7 @@ public:
     Q_INVOKABLE QVariant getVowelsRate(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getSpeechRate(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getMeanDurationOfPauses(QString path, double from_percent, double to_percent);
+    Q_INVOKABLE QVariant getMeanFillerSounds(QString path, double from_percent, double to_percent);
     Q_INVOKABLE QVariant getArticulationRate(QString path, double from_percent, double to_percent);
 
     Q_INVOKABLE QVariant getVowelsVarianceValue(QString path, double from_percent, double to_percent);

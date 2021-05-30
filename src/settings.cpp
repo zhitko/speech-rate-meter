@@ -26,6 +26,9 @@ const QString SettingsKeyKArticulationRate = "articulationRate/K2";
 const QString SettingsKeyMinArticulationRate = "articulationRate/Min";
 const QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
 const QString SettingsKeyKMeanPauses = "meanPauses/Max";
+const QString SettingsKeyKFillerSounds = "fillerSounds/K4";
+const QString SettingsKeyMaxFillerSounds = "fillerSounds/Max";
+const QString SettingsKeyMinFillerSounds = "fillerSounds/Min";
 
 Settings::Settings(QObject *parent) : QObject(parent),
   config(nullptr),
@@ -35,7 +38,10 @@ Settings::Settings(QObject *parent) : QObject(parent),
   kArticulationRate(DefaultKArticulationRate),
   minArticulationRate(DefaultMinArticulationRate),
   maxArticulationRate(DefaultMaxArticulationRate),
-  kMeanPauses(DefaultKMeanPauses)
+  kMeanPauses(DefaultKMeanPauses),
+  minFillerSounds(DefaultMinFillerSounds),
+  maxFillerSounds(DefaultMaxFillerSounds),
+  kFillerSounds(DefaultKFillerSounds)
 {
     this->getConfig();
 }
@@ -48,7 +54,10 @@ Settings::Settings(const Settings &settings) : QObject(),
     kArticulationRate(settings.kArticulationRate),
     minArticulationRate(settings.minArticulationRate),
     maxArticulationRate(settings.maxArticulationRate),
-    kMeanPauses(settings.kMeanPauses)
+    kMeanPauses(settings.kMeanPauses),
+    minFillerSounds(DefaultMinFillerSounds),
+    maxFillerSounds(DefaultMaxFillerSounds),
+    kFillerSounds(DefaultKFillerSounds)
 {
 
 }
@@ -130,6 +139,18 @@ void Settings::loadFromFile(IntonCore::Config *config)
             settings.value(SettingsKeyKMeanPauses, DefaultKMeanPauses),
             false
         );
+        this->setKFillerSounds(
+            settings.value(SettingsKeyKFillerSounds, DefaultKFillerSounds),
+            false
+        );
+        this->setMaxFillerSounds(
+            settings.value(SettingsKeyMaxFillerSounds, DefaultMaxFillerSounds),
+            false
+        );
+        this->setMinFillerSounds(
+            settings.value(SettingsKeyMinFillerSounds, DefaultMinFillerSounds),
+            false
+        );
     }
 }
 
@@ -193,6 +214,18 @@ void Settings::saveToFile(IntonCore::Config *config)
     settings.setValue(
         SettingsKeyKMeanPauses,
         this->getKMeanPauses()
+    );
+    settings.setValue(
+        SettingsKeyKFillerSounds,
+        this->getKFillerSounds()
+    );
+    settings.setValue(
+        SettingsKeyMaxFillerSounds,
+        this->getMaxFillerSounds()
+    );
+    settings.setValue(
+        SettingsKeyMinFillerSounds,
+        this->getMinFillerSounds()
     );
     settings.sync();
 }
@@ -363,6 +396,39 @@ void Settings::setKMeanPauses(QVariant value, bool save)
 QVariant Settings::getKMeanPauses()
 {
     return this->kMeanPauses;
+}
+
+void Settings::setKFillerSounds(QVariant value, bool save)
+{
+    this->kFillerSounds = value.toDouble();
+    if (save) this->saveToFile(config);
+}
+
+QVariant Settings::getKFillerSounds()
+{
+    return this->kFillerSounds;
+}
+
+void Settings::setMinFillerSounds(QVariant value, bool save)
+{
+    this->minFillerSounds = value.toDouble();
+    if (save) this->saveToFile(config);
+}
+
+QVariant Settings::getMinFillerSounds()
+{
+    return this->minFillerSounds;
+}
+
+void Settings::setMaxFillerSounds(QVariant value, bool save)
+{
+    this->maxFillerSounds = value.toDouble();
+    if (save) this->saveToFile(config);
+}
+
+QVariant Settings::getMaxFillerSounds()
+{
+    return this->maxFillerSounds;
 }
 
 static bool advanced = false;

@@ -29,6 +29,8 @@ Page {
     property double maxSpeechRate: 210
     property double minArticulationRate: 70
     property double maxArticulationRate: 210
+    property double minFillerSounds: 0
+    property double maxFillerSounds: 1
 
     property int plotHeight: parent.height * 0.4
     property int plotWidth: plotHeight
@@ -37,6 +39,7 @@ Page {
     property int recordButtonWidth: plotWidth * 0.5
     property int recordButtonHeight: recordButtonWidth
     property alias articulationRateRadialBar: articulationRateRadialBar
+    property alias meanFillerSoundsRadialBar: meanFillerSoundsRadialBar
     property alias minValue: minValue
     property alias maxValue: maxValue
 
@@ -313,6 +316,25 @@ Page {
         visible: recorded
     }
 
+    RadialBar {
+        id: meanFillerSoundsRadialBar
+        width: plotWidth - 3 * speechRateRadialBar.dialWidth
+        height: plotHeight - 3 * speechRateRadialBar.dialWidth
+        anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
+        anchors.verticalCenter: speechRateRadialBar.verticalCenter
+        showText: false
+        dialType: RadialBar.MinToMax
+        progressColor: Colors.raspberry
+        foregroundColor: "#00ffffff"
+        dialWidth: root.dialWidth
+        startAngle: 90
+        spanAngle: 180
+        minValue: minFillerSounds
+        maxValue: maxFillerSounds
+        value: 55
+        visible: recorded
+    }
+
     Text {
         id: minValue
         text: qsTr("--- wpm")
@@ -397,7 +419,7 @@ Page {
                 width: 70
                 height: 70
                 path: root.path
-                visible: !recording //&& false
+                visible: !recording && false
             },
             SaveResultButton {
                 id: saveButton

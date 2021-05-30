@@ -10,6 +10,9 @@ const double DefaultKArticulationRate = 1;
 const double DefaultMinArticulationRate = 70;
 const double DefaultMaxArticulationRate = 210;
 const double DefaultKMeanPauses = 17;
+const double DefaultKFillerSounds = 17;
+const double DefaultMinFillerSounds = 1;
+const double DefaultMaxFillerSounds = 2;
 
 namespace IntonCore {
 class Config;
@@ -55,6 +58,12 @@ public:
     Q_INVOKABLE QVariant getMaxArticulationRate();
     Q_INVOKABLE void setKMeanPauses(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getKMeanPauses();
+    Q_INVOKABLE void setKFillerSounds(QVariant value, bool save = true);
+    Q_INVOKABLE QVariant getKFillerSounds();
+    Q_INVOKABLE void setMinFillerSounds(QVariant value, bool save = true);
+    Q_INVOKABLE QVariant getMinFillerSounds();
+    Q_INVOKABLE void setMaxFillerSounds(QVariant value, bool save = true);
+    Q_INVOKABLE QVariant getMaxFillerSounds();
 
     Q_INVOKABLE void setAdvanced(QVariant value);
     Q_INVOKABLE QVariant getAdvanced();
@@ -69,6 +78,9 @@ private:
     double minArticulationRate;
     double maxArticulationRate;
     double kMeanPauses;
+    double minFillerSounds;
+    double maxFillerSounds;
+    double kFillerSounds;
 
     void loadFromFile(IntonCore::Config *config);
     void saveToFile(IntonCore::Config *config);
