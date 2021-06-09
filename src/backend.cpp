@@ -44,6 +44,15 @@ Settings *Backend::getSettings()
     return Settings::getInstance();
 }
 
+bool Backend::isOpenAvailable()
+{
+#ifdef ANDROID
+    return false;
+#else
+    return true;
+#endif
+}
+
 QVariantList Backend::getWaveFilesList()
 {
     QDir dataDir(ApplicationConfig::GetFullDataPath());

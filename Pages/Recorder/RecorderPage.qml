@@ -11,6 +11,7 @@ RecorderPageForm {
 
     property var bus: ""
     property bool autostart: false
+    property bool isOpenAvailable: false
 
     property int sec: 0
     property int min: 0
@@ -153,6 +154,8 @@ RecorderPageForm {
         let isFilePresent = !!root.path
         let startRecording = root.autostart && !isFilePresent
 
+        isOpenAvailable = backend.isOpenAvailable()
+
         if (startRecording) {
             console.log("Component.onCompleted: Autostart recording")
             startTimer()
@@ -178,6 +181,9 @@ RecorderPageForm {
 
         root.minArticulationRate = stngs.getMinArticulationRate()
         root.maxArticulationRate = stngs.getMaxArticulationRate()
+
+        root.minFillerSounds = stngs.getMinFillerSounds()
+        root.maxFillerSounds = stngs.getMaxFillerSounds()
 
         advanced = stngs.getAdvanced()
 
@@ -218,9 +224,9 @@ RecorderPageForm {
 
         articulationRateRadialBar.value = articulationRate
 
-        minFillerSounds
-        minFillerSounds
         let meanFillerSounds = backend.getMeanFillerSounds(root.path, startPoint, endPoint)
+        if (meanFillerSounds > root.maxFillerSounds) meanFillerSounds = root.maxFillerSounds
+        if (meanFillerSounds < root.minFillerSounds) meanFillerSounds = root.minFillerSounds
         meanFillerSoundsRadialBar.value = meanFillerSounds
 
         return true

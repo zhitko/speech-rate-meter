@@ -57,5 +57,8 @@ MetricsPageForm {
 
         let consonantsAndSilenceMax = backend.getConsonantsAndSilenceMax(root.path, startPoint, endPoint)
         consonantsAndSilenceMaxValue.text = String(consonantsAndSilenceMax.toFixed(2))
+
+        let meanFillerSounds = backend.getMeanFillerSounds(root.path, startPoint, endPoint)
+        meanFillerSoundsValue.text = String(meanFillerSounds.toFixed(2))
     }
 }

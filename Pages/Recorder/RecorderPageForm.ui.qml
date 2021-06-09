@@ -324,7 +324,7 @@ Page {
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
         showText: false
         dialType: RadialBar.MinToMax
-        progressColor: Colors.raspberry
+        progressColor: Colors.black
         foregroundColor: "#00ffffff"
         dialWidth: root.dialWidth
         startAngle: 90
@@ -419,7 +419,7 @@ Page {
                 width: 70
                 height: 70
                 path: root.path
-                visible: !recording && false
+                visible: !recording && isOpenAvailable
             },
             SaveResultButton {
                 id: saveButton

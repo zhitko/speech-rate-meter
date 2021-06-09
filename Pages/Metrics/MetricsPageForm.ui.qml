@@ -21,6 +21,7 @@ Page {
     property alias vowelsRateValue: vowelsRateValue
     property alias consonantsAndSilenceMaxValue: consonantsAndSilenceMaxValue
     property alias vowelsMaxValue: vowelsMaxValue
+    property alias meanFillerSoundsValue: meanFillerSoundsValue
 
     title: qsTr("Details")
 
@@ -195,6 +196,19 @@ Page {
 
                 Text {
                     id: vowelsRateValue
+                    text: "---"
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: meanFillerSoundsTitle
+                    text: qsTr("Mean Filler Sounds")
+                    font.bold: true
+                    font.pointSize: 12
+                }
+
+                Text {
+                    id: meanFillerSoundsValue
                     text: "---"
                     font.pointSize: 12
                 }

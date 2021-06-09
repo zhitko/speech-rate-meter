@@ -28,6 +28,8 @@ public:
 
     Q_INVOKABLE Settings* getSettings();
 
+    Q_INVOKABLE bool isOpenAvailable();
+
     // Files API
     Q_INVOKABLE QVariantList getWaveFilesList();
     Q_INVOKABLE void deleteWaveFile(QString path);
