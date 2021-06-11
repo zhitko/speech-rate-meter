@@ -10,7 +10,7 @@ const double DefaultKArticulationRate = 1;
 const double DefaultMinArticulationRate = 70;
 const double DefaultMaxArticulationRate = 210;
 const double DefaultKMeanPauses = 17;
-const double DefaultKFillerSounds = 17;
+const double DefaultKFillerSounds = 10;
 const double DefaultMinFillerSounds = 0;
 const double DefaultMaxFillerSounds = 1;
 

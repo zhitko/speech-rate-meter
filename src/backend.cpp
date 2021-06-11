@@ -705,9 +705,9 @@ QVariant Backend::getMeanFillerSounds(QString path, double from_percent, double 
 
     qDebug() << "getMeanFillerSounds K4:" << settings->getKFillerSounds();
 
-    auto tva = this->getVowelsMeanValue(path, from_percent, to_percent).toDouble();
+    auto tva = this->getVowelsSquareMeanValue(path, from_percent, to_percent).toDouble();
     auto tvm = this->getVowelsMedianValue(path, from_percent, to_percent).toDouble();
-    double meanFillerSounds = settings->getKFillerSounds().toDouble() * abs(tva - tvm);
+    double meanFillerSounds = settings->getKFillerSounds().toDouble() * (tva - tvm);
 
     qDebug() << "getMeanFillerSounds:" << meanFillerSounds;
 

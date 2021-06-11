@@ -4,14 +4,14 @@
 <context>
     <name>Backend</name>
     <message>
-        <location filename="src/backend.cpp" line="111"/>
-        <location filename="src/backend.cpp" line="118"/>
+        <location filename="src/backend.cpp" line="120"/>
+        <location filename="src/backend.cpp" line="127"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/backend.cpp" line="113"/>
-        <location filename="src/backend.cpp" line="120"/>
+        <location filename="src/backend.cpp" line="122"/>
+        <location filename="src/backend.cpp" line="129"/>
         <source>Wave (*.wav)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -19,90 +19,95 @@
 <context>
     <name>MetricsPageForm.ui</name>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="25"/>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="40"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="26"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="41"/>
         <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="48"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="49"/>
         <source>Record Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="61"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="62"/>
         <source>Consonants &amp; Silence Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="74"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="75"/>
         <source>Consonants &amp; Silence Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="87"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="88"/>
         <source>Consonants &amp; Silence Max</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="100"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="101"/>
         <source>Consonants &amp; Silence Mean Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="113"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="114"/>
         <source>Consonants &amp; Silence Median Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="126"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="127"/>
         <source>Vowels Length</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="139"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="140"/>
         <source>Vowels Count</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="152"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="153"/>
         <source>Vowels Max</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="165"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="166"/>
         <source>Vowels Mean Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="178"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="179"/>
         <source>Vowels Median Duration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="191"/>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="192"/>
         <source>Vowels Speaking Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Metrics/MetricsPageForm.ui.qml" line="205"/>
+        <source>Mean Filler Sounds</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RecorderPage</name>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="37"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="38"/>
         <source>%1:%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="176"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="177"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="201"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="214"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="179"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="180"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="207"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="220"/>
         <source>%1 wpm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="195"/>
-        <location filename="Pages/Recorder/RecorderPage.qml" line="210"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="201"/>
+        <location filename="Pages/Recorder/RecorderPage.qml" line="216"/>
         <source>%1 sec</source>
         <translation type="unfinished"></translation>
     </message>
