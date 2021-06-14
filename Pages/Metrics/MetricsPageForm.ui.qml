@@ -22,6 +22,7 @@ Page {
     property alias consonantsAndSilenceMaxValue: consonantsAndSilenceMaxValue
     property alias vowelsMaxValue: vowelsMaxValue
     property alias meanFillerSoundsValue: meanFillerSoundsValue
+    property alias playButton: playButton
 
     title: qsTr("Details")
 
@@ -216,24 +217,19 @@ Page {
         }
     }
 
-//    BottomBar {
-//        id: bottombar
-//        anchors.rightMargin: 0
-//        anchors.leftMargin: 0
-//        content.data: [
-//            PlayButton {
-//                id: playButton
-//                path: root.path
-//                width: 70
-//                height: 70
-//            },
-//            RecordButton {
-//                id: recordButton
-//                width: 70
-//                height: 70
-//            }
-//        ]
-//    }
+    BottomBar {
+        id: bottombar
+        anchors.rightMargin: 0
+        anchors.leftMargin: 0
+        content.data: [
+            PlayButton {
+                id: playButton
+                path: root.path
+                width: 70
+                height: 70
+            }
+        ]
+    }
 }
 
 /*##^##

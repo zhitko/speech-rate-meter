@@ -25,6 +25,8 @@ MetricsPageForm {
         let waveLength = backend.getWaveLength(root.path, startPoint, endPoint);
         recordLengthValue.text = String(waveLength.toFixed(2))
 
+        playButton.interval = waveLength
+
         let vowelsCount = backend.getVowelsCount(root.path, startPoint, endPoint)
         vowelsCountValue.text = String(vowelsCount)
 
