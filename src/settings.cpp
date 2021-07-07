@@ -19,6 +19,7 @@ const QString SettingsKeySegmentsByIntensityThresholdRelative = "segmentsByInten
 const QString SettingsKeySpeechRateKCoeficient = "speechRate/K";
 const QString SettingsKeySpeechRateMCoeficient = "speechRate/M";
 
+const QString SettingsKeyMeanValueDegry = "speechRate/MeanValueDegry";
 const QString SettingsKeyKSpeechRate = "speechRate/K1";
 const QString SettingsKeyMinSpeechRate = "speechRate/Min";
 const QString SettingsKeyMaxSpeechRate = "speechRate/Max";
@@ -32,6 +33,7 @@ const QString SettingsKeyMinFillerSounds = "fillerSounds/Min";
 
 Settings::Settings(QObject *parent) : QObject(parent),
   config(nullptr),
+  meanValueDegry(DefaultMeanValueDegry),
   kSpeechRate(DefaultKSpeechRate),
   minSpeechRate(DefaultMinSpeechRate),
   maxSpeechRate(DefaultMaxSpeechRate),
@@ -48,6 +50,7 @@ Settings::Settings(QObject *parent) : QObject(parent),
 
 Settings::Settings(const Settings &settings) : QObject(),
     config(settings.config),
+    meanValueDegry(settings.meanValueDegry),
     kSpeechRate(settings.kSpeechRate),
     minSpeechRate(settings.minSpeechRate),
     maxSpeechRate(settings.maxSpeechRate),
@@ -110,6 +113,10 @@ void Settings::loadFromFile(IntonCore::Config *config)
         );
         config->setSegmentsByIntensityThresholdRelative(
             settings.value(SettingsKeySegmentsByIntensityThresholdRelative).toDouble()
+        );
+        this->setMeanValueDegry(
+            settings.value(SettingsKeyMeanValueDegry, DefaultMeanValueDegry),
+            false
         );
         this->setKSpeechRate(
             settings.value(SettingsKeyKSpeechRate, DefaultKSpeechRate),
@@ -186,6 +193,10 @@ void Settings::saveToFile(IntonCore::Config *config)
     settings.setValue(
         SettingsKeySegmentsByIntensityThresholdRelative,
         config->segmentsByIntensityThresholdRelative()
+    );
+    settings.setValue(
+        SettingsKeyMeanValueDegry,
+        this->getMeanValueDegry()
     );
     settings.setValue(
         SettingsKeyKSpeechRate,
@@ -319,6 +330,17 @@ void Settings::setSegmentsByIntensityThresholdRelative(QVariant value, bool save
     IntonCore::Config * config = this->getConfig();
     config->setSegmentsByIntensityThresholdRelative(value.toDouble());
     if (save) this->saveToFile(config);
+}
+
+void Settings::setMeanValueDegry(QVariant value, bool save)
+{
+    this->meanValueDegry = value.toDouble();
+    if (save) this->saveToFile(config);
+}
+
+QVariant Settings::getMeanValueDegry()
+{
+    return this->meanValueDegry;
 }
 
 void Settings::setKSpeechRate(QVariant value, bool save)

@@ -4,6 +4,7 @@
 #include <QObject>
 
 const double DefaultKSpeechRate = 0.6;
+const double DefaultMeanValueDegry = 1.0;
 const double DefaultMinSpeechRate = 70;
 const double DefaultMaxSpeechRate = 210;
 const double DefaultKArticulationRate = 1;
@@ -44,6 +45,8 @@ public:
     Q_INVOKABLE QVariant getSegmentsByIntensityThresholdRelative();
     Q_INVOKABLE void setSegmentsByIntensityThresholdRelative(QVariant value, bool save = true);
 
+    Q_INVOKABLE void setMeanValueDegry(QVariant value, bool save = true);
+    Q_INVOKABLE QVariant getMeanValueDegry();
     Q_INVOKABLE void setKSpeechRate(QVariant value, bool save = true);
     Q_INVOKABLE QVariant getKSpeechRate();
     Q_INVOKABLE void setMinSpeechRate(QVariant value, bool save = true);
@@ -71,6 +74,7 @@ public:
 private:
     IntonCore::Config *config;
 
+    double meanValueDegry;
     double kSpeechRate;
     double minSpeechRate;
     double maxSpeechRate;

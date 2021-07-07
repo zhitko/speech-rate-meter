@@ -27,6 +27,7 @@ SettingsPageForm {
         intensitySmoothFrameValue.value = stngs.getIntensitySmoothFrame()
         intensityMaxLengthValue.value = stngs.getIntensityMaxLengthValue()
 
+        meanValueDegryValue.value = stngs.getMeanValueDegry() * 100
         kSpeechRateValue.value = stngs.getKSpeechRate() * 100
         minSpeechRateValue.value = stngs.getMinSpeechRate() * 100
         maxSpeechRateValue.value = stngs.getMaxSpeechRate() * 100
@@ -68,6 +69,12 @@ SettingsPageForm {
         if (root.loading) return
         let stngs = settings.getInstance()
         stngs.setIntensityMaxLengthValue(intensityMaxLengthValue.value)
+    }
+
+    meanValueDegryValue.onValueChanged: {
+        if (root.loading) return
+        let stngs = settings.getInstance()
+        stngs.setMeanValueDegry(meanValueDegryValue.value / 100)
     }
 
     kSpeechRateValue.onValueChanged: {

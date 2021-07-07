@@ -18,6 +18,7 @@ Page {
     property alias minFillerSoundsValue: minFillerSoundsValue
     property alias maxFillerSoundsValue: maxFillerSoundsValue
     property alias advanced: advanced
+    property alias meanValueDegryValue: meanValueDegryValue
     title: qsTr("Settings")
 
     ScrollView {
@@ -42,6 +43,23 @@ Page {
 
                 ColumnLayout {
                     anchors.fill: parent
+
+                    Text {
+                        id: meanValueDegryTitle
+                        text: qsTr("Mean value degry")
+                        font.pointSize: 12
+                        visible: advanced.checked
+                    }
+
+                    DoubleSpinBox {
+                        id: meanValueDegryValue
+                        decimals: 2
+                        to: 99999
+                        wheelEnabled: true
+                        editable: true
+                        stepSize: 100
+                        visible: advanced.checked
+                    }
 
                     Text {
                         id: kSpeechRateTitle

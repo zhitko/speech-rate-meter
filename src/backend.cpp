@@ -556,7 +556,9 @@ QVariant Backend::getVowelsSquareMeanValue(QString path, double from_percent, do
 
     auto storage = this->core->getTemplate();
 
-    auto result = storage->getVowelsLengthSquareMean();
+    Settings * settings = Settings::getInstance();
+
+    auto result = storage->getVowelsLengthGeneralizedMean(settings->getMeanValueDegry().toDouble());
 
     qDebug() << "getVowelsSquareMeanValue: mx" << result;
 
@@ -612,8 +614,10 @@ QVariant Backend::getConsonantsAndSilenceMeanSquareValue(QString path, double fr
 {
     this->initializeCore(path);
 
+    Settings * settings = Settings::getInstance();
+
     auto storage = this->core->getTemplate();
-    auto result = storage->getConsonantsAndSilenceLengthSquareMean();
+    auto result = storage->getConsonantsAndSilenceLengthGeneralizedMean(settings->getMeanValueDegry().toDouble());
 
     qDebug() << "getConsonantsAndSilenceMeanSquareValue: " << result;
 
