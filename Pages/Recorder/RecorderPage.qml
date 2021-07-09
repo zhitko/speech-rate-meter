@@ -141,6 +141,7 @@ RecorderPageForm {
         let path = backend.openFileDialog()
         if (path) {
             root.path = path
+            backend.path = ""
             setControlsVisible(true)
             showSpeechRate()
         }

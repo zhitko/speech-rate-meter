@@ -692,7 +692,7 @@ QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, dou
     Settings * settings = Settings::getInstance();
 
     qDebug() << "getMeanDurationOfPauses K3:" << settings->getKMeanPauses();
-    auto tcm = this->getConsonantsAndSilenceMeanValue(path, from_percent, to_percent).toDouble();
+    auto tcm = this->getConsonantsAndSilenceMeanSquareValue(path, from_percent, to_percent).toDouble();
     auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent).toDouble();
     if (tcm < tcd) return QVariant::fromValue(0.0);
     double meanDurationOfPauses = settings->getKMeanPauses().toDouble() * (tcm - tcd);
@@ -728,7 +728,7 @@ QVariant Backend::getArticulationRate(QString path, double from_percent, double 
     auto rs = this->getSpeechRate(path, from_percent, to_percent).toDouble();
     auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
     auto tv = this->getVowelsLength(path, from_percent, to_percent).toDouble();
-    auto tcpm = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent).toDouble();
+    auto tcpm = this->getConsonantsAndSilenceMeanSquareValue(path, from_percent, to_percent).toDouble();
     auto nc = this->getConsonantsAndSilenceCount(path, from_percent, to_percent).toInt();
     double articulationRate = rs * ts / (tv + settings->getKArticulationRate().toDouble() * tcpm * nc);
 
