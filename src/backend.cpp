@@ -695,7 +695,7 @@ QVariant Backend::getMeanDurationOfPauses(QString path, double from_percent, dou
     auto tcm = this->getConsonantsAndSilenceMeanSquareValue(path, from_percent, to_percent).toDouble();
     auto tcd = this->getConsonantsAndSilenceMedianValue(path, from_percent, to_percent).toDouble();
     if (tcm < tcd) return QVariant::fromValue(0.0);
-    double meanDurationOfPauses = settings->getKMeanPauses().toDouble() * (tcm - tcd);
+    double meanDurationOfPauses = settings->getKMeanPauses().toDouble() * (tcm - tcd) / tcd;
 
     qDebug() << "getMeanDurationOfPauses:" << meanDurationOfPauses;
 
@@ -711,7 +711,8 @@ QVariant Backend::getMeanFillerSounds(QString path, double from_percent, double 
 
     auto tva = this->getVowelsSquareMeanValue(path, from_percent, to_percent).toDouble();
     auto tvm = this->getVowelsMedianValue(path, from_percent, to_percent).toDouble();
-    double meanFillerSounds = settings->getKFillerSounds().toDouble() * (tva - tvm);
+    if (tva < tvm) return QVariant::fromValue(0.0);
+    double meanFillerSounds = settings->getKFillerSounds().toDouble() * (tva - tvm) / tvm;
 
     qDebug() << "getMeanFillerSounds:" << meanFillerSounds;
 
