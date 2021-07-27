@@ -229,6 +229,7 @@ RecorderPageForm {
         if (meanFillerSounds > root.maxFillerSounds) meanFillerSounds = root.maxFillerSounds
         if (meanFillerSounds < root.minFillerSounds) meanFillerSounds = root.minFillerSounds
         meanFillerSoundsRadialBar.value = meanFillerSounds
+        fillerSoundsValue.text = qsTr("%1 %").arg(String(((meanFillerSounds-root.minFillerSounds)/(root.maxFillerSounds-root.minFillerSounds)*100).toFixed(0)))
 
         return true
     }

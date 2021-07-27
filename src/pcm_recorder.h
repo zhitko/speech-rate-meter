@@ -4,7 +4,7 @@
 #include <QObject>
 #include <QAudioInput>
 #include <QBuffer>
-#include <intoncore.h>
+#include <inton-core/include/intoncore.h>
 
 class PcmRecorder : public QObject
 {

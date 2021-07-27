@@ -9,8 +9,8 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 
-#include <intoncore.h>
-#include <utils.h>
+#include <inton-core/include/intoncore.h>
+#include <inton-core/include/utils.h>
 
 #include "applicationconfig.h"
 #include "settings.h"

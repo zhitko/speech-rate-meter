@@ -11,23 +11,11 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-INCLUDE_DIRECTORIES(../IntonCoreBin/install/include)
-
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check http://doc.qt.io/qt-5/deployment-android.html for more information.
 # They need to be set before the find_package(Qt5 ...) call.
 
-if(ANDROID)
-    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-
-    set(ANDROID_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/lib_android/")
-
-    set(ANDROID_EXTRA_LIBS "${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/${ANDROID_ABI}/libIntonCore.so")
-
-    LINK_DIRECTORIES("${CMAKE_CURRENT_SOURCE_DIR}/../IntonCoreBin/install/${ANDROID_ABI}/")
-else()
-    LINK_DIRECTORIES(../IntonCoreBin/install/lib)
-endif()
+add_subdirectory(inton-core)
 
 if(ANDROID)
     find_package(Qt5 COMPONENTS Core Quick QuickControls2 Widgets Charts LinguistTools Multimedia MultimediaWidgets AndroidExtras REQUIRED)

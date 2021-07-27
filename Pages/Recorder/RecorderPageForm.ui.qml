@@ -21,6 +21,7 @@ Page {
     property alias meanDurationOfPausesValue: meanDurationOfPausesValue
     property alias speechRateValue: speechRateValue
     property alias articulationRateValue: articulationRateValue
+    property alias fillerSoundsValue: fillerSoundsValue
     property alias speechRateRadialBar: speechRateRadialBar
     property alias detailsButton: detailsButton
     property alias saveButton: saveButton
@@ -34,7 +35,7 @@ Page {
 
     property int plotHeight: parent.height * 0.4
     property int plotWidth: plotHeight
-    property int dialWidth: plotWidth * 0.1
+    property int dialWidth: plotWidth * 0.12
     property int plotDepth: plotWidth * 0.25
     property int recordButtonWidth: plotWidth * 0.5
     property int recordButtonHeight: recordButtonWidth
@@ -59,13 +60,15 @@ Page {
         visible: !recorded
     }
 
+    // Speech Rate
+
     Text {
         id: speechRateTitle
         text: qsTr("Speech Rate")
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 10
-        font.pointSize: 25
+        font.pointSize: 18
         visible: recorded
     }
 
@@ -75,7 +78,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateTitle.bottom
         anchors.topMargin: 10
-        font.pointSize: 30
+        font.pointSize: 20
         font.bold: true
         visible: recorded
     }
@@ -102,13 +105,15 @@ Page {
         visible: recorded
     }
 
+    // Articulation Rate
+
     Text {
         id: articulationRateTitle
         text: qsTr("Articulation Rate")
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateValue.bottom
         anchors.topMargin: 10
-        font.pointSize: 25
+        font.pointSize: 18
         visible: recorded
     }
 
@@ -118,7 +123,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: articulationRateTitle.bottom
         anchors.topMargin: 10
-        font.pointSize: 30
+        font.pointSize: 20
         font.bold: true
         visible: recorded
     }
@@ -145,6 +150,53 @@ Page {
         visible: recorded
     }
 
+    // Filler Sounds
+
+    Text {
+        id: fillerSoundsTitle
+        text: qsTr("Filler Sounds")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: articulationRateValue.bottom
+        anchors.topMargin: 10
+        font.pointSize: 18
+        visible: recorded
+    }
+
+    Text {
+        id: fillerSoundsValue
+        text: "---"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: fillerSoundsTitle.bottom
+        anchors.topMargin: 10
+        font.pointSize: 20
+        font.bold: true
+        visible: recorded
+    }
+
+    Rectangle {
+        color: meanFillerSoundsRadialBar.progressColor
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+        anchors.right: fillerSoundsValue.left
+        anchors.rightMargin: 10
+        anchors.top: fillerSoundsValue.top
+        anchors.bottom: fillerSoundsValue.bottom
+        visible: recorded
+    }
+
+    Rectangle {
+        color: meanFillerSoundsRadialBar.progressColor
+        anchors.left: fillerSoundsValue.right
+        anchors.leftMargin: 10
+        anchors.right: parent.right
+        anchors.rightMargin: 10
+        anchors.top: fillerSoundsValue.top
+        anchors.bottom: fillerSoundsValue.bottom
+        visible: recorded
+    }
+
+    // Phrase Pauses
+
     Text {
         id: meanDurationOfPausesTitle
         text: qsTr("Phrase Pauses")
@@ -166,6 +218,8 @@ Page {
         visible: recorded
     }
 
+    // Speech Duration
+
     Text {
         id: timerTitle
         text: qsTr("Speech Duration")
@@ -186,6 +240,8 @@ Page {
         font.pointSize: 30
         visible: recorded
     }
+
+    // Timer
 
     Text {
         id: timerLabel

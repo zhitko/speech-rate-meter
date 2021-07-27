@@ -5,7 +5,7 @@
 #include <QVariant>
 #include <QDate>
 
-#include <config.h>
+#include <inton-core/include/config.h>
 
 #include "applicationconfig.h"
 
@@ -58,9 +58,9 @@ Settings::Settings(const Settings &settings) : QObject(),
     minArticulationRate(settings.minArticulationRate),
     maxArticulationRate(settings.maxArticulationRate),
     kMeanPauses(settings.kMeanPauses),
-    minFillerSounds(DefaultMinFillerSounds),
-    maxFillerSounds(DefaultMaxFillerSounds),
-    kFillerSounds(DefaultKFillerSounds)
+    minFillerSounds(settings.minFillerSounds),
+    maxFillerSounds(settings.maxFillerSounds),
+    kFillerSounds(settings.kFillerSounds)
 {
 
 }
