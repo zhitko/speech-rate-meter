@@ -844,7 +844,7 @@ void Backend::initializeCore(bool reinit)
 
     qDebug() << "Backend::initializeCore: Initialize core: " << this->path;
     this->core = new IntonCore::Core(
-        this->path.toLocal8Bit().toStdString(),
+        this->path.toStdString(),
         settings->getConfig()
     );
     qDebug() << "Backend::initializeCore: Initialize core complete";
@@ -861,7 +861,7 @@ void Backend::initializeCore(const QString& path)
         qDebug() << "initializeCore: initialize core" << path;
         this->initializeCore();
         qDebug() << "initializeCore: load wav file" << path;
-        WaveFile * file = IntonCore::Helpers::openWaveFile(path.toLocal8Bit().toStdString());
+        WaveFile * file = IntonCore::Helpers::openWaveFile(path.toStdString());
         qDebug() << "initializeCore: reload template" << path;
         this->core->reloadTemplate(file);
     }

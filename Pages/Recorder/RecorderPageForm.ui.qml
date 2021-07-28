@@ -68,7 +68,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 10
-        font.pointSize: 18
+        font.pointSize: 16
         visible: recorded
     }
 
@@ -78,7 +78,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateTitle.bottom
         anchors.topMargin: 10
-        font.pointSize: 20
+        font.pointSize: 18
         font.bold: true
         visible: recorded
     }
@@ -113,7 +113,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: speechRateValue.bottom
         anchors.topMargin: 10
-        font.pointSize: 18
+        font.pointSize: 16
         visible: recorded
     }
 
@@ -123,7 +123,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: articulationRateTitle.bottom
         anchors.topMargin: 10
-        font.pointSize: 20
+        font.pointSize: 18
         font.bold: true
         visible: recorded
     }
@@ -158,7 +158,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: articulationRateValue.bottom
         anchors.topMargin: 10
-        font.pointSize: 18
+        font.pointSize: 16
         visible: recorded
     }
 
@@ -168,7 +168,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: fillerSoundsTitle.bottom
         anchors.topMargin: 10
-        font.pointSize: 20
+        font.pointSize: 18
         font.bold: true
         visible: recorded
     }
