@@ -49,6 +49,7 @@ Page {
     }
 
     Label {
+        id: welcomeLabel
         text: qsTr("Welcome to Speech Rate Meter")
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
@@ -61,7 +62,6 @@ Page {
     }
 
     // Speech Rate
-
     Text {
         id: speechRateTitle
         text: qsTr("Speech Rate")
@@ -106,7 +106,6 @@ Page {
     }
 
     // Articulation Rate
-
     Text {
         id: articulationRateTitle
         text: qsTr("Articulation Rate")
@@ -151,7 +150,6 @@ Page {
     }
 
     // Filler Sounds
-
     Text {
         id: fillerSoundsTitle
         text: qsTr("Filler Sounds")
@@ -196,7 +194,6 @@ Page {
     }
 
     // Phrase Pauses
-
     Text {
         id: meanDurationOfPausesTitle
         text: qsTr("Phrase Pauses")
@@ -219,7 +216,6 @@ Page {
     }
 
     // Speech Duration
-
     Text {
         id: timerTitle
         text: qsTr("Speech Duration")
@@ -242,7 +238,6 @@ Page {
     }
 
     // Timer
-
     Text {
         id: timerLabel
         text: qsTr("00:00")
@@ -258,14 +253,14 @@ Page {
         id: image
         anchors.bottom: recordButton.top
         anchors.bottomMargin: 10
-        anchors.top: timerLabel.bottom
+        anchors.top: welcomeLabel.bottom
         anchors.topMargin: 10
         anchors.right: parent.right
         anchors.rightMargin: 0
         anchors.left: parent.left
         anchors.leftMargin: 0
-        fillMode: Image.PreserveAspectCrop
-        source: "../../wave_long.svg"
+        fillMode: Image.PreserveAspectFit
+        source: "qrc:/wave_long.png"
         visible: !recorded
     }
 
@@ -276,6 +271,26 @@ Page {
         checkable: true
         anchors.horizontalCenter: speechRateRadialBar.horizontalCenter
         anchors.verticalCenter: speechRateRadialBar.verticalCenter
+    }
+
+    Text {
+        text: qsTr("Click to start recording")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: recordButton.bottom
+        anchors.topMargin: 10
+        font.bold: true
+        font.pointSize: 20
+        visible: !recorded && !recording
+    }
+
+    Text {
+        text: qsTr("Click to stop recording")
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: recordButton.bottom
+        anchors.topMargin: 10
+        font.bold: true
+        font.pointSize: 20
+        visible: recording
     }
 
     Shape {
@@ -488,8 +503,8 @@ Page {
                 articulationRate: articulationRateValue.text
                 phrasePause: meanDurationOfPausesValue.text
                 speechDuration: timerLabel.text
+                fillerSounds: fillerSoundsValue.text
             }
-
         ]
     }
 }

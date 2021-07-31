@@ -120,7 +120,7 @@ RecorderPageForm {
         if (root.recording)
         {
             console.log("RecorderPage: stop recording")
-            saveButton.endTime = time
+            saveButton.endTime = dateTime
             recordButton.checked = true
             saveButton.visible = true
 

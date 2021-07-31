@@ -152,7 +152,13 @@ QString Backend::loadResult()
     return results;
 }
 
-void Backend::saveResult(QString startTime, QString endTime, QString speechRate, QString articulationRate, QString phrasePause, QString speechDuration)
+void Backend::saveResult(QString startTime,
+                         QString endTime,
+                         QString speechRate,
+                         QString articulationRate,
+                         QString phrasePause,
+                         QString speechDuration,
+                         QString fillerSounds)
 {
     qDebug() << "startTime: " << startTime;
     qDebug() << "endTime: " << endTime;
@@ -160,15 +166,18 @@ void Backend::saveResult(QString startTime, QString endTime, QString speechRate,
     qDebug() << "articulationRate: " << articulationRate;
     qDebug() << "phrasePause: " << phrasePause;
     qDebug() << "speechDuration: " << speechDuration;
+    qDebug() << "fillerSounds: " << fillerSounds;
     QFile results(ApplicationConfig::GetFullResultsPath());
     if (!results.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append))
         return;
     QTextStream out(&results);
-    out << "Date&Time(Star&End) - " << startTime << " - " << endTime << "|" <<
+    out << "Star DateTime - " << startTime << "|" <<
+           "End DateTime - " << endTime << "|" <<
            "Speech Rate - " << speechRate << "|"
            "Articulation Rate - " << articulationRate << "|"
            "Phrase Pause - " << phrasePause << "|"
-           "Speech Duration - " << speechDuration << "\n";
+           "Speech Duration - " << speechDuration << "|"
+           "Filler Sounds - " << fillerSounds << "\n";
     results.close();
 }
 

@@ -9,12 +9,13 @@ SaveResultButtonForm {
         id: backend
     }
 
-    property var startTime: ""
-    property var endTime: ""
-    property var speechRate: ""
-    property var articulationRate: ""
-    property var phrasePause: ""
-    property var speechDuration: ""
+    property string startTime: ""
+    property string endTime: ""
+    property string speechRate: ""
+    property string articulationRate: ""
+    property string phrasePause: ""
+    property string speechDuration: ""
+    property string fillerSounds: ""
 
     signal save()
 
@@ -26,6 +27,7 @@ SaveResultButtonForm {
         console.log("articulationRate: " + articulationRate)
         console.log("phrasePause: " + phrasePause)
         console.log("speechDuration: " + speechDuration)
+        console.log("fillerSounds: " + fillerSounds)
 
         backend.saveResult(
             startTime,
@@ -33,7 +35,8 @@ SaveResultButtonForm {
             speechRate,
             articulationRate,
             phrasePause,
-            speechDuration
+            speechDuration,
+            fillerSounds
         )
 
         root.visible = false

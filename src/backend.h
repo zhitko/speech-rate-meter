@@ -44,7 +44,8 @@ public:
         QString speechRate,
         QString articulationRate,
         QString phrasePause,
-        QString speechDuration
+        QString speechDuration,
+        QString fillerSounds
     );
 
     // WAVE file API

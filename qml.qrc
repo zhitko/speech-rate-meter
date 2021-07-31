@@ -33,7 +33,6 @@
         <file>Pages/Metrics/MetricsPageForm.ui.qml</file>
         <file>Components/Buttons/ShowDetailsButton.qml</file>
         <file>Components/Buttons/ShowDetailsButtonForm.ui.qml</file>
-        <file>wave_long.svg</file>
         <file>Components/Buttons/AnimatedRecordButton.qml</file>
         <file>Components/Buttons/AnimatedRecordButtonForm.ui.qml</file>
         <file>speech-active-3-icon.png</file>
@@ -49,5 +48,6 @@
         <file>Components/Buttons/SaveResultButtonForm.ui.qml</file>
         <file>Pages/Results/ResultsPage.qml</file>
         <file>Pages/Results/ResultsPageForm.ui.qml</file>
+        <file>wave_long.png</file>
     </qresource>
 </RCC>
