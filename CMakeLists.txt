@@ -18,6 +18,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(inton-core)
 
 if(ANDROID)
+    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+
+    set(ANDROID_LIB_DIR "${CMAKE_CURRENT_BINARY_DIR}/inton-core/")
+
+    set(ANDROID_EXTRA_LIBS "${CMAKE_CURRENT_BINARY_DIR}/inton-core/libIntonCore.so")
+
+    LINK_DIRECTORIES("${CMAKE_CURRENT_BINARY_DIR}/inton-core/")
+endif()
+
+if(ANDROID)
     find_package(Qt5 COMPONENTS Core Quick QuickControls2 Widgets Charts LinguistTools Multimedia MultimediaWidgets AndroidExtras REQUIRED)
 else()
     find_package(Qt5 COMPONENTS Core Quick QuickControls2 Widgets Charts LinguistTools Multimedia MultimediaWidgets REQUIRED)

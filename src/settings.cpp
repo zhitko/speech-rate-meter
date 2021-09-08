@@ -9,27 +9,27 @@
 
 #include "applicationconfig.h"
 
-const QString SettingsKeyDate = "date";
-const QString SettingsKeyIntensityFrame = "intensity/frame";
-const QString SettingsKeyIntensityShift = "intensity/shift";
-const QString SettingsKeyIntensitySmoothFrame = "intensity/smoothFrame";
-const QString SettingsKeySegmentsByIntensityMinimumLength = "segmentsByIntensity/minimumLength";
-const QString SettingsKeySegmentsByIntensityThresholdAbsolute = "segmentsByIntensity/thresholdAbsolute";
-const QString SettingsKeySegmentsByIntensityThresholdRelative = "segmentsByIntensity/thresholdRelative";
-const QString SettingsKeySpeechRateKCoeficient = "speechRate/K";
-const QString SettingsKeySpeechRateMCoeficient = "speechRate/M";
+QString SettingsKeyDate = "date_v2";
+QString SettingsKeyIntensityFrame = "intensity/frame";
+QString SettingsKeyIntensityShift = "intensity/shift";
+QString SettingsKeyIntensitySmoothFrame = "intensity/smoothFrame";
+QString SettingsKeySegmentsByIntensityMinimumLength = "segmentsByIntensity/minimumLength";
+QString SettingsKeySegmentsByIntensityThresholdAbsolute = "segmentsByIntensity/thresholdAbsolute";
+QString SettingsKeySegmentsByIntensityThresholdRelative = "segmentsByIntensity/thresholdRelative";
+QString SettingsKeySpeechRateKCoeficient = "speechRate/K";
+QString SettingsKeySpeechRateMCoeficient = "speechRate/M";
 
-const QString SettingsKeyMeanValueDegry = "speechRate/MeanValueDegry";
-const QString SettingsKeyKSpeechRate = "speechRate/K1";
-const QString SettingsKeyMinSpeechRate = "speechRate/Min";
-const QString SettingsKeyMaxSpeechRate = "speechRate/Max";
-const QString SettingsKeyKArticulationRate = "articulationRate/K2";
-const QString SettingsKeyMinArticulationRate = "articulationRate/Min";
-const QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
-const QString SettingsKeyKMeanPauses = "meanPauses/Max";
-const QString SettingsKeyKFillerSounds = "fillerSounds/K4";
-const QString SettingsKeyMaxFillerSounds = "fillerSounds/Max";
-const QString SettingsKeyMinFillerSounds = "fillerSounds/Min";
+QString SettingsKeyMeanValueDegry = "speechRate/MeanValueDegry";
+QString SettingsKeyKSpeechRate = "speechRate/K1";
+QString SettingsKeyMinSpeechRate = "speechRate/Min";
+QString SettingsKeyMaxSpeechRate = "speechRate/Max";
+QString SettingsKeyKArticulationRate = "articulationRate/K2";
+QString SettingsKeyMinArticulationRate = "articulationRate/Min";
+QString SettingsKeyMaxArticulationRate = "articulationRate/Max";
+QString SettingsKeyKMeanPauses = "meanPauses/Max";
+QString SettingsKeyKFillerSounds = "fillerSounds/K4";
+QString SettingsKeyMaxFillerSounds = "fillerSounds/Max";
+QString SettingsKeyMinFillerSounds = "fillerSounds/Min";
 
 Settings::Settings(QObject *parent) : QObject(parent),
   config(nullptr),
@@ -97,16 +97,16 @@ void Settings::loadFromFile(IntonCore::Config *config)
     {
         qDebug() << "Load config file: " << settings.fileName();
         config->setIntensityFrame(
-            settings.value(SettingsKeyIntensityFrame).toUInt()
+            settings.value(SettingsKeyIntensityFrame, DefaultFrame).toUInt()
         );
         config->setIntensityShift(
-            settings.value(SettingsKeyIntensityShift).toUInt()
+            settings.value(SettingsKeyIntensityShift, DefaultShift).toUInt()
         );
         config->setIntensitySmoothFrame(
-            settings.value(SettingsKeyIntensitySmoothFrame).toUInt()
+            settings.value(SettingsKeyIntensitySmoothFrame, DefaultSmoothFrame).toUInt()
         );
         config->setSegmentsByIntensityMinimumLength(
-            settings.value(SettingsKeySegmentsByIntensityMinimumLength).toUInt()
+            settings.value(SettingsKeySegmentsByIntensityMinimumLength, DefaultSegmentLimit).toUInt()
         );
         config->setSegmentsByIntensityThresholdAbsolute(
             settings.value(SettingsKeySegmentsByIntensityThresholdAbsolute).toDouble()

@@ -3,17 +3,23 @@
 
 #include <QObject>
 
-const double DefaultKSpeechRate = 0.72;
+const double DefaultKSpeechRate = 0.79;
 const double DefaultMeanValueDegry = 3.0;
 const double DefaultMinSpeechRate = 70;
 const double DefaultMaxSpeechRate = 210;
-const double DefaultKArticulationRate = 1.13;
+const double DefaultKArticulationRate = 1.2;
 const double DefaultMinArticulationRate = 70;
 const double DefaultMaxArticulationRate = 210;
 const double DefaultKMeanPauses = 0.26;
 const double DefaultKFillerSounds = 100;
-const double DefaultMinFillerSounds = 110;
-const double DefaultMaxFillerSounds = 260;
+const double DefaultMinFillerSounds = 120;
+const double DefaultMaxFillerSounds = 240;
+
+const int DefaultFrame = 240;
+const int DefaultShift = 120;
+const int DefaultSmoothFrame = 120;
+const int DefaultSegmentLimit = 15;
+
 
 namespace IntonCore {
 class Config;
