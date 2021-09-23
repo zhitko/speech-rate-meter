@@ -15,7 +15,7 @@ ApplicationWindow {
     width: 640
     minimumHeight: 800
     height: 800
-    title: qsTr("SpeechRateMeter")
+    title: qsTr("SpeechRateMeter+")
 
     FontAwesome {
          id: awesome

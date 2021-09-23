@@ -120,11 +120,6 @@
 <context>
     <name>RecorderPageForm.ui</name>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="53"/>
-        <source>Welcome to Speech Rate Meter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="67"/>
         <source>Speech Rate</source>
         <translation type="unfinished"></translation>
@@ -135,11 +130,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="155"/>
-        <source>Filler Sounds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="199"/>
         <source>Phrase Pauses</source>
         <translation type="unfinished"></translation>
@@ -147,6 +137,16 @@
     <message>
         <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="221"/>
         <source>Speech Duration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="53"/>
+        <source>Welcome to Speech Rate Meter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="Pages/Recorder/RecorderPageForm.ui.qml" line="155"/>
+        <source>Filler Sounds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -325,7 +325,8 @@ Speech Rate Meter</source>
     <name>main</name>
     <message>
         <location filename="main.qml" line="18"/>
-        <source>SpeechRateMeter</source>
+        <source>SpeechRateMeter+</source>
+        <oldsource>SpeechRateMeter</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

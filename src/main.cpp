@@ -5,6 +5,7 @@
 #include <QDirIterator>
 #include <QDir>
 #include <QDateTime>
+#include <QTextCodec>
 
 #include "backend.h"
 #include "settings.h"
@@ -70,7 +71,9 @@ int main(int argc, char *argv[])
 
     auto result = QApplication::exec();
 
+#ifdef ANDROID
     cleanDataDir();
+#endif
 
     return result;
 }
