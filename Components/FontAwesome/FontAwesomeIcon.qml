@@ -1,12 +1,8 @@
 import QtQuick 2.14
 
 Text {
-    FontAwesome {
-        id: awesome
-    }
-
-    property string type: awesome.solid
-    property string icon: awesome.icons.faQuestionCircle
+    property string type: FontAwesome.solid
+    property string icon: FontAwesome.icons.faQuestionCircle
     width: 24
     height: 24
 

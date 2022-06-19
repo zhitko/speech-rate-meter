@@ -17,10 +17,6 @@ ApplicationWindow {
     height: 800
     title: qsTr("SpeechRateMeter+")
 
-    FontAwesome {
-         id: awesome
-    }
-
     StackView {
         id: stackView
         anchors.fill: parent
@@ -40,8 +36,8 @@ ApplicationWindow {
 
         FontAwesomeToolButton {
             id: menuButton
-            type: awesome.solid
-            icon: awesome.icons.faBars
+            type: FontAwesome.solid
+            icon: FontAwesome.icons.faBars
             anchors.left: parent.left
             anchors.leftMargin: 10
             button.onClicked: drawer.open()
@@ -49,8 +45,8 @@ ApplicationWindow {
 
         FontAwesomeToolButton {
             id: toolButton
-            type: awesome.solid
-            icon: awesome.icons.faArrowLeft
+            type: FontAwesome.solid
+            icon: FontAwesome.icons.faArrowLeft
             anchors.right: parent.right
             anchors.rightMargin: 10
             visible: stackView.depth > 1
@@ -81,7 +77,7 @@ ApplicationWindow {
                 }
 
                 FontAwesomeIconText {
-                    icon: awesome.icons.faHouseUser
+                    icon: FontAwesome.icons.faHouseUser
                     text: qsTr("Home")
                     anchors.fill: parent
                     color: "black"
@@ -96,7 +92,7 @@ ApplicationWindow {
                 }
 
                 FontAwesomeIconText {
-                    icon: awesome.icons.faHistory
+                    icon: FontAwesome.icons.faHistory
                     text: qsTr("Results History")
                     anchors.fill: parent
                     color: "black"
@@ -111,7 +107,7 @@ ApplicationWindow {
                 }
 
                 FontAwesomeIconText {
-                    icon: awesome.icons.faSlidersH
+                    icon: FontAwesome.icons.faSlidersH
                     text: qsTr("Settings")
                     anchors.fill: parent
                     color: "black"

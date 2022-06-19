@@ -43,11 +43,6 @@ Page {
     property alias meanFillerSoundsRadialBar: meanFillerSoundsRadialBar
     property alias minValue: minValue
     property alias maxValue: maxValue
-
-    FontAwesome {
-        id: awesome
-    }
-
     Label {
         id: welcomeLabel
         text: qsTr("Welcome to Speech Rate Meter")

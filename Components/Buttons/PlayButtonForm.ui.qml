@@ -7,6 +7,6 @@ FontAwesomeToolButton {
     height: 50
     property bool playing: false
 
-    font.family: awesome.solid
-    text: playing ? awesome.icons.faStopCircle : awesome.icons.faPlayCircle
+    font.family: FontAwesome.solid
+    text: playing ? FontAwesome.icons.faStopCircle : FontAwesome.icons.faPlayCircle
 }

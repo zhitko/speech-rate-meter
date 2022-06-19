@@ -6,6 +6,6 @@ FontAwesomeToolButton {
     width: 50
     height: 50
 
-    font.family: awesome.solid
-    text: awesome.icons.faInfoCircle
+    font.family: FontAwesome.solid
+    text: FontAwesome.icons.faInfoCircle
 }

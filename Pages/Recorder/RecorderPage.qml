@@ -24,10 +24,6 @@ RecorderPageForm {
         id: settings
     }
 
-    FontAwesome {
-        id: awesome
-    }
-
     function setControlsVisible(visible)
     {
         recorded = visible

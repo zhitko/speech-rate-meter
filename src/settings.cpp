@@ -9,7 +9,7 @@
 
 #include "applicationconfig.h"
 
-QString SettingsKeyDate = "date_v2";
+QString SettingsKeyDate = "date_v3";
 QString SettingsKeyIntensityFrame = "intensity/frame";
 QString SettingsKeyIntensityShift = "intensity/shift";
 QString SettingsKeyIntensitySmoothFrame = "intensity/smoothFrame";

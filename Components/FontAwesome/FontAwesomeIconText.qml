@@ -3,13 +3,9 @@ import QtQuick 2.14
 Item {
     id: root
 
-    FontAwesome {
-        id: awesome
-    }
-
     property string text: ""
-    property string type: awesome.solid
-    property string icon: awesome.icons.faQuestionCircle
+    property string type: FontAwesome.solid
+    property string icon: FontAwesome.icons.faQuestionCircle
     property string color: "white"
 
     FontAwesomeIcon {

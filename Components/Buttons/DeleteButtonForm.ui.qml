@@ -40,8 +40,8 @@ Item {
     FontAwesomeToolButton {
         id: toolButton
 
-        font.family: awesome.regular
-        text: awesome.icons.faTrashAlt
+        font.family: FontAwesome.regular
+        text: FontAwesome.icons.faTrashAlt
         anchors.fill: parent
         property alias okButton: okButton
         property alias cancelButton: cancelButton
