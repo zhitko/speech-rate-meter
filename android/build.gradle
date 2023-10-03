@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:3.6.0'
     }
 }
 
@@ -46,9 +46,19 @@ android {
             res.srcDirs = [qt5AndroidDir + '/res', 'res']
             resources.srcDirs = ['resources']
             renderscript.srcDirs = ['src']
+            // Add examples files to package
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
        }
+    }
+
+    tasks.withType(JavaCompile) {
+        options.incremental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     lintOptions {
@@ -61,6 +71,9 @@ android {
     }
 
     defaultConfig {
-        resConfigs "en"
+        resConfig "en"
+        minSdkVersion = qtMinSdkVersion
+        targetSdkVersion = qtTargetSdkVersion
+        targetSdkVersion = 33
     }
 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.14)
 
 project(SpeechRateMeter LANGUAGES CXX)
 
@@ -28,32 +28,32 @@ if(ANDROID)
 endif()
 
 if(ANDROID)
-    find_package(Qt5 COMPONENTS Core Quick QuickControls2 Widgets Charts LinguistTools Multimedia MultimediaWidgets AndroidExtras REQUIRED)
+    find_package(QT NAMES Qt5 COMPONENTS Core Quick LinguistTools QuickControls2 Widgets Charts Multimedia MultimediaWidgets AndroidExtras REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools QuickControls2 Widgets Charts Multimedia MultimediaWidgets AndroidExtras REQUIRED)
 else()
-    find_package(Qt5 COMPONENTS Core Quick QuickControls2 Widgets Charts LinguistTools Multimedia MultimediaWidgets REQUIRED)
+    find_package(QT NAMES Qt5 COMPONENTS Core Quick LinguistTools QuickControls2 Widgets Charts Multimedia MultimediaWidgets REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools QuickControls2 Widgets Charts Multimedia MultimediaWidgets REQUIRED)
 endif()
 
 set(TS_FILES SpeechRateMeter_en_US.ts)
 
-file(GLOB SOURCES src/*.cpp)
-file(GLOB HEADERS src/*.h)
-
-file(GLOB OTHER_SOURCES src/*/*.cpp)
-file(GLOB OTHER_HEADERS src/*/*.h)
-
-file(GLOB 3DPARTY_SOURCES 3party/*/*.cpp)
-file(GLOB 3DPARTY_HEADERS 3party/*/*.h)
+file(GLOB SOURCES
+    src/*.cpp
+    src/*/*.cpp
+    3party/*/*.cpp
+    )
+file(GLOB HEADERS
+    src/*.h
+    src/*/*.h
+    3party/*/*.h
+    )
 
 if(ANDROID)
     add_library(SpeechRateMeter SHARED
-        ${OTHER_HEADERS}
-        ${OTHER_SOURCES}
-        ${3DPARTY_HEADERS}
-        ${3DPARTY_SOURCES}
-        ${HEADERS}
-        ${SOURCES}
-        qml.qrc
-        ${TS_FILES}
+      ${SOURCES}
+      ${HEADERS}
+      qml.qrc
+      ${TS_FILES}
     )
 else()
     if (WIN32)
@@ -62,28 +62,30 @@ else()
         set(WIN32_ON_OFF_SWITCH "")
     endif ()
     add_executable(SpeechRateMeter
-        ${WIN32_ON_OFF_SWITCH}
-        ${OTHER_HEADERS}
-        ${OTHER_SOURCES}
-        ${3DPARTY_HEADERS}
-        ${3DPARTY_SOURCES}
-        ${HEADERS}
-        ${SOURCES}
-        qml.qrc
-        ${TS_FILES}
+      ${WIN32_ON_OFF_SWITCH}
+      ${SOURCES}
+      ${HEADERS}
+      qml.qrc
+      ${TS_FILES}
     )
 endif()
 
 target_compile_definitions(SpeechRateMeter
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
 
+target_link_libraries(SpeechRateMeter
+  PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
+
 if(ANDROID)
     target_link_libraries(SpeechRateMeter
-      PRIVATE IntonCore Qt5::Core Qt5::Quick Qt5::QuickControls2 Qt5::Widgets Qt5::Charts Qt5::Multimedia Qt5::MultimediaWidgets Qt5::AndroidExtras)
+      PRIVATE IntonCore Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2
+        Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Multimedia
+        Qt${QT_VERSION_MAJOR}::MultimediaWidgets Qt${QT_VERSION_MAJOR}::AndroidExtras)
 else()
     target_link_libraries(SpeechRateMeter
-      PRIVATE IntonCore Qt5::Core Qt5::Quick Qt5::QuickControls2 Qt5::Widgets Qt5::Charts Qt5::Multimedia Qt5::MultimediaWidgets)
+      PRIVATE IntonCore Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2
+        Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Charts Qt${QT_VERSION_MAJOR}::Multimedia
+        Qt${QT_VERSION_MAJOR}::MultimediaWidgets)
 endif()
-
 
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
