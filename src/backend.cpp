@@ -686,9 +686,16 @@ QVariant Backend::getSpeechRate(QString path, double from_percent, double to_per
 
     qDebug() << "getSpeechRate K1:" << settings->getKSpeechRate();
 
-    auto nv = this->getVowelsCount(path, from_percent, to_percent).toDouble();
+    auto k = settings->getKSpeechRate().toDouble();
+    auto storage = this->core->getTemplate();
+    auto nv = storage->getVowelsCount();
     auto ts = this->getWaveLength(path, from_percent, to_percent).toDouble();
-    double speechRate = settings->getKSpeechRate().toDouble() * nv * 60 / ts;
+
+    double speechRate = k * nv * 60 / ts;
+    qDebug() << "speechRate: " << k;
+    qDebug() << "speechRate: " << nv;
+    qDebug() << "speechRate: " << ts;
+    qDebug() << "speechRate: " << speechRate;
 
     qDebug() << "getSpeechRate:" << speechRate;
 

@@ -49,5 +49,6 @@
         <file>Pages/Results/ResultsPage.qml</file>
         <file>Pages/Results/ResultsPageForm.ui.qml</file>
         <file>wave_long.png</file>
+        <file>Components/FontAwesome/qmldir</file>
     </qresource>
 </RCC>

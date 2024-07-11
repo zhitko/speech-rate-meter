@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.0'
+        classpath 'com.android.tools.build:gradle:7.4.1'
     }
 }
 
@@ -36,7 +36,7 @@ android {
 
     compileSdkVersion androidCompileSdkVersion.toInteger()
 
-    buildToolsVersion '28.0.3'
+    //buildToolsVersion '28.0.3'
 
     sourceSets {
         main {
@@ -46,7 +46,6 @@ android {
             res.srcDirs = [qt5AndroidDir + '/res', 'res']
             resources.srcDirs = ['resources']
             renderscript.srcDirs = ['src']
-            // Add examples files to package
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
        }
@@ -56,10 +55,10 @@ android {
         options.incremental = true
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
+    //compileOptions {
+    //    sourceCompatibility JavaVersion.VERSION_1_8
+    //    targetCompatibility JavaVersion.VERSION_1_8
+    //}
 
     lintOptions {
         abortOnError false
@@ -73,7 +72,6 @@ android {
     defaultConfig {
         resConfig "en"
         minSdkVersion = qtMinSdkVersion
-        targetSdkVersion = qtTargetSdkVersion
-        targetSdkVersion = 33
+        targetSdkVersion = 34
     }
 }
